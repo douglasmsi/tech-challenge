@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/fastfood
+    username: fastfooduser
+    password: fastfoodpass
+  jpa:
+    hibernate:
+      ddl-auto: update
+    driver-class-name: com.mysql.cj.jdbc.Driver
