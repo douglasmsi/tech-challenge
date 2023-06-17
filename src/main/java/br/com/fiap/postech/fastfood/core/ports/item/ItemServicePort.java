@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ItemServicePort {
 
-    Item save(Cliente cliente);
+    Item save(Item item);
     List<Item> findAll();
     Item findById(Long id);
 }

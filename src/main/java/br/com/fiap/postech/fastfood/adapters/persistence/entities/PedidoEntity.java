@@ -31,4 +31,7 @@ public class PedidoEntity {
     @Column
     private BigDecimal valorTotal;
 
+    @ManyToOne
+    private ClienteEntity cliente;
+
 }

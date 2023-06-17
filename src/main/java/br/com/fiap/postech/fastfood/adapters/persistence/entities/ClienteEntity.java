@@ -6,6 +6,7 @@ import lombok.Setter;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Builder
@@ -34,6 +35,9 @@ public class ClienteEntity implements Serializable {
 
         @Column
         private String email;
+
+        @OneToMany(mappedBy = "cliente")
+        List<PedidoEntity> pedidos;
 
 
 }

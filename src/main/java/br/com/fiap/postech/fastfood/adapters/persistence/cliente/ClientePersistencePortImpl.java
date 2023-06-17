@@ -36,7 +36,7 @@ public class ClientePersistencePortImpl implements ClientePersistencePort {
     public Cliente findByNome(String nome) {
         Optional<ClienteEntity> cliente = clienteJpaRepository.findByCpf(nome);
         if(cliente.isPresent()){
-            return modelMapper.map(cliente, Cliente.class);
+            return modelMapper.map(cliente.get(), Cliente.class);
         }
         return null;
     }
@@ -45,7 +45,7 @@ public class ClientePersistencePortImpl implements ClientePersistencePort {
     public Cliente findByCpf(String cpf) {
         Optional<ClienteEntity> cliente = clienteJpaRepository.findByCpf(cpf);
         if(cliente.isPresent()){
-            return modelMapper.map(cliente, Cliente.class);
+            return modelMapper.map(cliente.get(), Cliente.class);
         }
         return null;
     }
