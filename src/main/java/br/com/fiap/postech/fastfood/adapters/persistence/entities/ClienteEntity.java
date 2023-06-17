@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "clientes")
+@Table(name = "clientes", uniqueConstraints = @UniqueConstraint(columnNames = "cpf"))
 public class ClienteEntity implements Serializable {
 
         @Id
@@ -34,4 +34,6 @@ public class ClienteEntity implements Serializable {
 
         @Column
         private String email;
+
+
 }

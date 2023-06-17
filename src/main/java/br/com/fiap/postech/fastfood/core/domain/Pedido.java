@@ -10,6 +10,6 @@ import java.util.List;
 public record Pedido(
         String numeroPedido,
         PedidoStatus status,
-        BigDecimal valorTotal
-        //TODO : implementar aqui //List<ItemPedido> items
+        BigDecimal valorTotal,
+        List<ItemPedido> items
 ) {}

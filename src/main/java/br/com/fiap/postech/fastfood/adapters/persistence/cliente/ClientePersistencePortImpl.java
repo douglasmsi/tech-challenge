@@ -36,7 +36,7 @@ public class ClientePersistencePortImpl implements ClientePersistencePort {
     }
 
     @Override
-    public Cliente findByCpf(String cpf) {
+    public ClienteEntity findByCpf(String cpf) {
         return clienteJpaRepository.findByCpf(cpf);
     }
 }

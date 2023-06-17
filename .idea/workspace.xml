@@ -5,7 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ce3d62b-bc51-4c4e-9db0-aa563c95987c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/dtos/ErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/inbound/controller/ItemController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/item/ItemJpaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/item/ItemPersistencePortImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/domain/enums/ErrorMessages.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/item/ItemPersistencePort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/item/ItemServicePort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/services/item/ItemServicePortImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/configs/BeanConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/configs/BeanConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/inbound/controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/inbound/controller/ClienteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/inbound/controller/PedidoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/inbound/controller/PedidoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClienteJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClienteJpaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClientePersistencePortImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClientePersistencePortImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/entities/ClienteEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/entities/ClienteEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/domain/Pedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/domain/Pedido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/cliente/ClientePersistencePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/cliente/ClientePersistencePort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/cliente/ClienteServicePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/cliente/ClienteServicePort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/services/cliente/ClienteServicePortImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/services/cliente/ClienteServicePortImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/inbound/controller/ClienteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/inbound/controller/ClienteController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClienteJpaRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClienteJpaRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClientePersistencePortImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClientePersistencePortImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/ports/cliente/ClientePersistencePort.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/ports/cliente/ClientePersistencePort.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/ports/cliente/ClienteServicePort.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/ports/cliente/ClienteServicePort.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/services/cliente/ClienteServicePortImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/services/cliente/ClienteServicePortImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +39,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -93,6 +118,8 @@
       <workItem from="1686877501644" duration="1998000" />
       <workItem from="1686879984907" duration="1942000" />
       <workItem from="1686943512921" duration="320000" />
+      <workItem from="1686961711685" duration="537000" />
+      <workItem from="1686962331674" duration="3533000" />
     </task>
     <servers />
   </component>

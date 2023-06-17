@@ -1,5 +1,6 @@
 package br.com.fiap.postech.fastfood.core.services.cliente;
 
+import br.com.fiap.postech.fastfood.adapters.persistence.entities.ClienteEntity;
 import br.com.fiap.postech.fastfood.core.domain.Cliente;
 import br.com.fiap.postech.fastfood.core.ports.cliente.ClientePersistencePort;
 import br.com.fiap.postech.fastfood.core.ports.cliente.ClienteServicePort;
@@ -22,7 +23,7 @@ public class ClienteServicePortImpl implements ClienteServicePort {
     }
 
     @Override
-    public Cliente findByCpf(String cpf) {
+    public ClienteEntity findByCpf(String cpf) {
         return clientePersistencePort.findByCpf(cpf);
     }
 
