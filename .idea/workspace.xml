@@ -4,29 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ce3d62b-bc51-4c4e-9db0-aa563c95987c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/dtos/ErrorResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/inbound/controller/ItemController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/item/ItemJpaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/item/ItemPersistencePortImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/domain/enums/ErrorMessages.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/item/ItemPersistencePort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/item/ItemServicePort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/services/item/ItemServicePortImpl.java" afterDir="false" />
+    <list default="true" id="73772ae3-e4f5-48e6-95b1-0e6723b519e8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/configs/BeanConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/configs/BeanConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/inbound/controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/inbound/controller/ClienteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/inbound/controller/PedidoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/inbound/controller/PedidoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/inbound/controller/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/inbound/controller/ItemController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClienteJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClienteJpaRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClientePersistencePortImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClientePersistencePortImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/entities/ClienteEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/entities/ClienteEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/entities/ItemEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/entities/ItemEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/entities/PedidoEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/entities/PedidoEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/pedido/PedidoJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/pedido/PedidoJpaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/pedido/PedidoPersistencePortImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters/persistence/pedido/PedidoPersistencePortImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/domain/Pedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/domain/Pedido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/domain/PedidoStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/domain/enums/PedidoStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/domain/enums/CategoriaItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/domain/enums/CategoriaItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/cliente/ClientePersistencePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/cliente/ClientePersistencePort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/cliente/ClienteServicePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/cliente/ClienteServicePort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/item/ItemServicePort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/ports/item/ItemServicePort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/services/cliente/ClienteServicePortImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core/services/cliente/ClienteServicePortImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/configs/BeanConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/configs/BeanConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/inbound/controller/ClienteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/inbound/controller/ClienteController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClienteJpaRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClienteJpaRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClientePersistencePortImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/cliente/ClientePersistencePortImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/entities/ItemEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/entities/ItemEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/entities/PedidoEntity$PedidoEntityBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/entities/PedidoEntity$PedidoEntityBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/entities/PedidoEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/entities/PedidoEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/pedido/PedidoJpaRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/pedido/PedidoJpaRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/pedido/PedidoPersistencePortImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/adapters/persistence/pedido/PedidoPersistencePortImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/Cliente$ClienteBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/Cliente$ClienteBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/Item$ItemBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/Item$ItemBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/ItemPedido$ItemPedidoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/ItemPedido$ItemPedidoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/Pedido$PedidoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/Pedido$PedidoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/Pedido.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/Pedido.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/PedidoStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/enums/CategoriaItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/domain/enums/CategoriaItem.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/ports/cliente/ClientePersistencePort.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/ports/cliente/ClientePersistencePort.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/ports/cliente/ClienteServicePort.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/ports/cliente/ClienteServicePort.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/services/cliente/ClienteServicePortImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/postech/fastfood/core/services/cliente/ClienteServicePortImpl.class" afterDir="false" />
@@ -39,17 +50,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
-        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GoLibraries">
-    <option name="indexEntireGoPath" value="true" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -62,41 +73,46 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="2RAsPXa0Z4AFiwh4vmphYsKpmCp" />
+  <component name="ProjectId" id="2RKistPPmC12FIR2sUhT4kJFSQ7" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/domarra/desarrollo/personal/tech-challenge&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.diffblue.cover.intellij&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;e314b72ecaa14263359fa8166d20b903&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.42413792",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "spring.configuration.checksum": "e314b72ecaa14263359fa8166d20b903",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/adapters" />
-      <recent name="$PROJECT_DIR$/src/main/java/br/com/fiap/postech/fastfood/core" />
-    </key>
-  </component>
+}]]></component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="tech-challenge" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="tech-challenge" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FastfoodApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="fastfood" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="br.com.fiap.postech.fastfood.FastfoodApplication" />
@@ -108,26 +124,17 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9ce3d62b-bc51-4c4e-9db0-aa563c95987c" name="Changes" comment="" />
-      <created>1686704198704</created>
+      <changelist id="73772ae3-e4f5-48e6-95b1-0e6723b519e8" name="Changes" comment="" />
+      <created>1687005383704</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1686704198704</updated>
-      <workItem from="1686704199898" duration="996000" />
-      <workItem from="1686706602929" duration="3571000" />
-      <workItem from="1686877501644" duration="1998000" />
-      <workItem from="1686879984907" duration="1942000" />
-      <workItem from="1686943512921" duration="320000" />
-      <workItem from="1686961711685" duration="537000" />
-      <workItem from="1686962331674" duration="3533000" />
+      <updated>1687005383704</updated>
+      <workItem from="1687005385061" duration="1063000" />
+      <workItem from="1687006970215" duration="5536000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VgoProject">
-    <integration-enabled>false</integration-enabled>
-    <settings-migrated>true</settings-migrated>
   </component>
 </project>

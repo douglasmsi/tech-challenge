@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.adapters.persistence.entities;
 
-import br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,21 +13,26 @@ import java.math.BigDecimal;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "pedidos")
-public class PedidoEntity {
+@Table(name = "ITEM_PEDIDO")
+public class ItemPedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column
-    private String numeroPedido;
+    @OneToOne
+    private ItemEntity item;
+
+    @OneToOne
+    private PedidoEntity pedido;
 
     @Column
-    private PedidoStatus status;
+    private Integer quantidade;
 
     @Column
-    private BigDecimal valorTotal;
+    private BigDecimal valor;
 
+    @Column
+    private String observacao;
 }

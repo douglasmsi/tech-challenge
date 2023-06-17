@@ -3,8 +3,11 @@ package br.com.fiap.postech.fastfood.adapters.persistence.cliente;
 import br.com.fiap.postech.fastfood.adapters.persistence.entities.ClienteEntity;
 import br.com.fiap.postech.fastfood.core.domain.Cliente;
 import br.com.fiap.postech.fastfood.core.ports.cliente.ClientePersistencePort;
+import br.com.fiap.postech.fastfood.core.services.exception.ClienteNaoEncontradoException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 
@@ -31,12 +34,19 @@ public class ClientePersistencePortImpl implements ClientePersistencePort {
 
     @Override
     public Cliente findByNome(String nome) {
-        //TODO: Implementar
+        Optional<ClienteEntity> cliente = clienteJpaRepository.findByCpf(nome);
+        if(cliente.isPresent()){
+            return modelMapper.map(cliente, Cliente.class);
+        }
         return null;
     }
 
     @Override
-    public ClienteEntity findByCpf(String cpf) {
-        return clienteJpaRepository.findByCpf(cpf);
+    public Cliente findByCpf(String cpf) {
+        Optional<ClienteEntity> cliente = clienteJpaRepository.findByCpf(cpf);
+        if(cliente.isPresent()){
+            return modelMapper.map(cliente, Cliente.class);
+        }
+        return null;
     }
 }

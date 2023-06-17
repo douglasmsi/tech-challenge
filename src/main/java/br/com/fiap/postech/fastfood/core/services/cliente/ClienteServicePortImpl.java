@@ -23,10 +23,9 @@ public class ClienteServicePortImpl implements ClienteServicePort {
     }
 
     @Override
-    public ClienteEntity findByCpf(String cpf) {
+    public Cliente findByCpf(String cpf) {
         return clientePersistencePort.findByCpf(cpf);
     }
-
     @Override
     public Cliente findByNome(String nome) {
         return clientePersistencePort.findByNome(nome);

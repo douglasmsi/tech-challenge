@@ -10,6 +10,6 @@ public interface ClientePersistencePort {
     Cliente save(Cliente cliente);
     List<Cliente> findAll();
     Cliente findByNome(String nome);
-    ClienteEntity findByCpf(String cpf);
+    Cliente findByCpf(String cpf);
 
 }

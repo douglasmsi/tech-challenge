@@ -31,7 +31,8 @@ public class PedidoPersistencePortImpl implements PedidoPersistencePort {
 
     @Override
     public Pedido findByNumeroPedido(String numeroPedido) {
-        return pedidoJpaRepository.findByNumeroPedido(numeroPedido);
+        PedidoEntity pedidoEntity = pedidoJpaRepository.findByNumeroPedido(numeroPedido);
+        return modelMapper.map(pedidoEntity, Pedido.class);
     }
 
 }

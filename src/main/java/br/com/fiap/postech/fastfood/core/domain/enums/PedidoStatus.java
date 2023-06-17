@@ -1,15 +1,15 @@
 package br.com.fiap.postech.fastfood.core.domain.enums;
 
-public enum CategoriaItem {
+public enum PedidoStatus {
 
-    BEBIDA("BEBIDA"),
-    LANCHE("LANCHE"),
-    ACOMPANHAMENTO("ACOMPANHAMENTO"),
-    SOBREMESA("SOBREMESA");
+    CRIADO("CRIADO"),
+    ANDAMENTO("ANDAMENTO"),
+    ENTREGA("ENTREGA"),
+    FINALIZADO("FINALIZADO");
 
     private String value;
 
-    CategoriaItem(String value){
+    PedidoStatus(String value){
         this.value = value;
     }
 

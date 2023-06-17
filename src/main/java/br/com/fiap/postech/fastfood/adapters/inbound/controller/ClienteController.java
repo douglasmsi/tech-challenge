@@ -34,13 +34,14 @@ public class ClienteController {
 
     @GetMapping("/clientes/{cpf}")
     public ResponseEntity<Object> getClienteByCpf(@PathVariable(value = "cpf") String cpf) {
-        ClienteEntity clienteEntity = clienteServicePort.findByCpf(cpf);
-        if (clienteEntity == null){
+        Cliente cliente = clienteServicePort.findByCpf(cpf);
+        if (cliente == null){
             ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.CLIENTE_CPF_NOT_FOUND.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
-        return ResponseEntity.ok(clienteEntity);
+        return ResponseEntity.ok(cliente);
     }
+
 
     @PostMapping("/clientes")
     public ResponseEntity<Object> createCliente(@RequestBody Cliente cliente){

@@ -9,7 +9,7 @@ public interface ClienteServicePort {
 
     Cliente save(Cliente cliente);
     List<Cliente> findAll();
-    ClienteEntity findByCpf(String cpf);
+    Cliente findByCpf(String cpf);
     Cliente findByNome(String nome);
 
 }
