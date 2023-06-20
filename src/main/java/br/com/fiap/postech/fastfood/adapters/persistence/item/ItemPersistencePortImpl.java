@@ -1,9 +1,10 @@
 package br.com.fiap.postech.fastfood.adapters.persistence.item;
 
-import br.com.fiap.postech.fastfood.adapters.persistence.entities.ClienteEntity;
+
 import br.com.fiap.postech.fastfood.adapters.persistence.entities.ItemEntity;
-import br.com.fiap.postech.fastfood.core.domain.Cliente;
+
 import br.com.fiap.postech.fastfood.core.domain.Item;
+import br.com.fiap.postech.fastfood.core.domain.enums.CategoriaItem;
 import br.com.fiap.postech.fastfood.core.ports.item.ItemPersistencePort;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -35,9 +36,18 @@ public class ItemPersistencePortImpl implements ItemPersistencePort {
     public Item findById(Long id) {
         Optional<ItemEntity> itemEntityEntity = itemJpaRepository.findById(id);
         if(itemEntityEntity.isPresent()){
-            Item item = modelMapper.map(itemEntityEntity.get(), Item.class);
-            return item;
+            return modelMapper.map(itemEntityEntity.get(), Item.class);
         }
         return null;
+    }
+
+    @Override
+    public List<Item> findAllByCategoria(CategoriaItem categoriaItem) {
+        return itemJpaRepository.findByCategoriaItem(categoriaItem).stream().map(entity -> modelMapper.map(entity, Item.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deletarItem(Long id) {
+        itemJpaRepository.deleteById(id);
     }
 }

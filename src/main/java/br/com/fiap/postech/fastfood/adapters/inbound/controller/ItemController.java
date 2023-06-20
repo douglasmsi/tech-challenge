@@ -1,6 +1,7 @@
 package br.com.fiap.postech.fastfood.adapters.inbound.controller;
 
 import br.com.fiap.postech.fastfood.core.domain.Item;
+import br.com.fiap.postech.fastfood.core.domain.enums.CategoriaItem;
 import br.com.fiap.postech.fastfood.core.domain.enums.ErrorMessages;
 import br.com.fiap.postech.fastfood.core.ports.item.ItemServicePort;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,14 @@ public class ItemController {
     private final ItemServicePort itemServicePort;
 
     @GetMapping("/items")
-    ResponseEntity<Object> getAllItems() {
-        List<Item> items = itemServicePort.findAll();
+    ResponseEntity<Object> getAllItems(@RequestParam(name = "categoria", required = false) CategoriaItem categoria) {
+        List<Item> items = null;
+        if(Objects.nonNull(categoria)){
+            items = itemServicePort.findAllByCategoria(categoria);
+        } else {
+            items = itemServicePort.findAll();
+        }
+
         return ResponseEntity.ok(items);
     }
 
@@ -38,6 +45,18 @@ public class ItemController {
             return ResponseEntity.ok(item);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @PutMapping("/items/{id}")
+    ResponseEntity<Item> atualizarItem(@PathVariable(name = "id") Long id,@RequestBody Item item) {
+        Item updatedItem = itemServicePort.save(item);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedItem);
+    }
+
+    @DeleteMapping("/items/{id}")
+    ResponseEntity<Item> deletarItem(@PathVariable(name = "id") Long id) {
+        itemServicePort.deletarItem(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 

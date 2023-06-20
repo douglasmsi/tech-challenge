@@ -1,6 +1,7 @@
 package br.com.fiap.postech.fastfood.core.services.item;
 
 import br.com.fiap.postech.fastfood.core.domain.Item;
+import br.com.fiap.postech.fastfood.core.domain.enums.CategoriaItem;
 import br.com.fiap.postech.fastfood.core.ports.item.ItemPersistencePort;
 import br.com.fiap.postech.fastfood.core.ports.item.ItemServicePort;
 import lombok.RequiredArgsConstructor;
@@ -27,4 +28,14 @@ public class ItemServicePortImpl implements ItemServicePort {
       public Item findById(Long id) {
         return itemPersistencePort.findById(id);
       }
+
+    @Override
+    public List<Item> findAllByCategoria(CategoriaItem categoriaItem) {
+        return itemPersistencePort.findAllByCategoria(categoriaItem);
+    }
+
+    @Override
+    public void deletarItem(Long id) {
+        itemPersistencePort.deletarItem(id);
+    }
 }

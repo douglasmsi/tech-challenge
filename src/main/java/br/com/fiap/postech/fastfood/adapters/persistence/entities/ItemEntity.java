@@ -24,5 +24,5 @@ public class ItemEntity {
     private String nome;
     private String descricao;
     private BigDecimal valor;
-    private String categoria;
+    private CategoriaItem categoriaItem;
 }
