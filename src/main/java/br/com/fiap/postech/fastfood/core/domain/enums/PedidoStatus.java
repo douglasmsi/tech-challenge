@@ -5,6 +5,7 @@ public enum PedidoStatus {
     CRIADO("CRIADO"),
     ANDAMENTO("ANDAMENTO"),
     ENTREGA("ENTREGA"),
+    CANCELADO("CANCELADO"),
     FINALIZADO("FINALIZADO");
 
     private String value;

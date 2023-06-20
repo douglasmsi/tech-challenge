@@ -1,7 +1,5 @@
 package br.com.fiap.postech.fastfood.adapters.inbound.controller;
 
-import br.com.fiap.postech.fastfood.adapters.dtos.ErrorResponse;
-import br.com.fiap.postech.fastfood.core.domain.Cliente;
 import br.com.fiap.postech.fastfood.core.domain.Item;
 import br.com.fiap.postech.fastfood.core.domain.enums.ErrorMessages;
 import br.com.fiap.postech.fastfood.core.ports.item.ItemServicePort;
@@ -22,21 +20,21 @@ public class ItemController {
     private final ItemServicePort itemServicePort;
 
     @GetMapping("/items")
-    ResponseEntity<Object> getAllItems(){
+    ResponseEntity<Object> getAllItems() {
         List<Item> items = itemServicePort.findAll();
         return ResponseEntity.ok(items);
     }
 
     @PostMapping("/items")
-    ResponseEntity<Object> createItem(@RequestBody Item item){
-            Item createdItem = itemServicePort.save(item);
-            return ResponseEntity.ok(createdItem);
+    ResponseEntity<Item> createItem(@RequestBody Item item) {
+        Item createdItem = itemServicePort.save(item);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdItem);
     }
 
     @GetMapping("/items/{id}")
-    ResponseEntity<Object> getItemById(@PathVariable(name = "id", required = true) Long id){
+    ResponseEntity<Object> getItemById(@PathVariable(name = "id", required = true) Long id) {
         Item item = itemServicePort.findById(id);
-        if(Objects.nonNull(item)){
+        if (Objects.nonNull(item)) {
             return ResponseEntity.ok(item);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

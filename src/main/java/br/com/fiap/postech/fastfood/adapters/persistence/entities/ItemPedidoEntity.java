@@ -14,18 +14,12 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "ITEM_PEDIDO")
-public class ItemPedido {
+public class ItemPedidoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-
-    @OneToOne
-    private ItemEntity item;
-
-    @OneToOne
-    private PedidoEntity pedido;
 
     @Column
     private Integer quantidade;
@@ -35,4 +29,8 @@ public class ItemPedido {
 
     @Column
     private String observacao;
+
+    @ManyToOne
+    private PedidoEntity pedido;
+
 }

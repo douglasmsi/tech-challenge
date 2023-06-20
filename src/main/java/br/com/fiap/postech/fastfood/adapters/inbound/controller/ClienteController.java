@@ -21,7 +21,6 @@ public class ClienteController {
 
     final ClienteServicePort clienteServicePort;
 
-
     @GetMapping("/clientes")
     public ResponseEntity<Object> getAllClientes(){
         List<Cliente> clientes = clienteServicePort.findAll();

@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @Builder
 public class Item {
 
+    private Long id;
     private String nome;
     private String descricao;
     private BigDecimal valor;
