@@ -20,7 +20,12 @@ public enum ErrorMessages {
   PEDIDO_STATUS_INVALID_TRANSITION_TO_PREPARATION_TO_CONFIRM("Transição de status inválida para preparação para confirmação"),
   PEDIDO_STATUS_INVALID_TRANSITION_TO_PREPARATION_TO_DELIVER("Transição de status inválida para preparação para entrega"),
   PEDIDO_STATUS_INVALID_TRANSITION_TO_PREPARATION_TO_FINISH("Transição de status inválida para preparação para finalização"),
-  PEDIDO_STATUS_INVALID_TRANSITION_TO_PREPARATION_TO_PREPARATION("Transição de status inválida para preparação para preparação");
+  PEDIDO_STATUS_INVALID_TRANSITION_TO_PREPARATION_TO_PREPARATION("Transição de status inválida para preparação para preparação"),
+  PAGAMENTO_ALREADY_EXISTS("Pagamento já cadastrado"),
+  PAGAMENTO_NOT_FOUND("Pagamento não encontrado"),
+  PAGAMENTO_STATUS_NOT_FOUND("Status não encontrado"),
+  PAGAMENTO_STATUS_INVALID("Status inválido"),
+  PAGAMENTO_PAYLOAD_INVALID("Payload inválido");
 
   private final String message;
 

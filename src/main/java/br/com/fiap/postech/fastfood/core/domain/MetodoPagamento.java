@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.core.domain;
 
-import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,10 +11,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Pagamento {
-
+public class MetodoPagamento {
   private Long id;
-  private Pedido pedido;
-  private PagamentoStatus status;
-  private MetodoPagamento metodoPagamento;
+  private String cvv;
+  private String dataExpiracao;
+  private String numeroCartao;
 }

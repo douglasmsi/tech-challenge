@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PedidoPersistencePort {
 
-    Pedido save(Pedido pedido);
+    Pedido createPedido(Pedido pedido);
     List<Pedido> findAll();
     Pedido findByNumeroPedido(String numeroPedido);
 

@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "pedidos")
+@Table(name = "pedidos", uniqueConstraints = {@UniqueConstraint(columnNames = "numeroPedido")})
 public class PedidoEntity {
 
     @Id
@@ -44,5 +44,9 @@ public class PedidoEntity {
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedidoEntity> items;
+
+    @OneToOne
+    @JoinColumn(name = "pagamento_entity_id")
+    private PagamentoEntity pagamentoEntity;
 
 }

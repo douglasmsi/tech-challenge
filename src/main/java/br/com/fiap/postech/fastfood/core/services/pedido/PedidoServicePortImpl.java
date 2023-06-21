@@ -13,8 +13,13 @@ public class PedidoServicePortImpl implements PedidoServicePort {
     private final PedidoPersistencePort pedidoPersistencePort;
 
     @Override
-    public Pedido save(final Pedido pedido) {
-        return pedidoPersistencePort.save(pedido);
+    public Pedido createPedido(final Pedido pedido) {
+        return pedidoPersistencePort.createPedido(pedido);
+    }
+
+    @Override
+    public Pedido updatePedido(Pedido pedido) {
+        return null;
     }
 
     @Override

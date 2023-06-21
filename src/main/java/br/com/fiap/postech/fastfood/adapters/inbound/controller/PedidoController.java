@@ -1,6 +1,7 @@
 package br.com.fiap.postech.fastfood.adapters.inbound.controller;
 
 import br.com.fiap.postech.fastfood.adapters.dtos.ErrorResponse;
+import br.com.fiap.postech.fastfood.core.domain.ItemPedido;
 import br.com.fiap.postech.fastfood.core.domain.Pedido;
 import br.com.fiap.postech.fastfood.core.domain.enums.ErrorMessages;
 import br.com.fiap.postech.fastfood.core.ports.pedido.PedidoServicePort;
@@ -44,7 +45,9 @@ public class PedidoController {
     @PostMapping("/pedidos")
     public ResponseEntity<Object> createPedido(@RequestBody Pedido pedido) {
         try {
-            Pedido createdPedido = pedidoServicePort.save(pedido);
+
+            Pedido createdPedido = pedidoServicePort.createPedido(pedido);
+
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPedido);
         } catch (DataIntegrityViolationException ex) {
             ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_ALREADY_EXISTS.getMessage());

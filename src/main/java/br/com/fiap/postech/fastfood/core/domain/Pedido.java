@@ -1,5 +1,6 @@
 package br.com.fiap.postech.fastfood.core.domain;
 
+import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus;
 import lombok.*;
 
@@ -14,7 +15,8 @@ import java.util.List;
 public class Pedido {
 
     String numeroPedido;
-    PedidoStatus status;
+    PedidoStatus statusPedido;
+    PagamentoStatus statusPagamento;
     BigDecimal valorTotal;
     List<ItemPedido> items;
 }

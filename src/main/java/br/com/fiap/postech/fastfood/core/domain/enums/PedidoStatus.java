@@ -10,12 +10,14 @@ public enum PedidoStatus {
 
     private String value;
 
-    PedidoStatus(String value){
+    PedidoStatus(final String value){
         this.value = value;
     }
 
     public String getValue(){
         return value;
     }
+
+
 
 }

@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface PedidoServicePort {
 
-    Pedido save(Pedido pedido);
+    Pedido createPedido(Pedido pedido);
+    Pedido updatePedido(Pedido pedido);
     List<Pedido> findAll();
     Pedido findByNumeroPedido(String numeroPedido);
 

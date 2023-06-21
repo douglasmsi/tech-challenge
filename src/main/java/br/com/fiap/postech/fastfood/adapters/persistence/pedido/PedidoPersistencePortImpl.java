@@ -2,9 +2,14 @@ package br.com.fiap.postech.fastfood.adapters.persistence.pedido;
 
 import br.com.fiap.postech.fastfood.adapters.persistence.entities.PedidoEntity;
 import br.com.fiap.postech.fastfood.core.domain.Pedido;
+import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
+import br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus;
 import br.com.fiap.postech.fastfood.core.ports.pedido.PedidoPersistencePort;
+import br.com.fiap.postech.fastfood.core.utils.PedidoNumberGenerator;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,9 +23,15 @@ public class PedidoPersistencePortImpl implements PedidoPersistencePort {
 
     private final ModelMapper modelMapper;
 
+
     @Override
-    public Pedido save(final Pedido pedido) {
-        PedidoEntity pedidoEntity = pedidoJpaRepository.save(modelMapper.map(pedido, PedidoEntity.class));
+    public Pedido createPedido(final Pedido pedido) {
+        String numeroPedido = PedidoNumberGenerator.generateNumber();
+        pedido.setNumeroPedido(numeroPedido);
+        pedido.setStatusPagamento(PagamentoStatus.PENDENTE);
+        pedido.setStatusPedido(PedidoStatus.CRIADO);
+        PedidoEntity pedidoEntity = modelMapper.map(pedido, PedidoEntity.class);
+        pedidoEntity = pedidoJpaRepository.save(pedidoEntity);
         return modelMapper.map(pedidoEntity, Pedido.class);
     }
 
