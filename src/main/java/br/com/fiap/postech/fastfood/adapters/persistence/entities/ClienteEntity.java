@@ -39,5 +39,17 @@ public class ClienteEntity implements Serializable {
         @OneToMany(mappedBy = "cliente")
         List<PedidoEntity> pedidos;
 
+        @Override
+        public String toString() {
+                return "ClienteEntity{" +
+                    "id=" + id +
+                    ", cpf='" + cpf + '\'' +
+                    ", nome='" + nome + '\'' +
+                    ", telefone='" + telefone + '\'' +
+                    ", endereco='" + endereco + '\'' +
+                    ", email='" + email + '\'' +
+                    ", pedidos=" + (pedidos != null ? pedidos.size() : null) + // Evita a recursão infinita
+                    '}';
+        }
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,6 +50,23 @@ public class PedidoController {
             Pedido createdPedido = pedidoServicePort.createPedido(pedido);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPedido);
+        } catch (DataIntegrityViolationException ex) {
+            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_ALREADY_EXISTS.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+        } catch (Exception ex) {
+            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_NOT_FOUND.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+
+
+    @PutMapping("/pedidos/{numeroPedido}")
+    public ResponseEntity<Object> updateStatusPedido(@PathVariable(value = "numeroPedido") String numeroPedido, @RequestBody Pedido pedido) {
+        try {
+
+            Pedido updatedPedido = pedidoServicePort.updateStatusPedido(pedido);
+
+            return ResponseEntity.status(HttpStatus.OK).body(updatedPedido);
         } catch (DataIntegrityViolationException ex) {
             ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_ALREADY_EXISTS.getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);

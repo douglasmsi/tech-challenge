@@ -1,5 +1,6 @@
 package br.com.fiap.postech.fastfood.core.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -15,6 +16,8 @@ public class ItemPedido {
     private Integer quantidade;
     private BigDecimal valor;
     private String observacao;
+
+    @JsonBackReference
     private Pedido pedido;
 
     public BigDecimal getValor() {

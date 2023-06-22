@@ -49,4 +49,20 @@ public class PedidoEntity {
     @JoinColumn(name = "pagamento_entity_id")
     private PagamentoEntity pagamentoEntity;
 
+    @Override
+    public String toString() {
+        return "PedidoEntity{" +
+            "id=" + id +
+            ", numeroPedido='" + numeroPedido + '\'' +
+            ", pedidoStatus=" + pedidoStatus +
+            ", pagamentoStatus=" + pagamentoStatus +
+            ", valorTotal=" + valorTotal +
+            ", cliente=" + (cliente != null ? cliente.getId() : null) + // Evita a recursão infinita
+            ", items=" + items +
+            ", pagamentoEntity=" + (pagamentoEntity != null ? pagamentoEntity.getId() : null) + // Evita a recursão infinita
+            '}';
+    }
+
+
+
 }

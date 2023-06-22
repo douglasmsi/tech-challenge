@@ -44,6 +44,15 @@ public class PagamentoEntity {
   @OneToOne(mappedBy = "pagamentoEntity", orphanRemoval = true)
   private PedidoEntity pedidoEntity;
 
+  @Override
+  public String toString() {
+    return "PagamentoEntity{" +
+        "id=" + id +
+        ", status=" + status +
+        ", pedido=" + (pedido != null ? pedido.getNumeroPedido() : null) + // Evita a recursão infinita
+        ", metodoPagamento=" + (metodoPagamento != null ? metodoPagamento.getId() : null) + // Evita a recursão infinita
+        '}';
+  }
 
 
 }

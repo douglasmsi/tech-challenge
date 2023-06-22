@@ -12,4 +12,5 @@ public interface PedidoJpaRepository extends JpaRepository<PedidoEntity, Long> {
 
     PedidoEntity findByNumeroPedido(String numeroPedido);
 
+
 }
