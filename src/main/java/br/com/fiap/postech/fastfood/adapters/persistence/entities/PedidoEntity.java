@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.adapters.persistence.entities;
 
-import br.com.fiap.postech.fastfood.core.domain.ItemPedido;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus;
 import jakarta.persistence.*;
@@ -62,7 +61,5 @@ public class PedidoEntity {
             ", pagamentoEntity=" + (pagamentoEntity != null ? pagamentoEntity.getId() : null) + // Evita a recursão infinita
             '}';
     }
-
-
 
 }

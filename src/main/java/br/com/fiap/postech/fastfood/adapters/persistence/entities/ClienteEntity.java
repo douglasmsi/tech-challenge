@@ -1,11 +1,11 @@
 package br.com.fiap.postech.fastfood.adapters.persistence.entities;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import jakarta.persistence.*;
-import lombok.*;
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 @Data
@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "clientes", uniqueConstraints = @UniqueConstraint(columnNames = "cpf"))
-public class ClienteEntity implements Serializable {
+public class ClienteEntity {
 
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE)

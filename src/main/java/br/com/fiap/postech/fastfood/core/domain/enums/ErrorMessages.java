@@ -5,7 +5,6 @@ public enum ErrorMessages {
   CLIENTE_ALREADY_EXISTS("Cliente já cadastrado"),
   CLIENTE_CPF_ALREADY_EXISTS("CPF já cadastrado"),
   CLIENTE_CPF_NOT_FOUND("CPF não encontrado"),
-
   PEDIDO_NOT_FOUND("Pedido não encontrado"),
   PEDIDO_ALREADY_EXISTS("Pedido já cadastrado"),
   PEDIDO_STATUS_NOT_FOUND("Status não encontrado"),
@@ -36,4 +35,5 @@ public enum ErrorMessages {
   public String getMessage() {
     return message;
   }
+
 }

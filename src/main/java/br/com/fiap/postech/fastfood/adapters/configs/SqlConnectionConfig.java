@@ -57,21 +57,12 @@ public class SqlConnectionConfig {
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String ddlGeneration;
 
-
-
     @Value("$app.datasource.properties.allowPublicKeyRetrieval")
     private String allowPublicKeyRetrieval;
 
-    /**
-     * Bean of DataSource.
-     *
-     * @return DataSource
-     */
     @Bean(name = "dataSource")
     public DataSource dataSource() {
-
         final String url = getUrl();
-
         final HikariConfig hikariConfig = new HikariConfig();
 
         hikariConfig.setDriverClassName(this.driver);
@@ -91,7 +82,6 @@ public class SqlConnectionConfig {
         if ("jdbc:h2".equals(this.connector)) {
             return this.connector + TWO_POINTS + this.host + TWO_POINTS + this.db + ";DB_CLOSE_DELAY=-1";
         }
-
         return this.connector + "://" + this.host + "/" + this.db + "?useSSL=false";
     }
 

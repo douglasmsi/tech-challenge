@@ -2,16 +2,15 @@ package br.com.fiap.postech.fastfood.adapters.inbound.controller;
 
 import br.com.fiap.postech.fastfood.core.domain.Item;
 import br.com.fiap.postech.fastfood.core.domain.enums.CategoriaItem;
-import br.com.fiap.postech.fastfood.core.domain.enums.ErrorMessages;
 import br.com.fiap.postech.fastfood.core.ports.item.ItemServicePort;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
+
+import static java.util.Objects.nonNull;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,9 +20,9 @@ public class ItemController {
     private final ItemServicePort itemServicePort;
 
     @GetMapping("/items")
-    ResponseEntity<Object> getAllItems(@RequestParam(name = "categoria", required = false) CategoriaItem categoria) {
+    ResponseEntity<Object> getAllItems(@RequestParam(name = "categoria", required = false) final CategoriaItem categoria) {
         List<Item> items = null;
-        if(Objects.nonNull(categoria)){
+        if (nonNull(categoria)) {
             items = itemServicePort.findAllByCategoria(categoria);
         } else {
             items = itemServicePort.findAll();
@@ -33,31 +32,27 @@ public class ItemController {
     }
 
     @PostMapping("/items")
-    ResponseEntity<Item> createItem(@RequestBody Item item) {
-        Item createdItem = itemServicePort.save(item);
+    ResponseEntity<Item> createItem(@RequestBody final Item item) {
+        var createdItem = itemServicePort.save(item);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdItem);
     }
 
     @GetMapping("/items/{id}")
-    ResponseEntity<Object> getItemById(@PathVariable(name = "id", required = true) Long id) {
-        Item item = itemServicePort.findById(id);
-        if (Objects.nonNull(item)) {
-            return ResponseEntity.ok(item);
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    ResponseEntity<Object> getItemById(@PathVariable(name = "id", required = true) final Long id) {
+        var item = itemServicePort.findById(id);
+        return nonNull(item) ? ResponseEntity.ok(item) : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @PutMapping("/items/{id}")
-    ResponseEntity<Item> atualizarItem(@PathVariable(name = "id") Long id,@RequestBody Item item) {
-        Item updatedItem = itemServicePort.save(item);
+    ResponseEntity<Item> atualizarItem(@PathVariable(name = "id") final Long id, @RequestBody Item item) {
+        var updatedItem = itemServicePort.save(item);
         return ResponseEntity.status(HttpStatus.OK).body(updatedItem);
     }
 
     @DeleteMapping("/items/{id}")
-    ResponseEntity<Item> deletarItem(@PathVariable(name = "id") Long id) {
+    ResponseEntity<Item> deletarItem(@PathVariable(name = "id") final Long id) {
         itemServicePort.deletarItem(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
 
 }

@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.core.services.pedido;
 
-import br.com.fiap.postech.fastfood.core.domain.ItemPedido;
 import br.com.fiap.postech.fastfood.core.domain.Pedido;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus;
@@ -21,18 +20,18 @@ public class PedidoServicePortImpl implements PedidoServicePort {
     }
 
     @Override
-    public Pedido updateStatusPedido(Pedido pedido) {
+    public Pedido updateStatusPedido(final Pedido pedido) {
         // Retrieve the existing Pedido from the persistence layer
-        Pedido existingPedido = pedidoPersistencePort.findByNumeroPedido(pedido.getNumeroPedido());
+        var existingPedido = pedidoPersistencePort.findByNumeroPedido(pedido.getNumeroPedido());
 
         // Check if the existing Pedido is in a status that allows updates
-        PedidoStatus currentStatus = existingPedido.getStatusPedido();
-        if (currentStatus == PedidoStatus.CANCELADO || currentStatus == PedidoStatus.FINALIZADO) {
+        var currentStatus = existingPedido.getStatusPedido();
+        if (PedidoStatus.CANCELADO.equals(currentStatus) || PedidoStatus.FINALIZADO.equals(currentStatus)) {
             throw new IllegalStateException("Cannot update Pedido in status CANCELADO or FINALIZADO.");
         }
 
         // Perform status transition validation
-        PedidoStatus newStatus = pedido.getStatusPedido();
+        var newStatus = pedido.getStatusPedido();
         switch (currentStatus) {
             case CRIADO:
                 if (newStatus != PedidoStatus.ANDAMENTO && newStatus != PedidoStatus.CANCELADO) {
@@ -54,7 +53,7 @@ public class PedidoServicePortImpl implements PedidoServicePort {
         }
 
         // Perform additional validation based on the new status
-        if (newStatus == PedidoStatus.ANDAMENTO) {
+        if (PedidoStatus.ANDAMENTO.equals(newStatus)) {
             // Check if the Pagamento status is APROVADO
             if (existingPedido.getStatusPagamento() != PagamentoStatus.APROVADO) {
                 throw new IllegalStateException("Cannot update Pedido to EM_ANDAMENTO unless Pagamento status is APROVADO.");

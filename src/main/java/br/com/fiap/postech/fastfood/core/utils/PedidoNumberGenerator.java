@@ -1,8 +1,11 @@
 package br.com.fiap.postech.fastfood.core.utils;
 
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class PedidoNumberGenerator {
 
   private static final String FIXED_PREFIX = "FF";
@@ -10,8 +13,9 @@ public class PedidoNumberGenerator {
   private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("mmss");
 
   public static String generateNumber() {
-    String currentDate = LocalDateTime.now().format(DATE_FORMATTER);
-    String currentTime = LocalDateTime.now().format(TIME_FORMATTER);
+    var currentDate = LocalDateTime.now().format(DATE_FORMATTER);
+    var currentTime = LocalDateTime.now().format(TIME_FORMATTER);
     return FIXED_PREFIX + currentDate + currentTime;
   }
+
 }

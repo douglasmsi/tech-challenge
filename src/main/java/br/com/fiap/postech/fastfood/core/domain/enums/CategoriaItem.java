@@ -9,7 +9,7 @@ public enum CategoriaItem {
 
     private String value;
 
-    CategoriaItem(String value){
+    CategoriaItem(final String value) {
         this.value = value;
     }
 

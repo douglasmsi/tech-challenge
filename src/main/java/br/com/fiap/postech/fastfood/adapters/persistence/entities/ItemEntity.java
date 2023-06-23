@@ -25,4 +25,5 @@ public class ItemEntity {
     private String descricao;
     private BigDecimal valor;
     private CategoriaItem categoriaItem;
+
 }

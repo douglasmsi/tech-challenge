@@ -9,14 +9,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import lombok.RequiredArgsConstructor;
 
-import java.util.List;
+import static java.util.Objects.isNull;
 
 @OpenAPIDefinition(info = @Info(title = "Cliente", description = "Cliente", version = "1.00"))
 @Tag(name = "Cliente", description = "Cliente")
@@ -25,7 +25,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ClienteController {
 
-    final ClienteServicePort clienteServicePort;
+    private final ClienteServicePort clienteServicePort;
 
     @Operation(
         summary = "All Clientes",
@@ -33,45 +33,45 @@ public class ClienteController {
         responses = {@ApiResponse(responseCode = "200", description = "Get a list of clientes.")})
     @GetMapping(value = "/clientes", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getAllClientes(){
-        List<Cliente> clientes = clienteServicePort.findAll();
+        var clientes = clienteServicePort.findAll();
         if (clientes.isEmpty()) {
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.CLIENTE_NOT_FOUND.getMessage());
+            var errorResponse = new ErrorResponse(ErrorMessages.CLIENTE_NOT_FOUND.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
         return ResponseEntity.ok(clientes);
     }
 
     @Operation(
-        summary = "Cliente by CPF",
-        description = "Returns a cliente by CPF",
-        responses = {@ApiResponse(responseCode = "200", description = "Get a cliente by CPF.")})
+            summary = "Cliente by CPF",
+            description = "Returns a cliente by CPF",
+            responses = {@ApiResponse(responseCode = "200", description = "Get a cliente by CPF.")})
     @GetMapping(value = "/clientes/{cpf}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getClienteByCpf(@PathVariable(value = "cpf") String cpf) {
-        Cliente cliente = clienteServicePort.findByCpf(cpf);
-        if (cliente == null){
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.CLIENTE_CPF_NOT_FOUND.getMessage());
+    public ResponseEntity<Object> getClienteByCpf(@PathVariable(value = "cpf") final String cpf) {
+        var cliente = clienteServicePort.findByCpf(cpf);
+        if (isNull(cliente)) {
+            var errorResponse = new ErrorResponse(ErrorMessages.CLIENTE_CPF_NOT_FOUND.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
         return ResponseEntity.ok(cliente);
     }
 
-
     @Operation(
-        summary = "Create Cliente",
-        description = "Create a cliente",
-        responses = {@ApiResponse(responseCode = "200", description = "Create a cliente.")})
+            summary = "Create Cliente",
+            description = "Create a cliente",
+            responses = {@ApiResponse(responseCode = "200", description = "Create a cliente.")})
     @PostMapping(value = "/clientes", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> createCliente(@RequestBody Cliente cliente){
+    public ResponseEntity<Object> createCliente(@RequestBody final Cliente cliente) {
         try {
-            Cliente createdCliente = clienteServicePort.save(cliente);
+            var createdCliente = clienteServicePort.save(cliente);
             return ResponseEntity.ok(createdCliente);
         } catch (DataIntegrityViolationException ex) {
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.CLIENTE_CPF_ALREADY_EXISTS.getMessage());
+            var errorResponse = new ErrorResponse(ErrorMessages.CLIENTE_CPF_ALREADY_EXISTS.getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (Exception ex) {
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.CLIENTE_ALREADY_EXISTS.getMessage());
+            var errorResponse = new ErrorResponse(ErrorMessages.CLIENTE_ALREADY_EXISTS.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
+
 }
 

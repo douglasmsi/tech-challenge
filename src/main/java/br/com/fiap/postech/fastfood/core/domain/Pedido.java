@@ -3,7 +3,10 @@ package br.com.fiap.postech.fastfood.core.domain;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -23,7 +26,6 @@ public class Pedido {
     @JsonManagedReference
     List<ItemPedido> items;
 
-
     public BigDecimal getValorTotal() {
         BigDecimal total = BigDecimal.ZERO;
         if (items != null) {
@@ -33,4 +35,5 @@ public class Pedido {
         }
         return total;
     }
+
 }

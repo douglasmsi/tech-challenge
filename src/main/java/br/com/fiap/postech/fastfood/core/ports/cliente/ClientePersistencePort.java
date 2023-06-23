@@ -1,15 +1,17 @@
 package br.com.fiap.postech.fastfood.core.ports.cliente;
 
-import br.com.fiap.postech.fastfood.adapters.persistence.entities.ClienteEntity;
 import br.com.fiap.postech.fastfood.core.domain.Cliente;
 
 import java.util.List;
 
 public interface ClientePersistencePort {
 
-    Cliente save(Cliente cliente);
+    Cliente save(final Cliente cliente);
+
     List<Cliente> findAll();
-    Cliente findByNome(String nome);
-    Cliente findByCpf(String cpf);
+
+    Cliente findByNome(final String nome);
+
+    Cliente findByCpf(final String cpf);
 
 }
