@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ItemPedidoRequest {
-  private String numeroPedido;
+
   private Item item;
   private Integer quantidade;
 

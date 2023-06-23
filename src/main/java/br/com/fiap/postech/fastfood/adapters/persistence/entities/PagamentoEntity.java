@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.adapters.persistence.entities;
 
-import br.com.fiap.postech.fastfood.core.domain.Pedido;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

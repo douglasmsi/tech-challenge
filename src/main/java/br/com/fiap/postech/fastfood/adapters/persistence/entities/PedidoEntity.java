@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.adapters.persistence.entities;
 
-import br.com.fiap.postech.fastfood.core.domain.ItemPedido;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus;
 import jakarta.persistence.*;
@@ -8,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -28,6 +26,9 @@ public class PedidoEntity {
     @Column
     private String numeroPedido;
 
+    @Column
+    private String cpf;
+
     @Enumerated(EnumType.STRING)
     @Column
     private PedidoStatus pedidoStatus;
@@ -40,6 +41,7 @@ public class PedidoEntity {
     private BigDecimal valorTotal;
 
     @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private ClienteEntity cliente;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
@@ -54,6 +56,7 @@ public class PedidoEntity {
         return "PedidoEntity{" +
             "id=" + id +
             ", numeroPedido='" + numeroPedido + '\'' +
+            ", cpf='" + cpf + '\'' +
             ", pedidoStatus=" + pedidoStatus +
             ", pagamentoStatus=" + pagamentoStatus +
             ", valorTotal=" + valorTotal +

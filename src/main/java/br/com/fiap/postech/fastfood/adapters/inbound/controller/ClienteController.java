@@ -32,7 +32,7 @@ public class ClienteController {
         description = "Returns a list of clientes",
         responses = {@ApiResponse(responseCode = "200", description = "Get a list of clientes.")})
     @GetMapping(value = "/clientes", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getAllClientes(){
+    public ResponseEntity<Object> getAllClientes() {
         List<Cliente> clientes = clienteServicePort.findAll();
         if (clientes.isEmpty()) {
             ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.CLIENTE_NOT_FOUND.getMessage());
@@ -48,20 +48,19 @@ public class ClienteController {
     @GetMapping(value = "/clientes/{cpf}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getClienteByCpf(@PathVariable(value = "cpf") String cpf) {
         Cliente cliente = clienteServicePort.findByCpf(cpf);
-        if (cliente == null){
+        if (cliente == null) {
             ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.CLIENTE_CPF_NOT_FOUND.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
         return ResponseEntity.ok(cliente);
     }
 
-
     @Operation(
         summary = "Create Cliente",
         description = "Create a cliente",
         responses = {@ApiResponse(responseCode = "200", description = "Create a cliente.")})
     @PostMapping(value = "/clientes", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> createCliente(@RequestBody Cliente cliente){
+    public ResponseEntity<Object> createCliente(@RequestBody Cliente cliente) {
         try {
             Cliente createdCliente = clienteServicePort.save(cliente);
             return ResponseEntity.ok(createdCliente);
@@ -74,4 +73,3 @@ public class ClienteController {
         }
     }
 }
-

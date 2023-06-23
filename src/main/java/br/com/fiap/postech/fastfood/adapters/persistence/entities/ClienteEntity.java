@@ -1,7 +1,5 @@
 package br.com.fiap.postech.fastfood.adapters.persistence.entities;
 
-import lombok.Getter;
-import lombok.Setter;
 
 import jakarta.persistence.*;
 import lombok.*;

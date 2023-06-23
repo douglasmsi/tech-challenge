@@ -7,7 +7,6 @@ import br.com.fiap.postech.fastfood.adapters.persistence.item.ItemJpaRepository;
 import br.com.fiap.postech.fastfood.adapters.persistence.pedido.PedidoJpaRepository;
 import br.com.fiap.postech.fastfood.core.domain.Item;
 import br.com.fiap.postech.fastfood.core.domain.ItemPedido;
-import br.com.fiap.postech.fastfood.core.domain.Pagamento;
 import br.com.fiap.postech.fastfood.core.ports.itempedido.ItemPedidoPersistencePort;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -73,5 +72,12 @@ public class ItemPedidoPersistencePortImpl implements ItemPedidoPersistencePort 
   @Override
   public List<ItemPedido> findByID(Long id) {
     return null;
+  }
+
+  @Override
+  public List<ItemPedido> findByNumeroPedido(String numeroPedido) {
+    PedidoEntity pedidoEntity = pedidoJpaRepository.findByNumeroPedido(numeroPedido);
+    return itemPedidoJpaRepository.findByPedido(pedidoEntity).stream().map(entity -> modelMapper.map(entity, ItemPedido.class)).collect(
+        java.util.stream.Collectors.toList());
   }
 }

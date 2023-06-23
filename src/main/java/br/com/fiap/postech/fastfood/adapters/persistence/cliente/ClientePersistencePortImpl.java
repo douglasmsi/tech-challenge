@@ -3,7 +3,6 @@ package br.com.fiap.postech.fastfood.adapters.persistence.cliente;
 import br.com.fiap.postech.fastfood.adapters.persistence.entities.ClienteEntity;
 import br.com.fiap.postech.fastfood.core.domain.Cliente;
 import br.com.fiap.postech.fastfood.core.ports.cliente.ClientePersistencePort;
-import br.com.fiap.postech.fastfood.core.services.exception.ClienteNaoEncontradoException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
