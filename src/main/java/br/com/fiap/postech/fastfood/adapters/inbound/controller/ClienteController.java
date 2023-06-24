@@ -7,7 +7,10 @@ import br.com.fiap.postech.fastfood.core.ports.cliente.ClienteServicePort;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -29,8 +32,11 @@ public class ClienteController {
 
     @Operation(
         summary = "All Clientes",
-        description = "Returns a list of clientes",
-        responses = {@ApiResponse(responseCode = "200", description = "Get a list of clientes.")})
+        description = "Returns a list of clientes"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Cliente.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) })})
     @GetMapping(value = "/clientes", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getAllClientes() {
         List<Cliente> clientes = clienteServicePort.findAll();
@@ -43,8 +49,10 @@ public class ClienteController {
 
     @Operation(
         summary = "Cliente by CPF",
-        description = "Returns a cliente by CPF",
-        responses = {@ApiResponse(responseCode = "200", description = "Get a cliente by CPF.")})
+        description = "Returns a cliente by CPF")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Cliente.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) })})
     @GetMapping(value = "/clientes/{cpf}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getClienteByCpf(@PathVariable(value = "cpf") String cpf) {
         Cliente cliente = clienteServicePort.findByCpf(cpf);
@@ -57,8 +65,10 @@ public class ClienteController {
 
     @Operation(
         summary = "Create Cliente",
-        description = "Create a cliente",
-        responses = {@ApiResponse(responseCode = "200", description = "Create a cliente.")})
+        description = "Create a cliente")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", content = { @Content(schema = @Schema(implementation = Cliente.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema()) })})
     @PostMapping(value = "/clientes", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> createCliente(@RequestBody Cliente cliente) {
         try {
