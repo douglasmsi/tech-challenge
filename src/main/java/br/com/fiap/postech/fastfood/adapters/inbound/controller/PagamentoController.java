@@ -1,11 +1,15 @@
 package br.com.fiap.postech.fastfood.adapters.inbound.controller;
 
 import br.com.fiap.postech.fastfood.adapters.dtos.ErrorResponse;
+import br.com.fiap.postech.fastfood.adapters.inbound.dto.CriarCheckoutRequest;
 import br.com.fiap.postech.fastfood.core.domain.Cliente;
+import br.com.fiap.postech.fastfood.core.domain.MetodoPagamento;
 import br.com.fiap.postech.fastfood.core.domain.Pagamento;
+import br.com.fiap.postech.fastfood.core.domain.Pedido;
 import br.com.fiap.postech.fastfood.core.domain.enums.ErrorMessages;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.core.ports.pagamento.PagamentoServicePort;
+import br.com.fiap.postech.fastfood.core.ports.pedido.PedidoServicePort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,6 +31,7 @@ import java.util.List;
 public class PagamentoController {
 
   private final PagamentoServicePort pagamentoServicePort;
+  private final PedidoServicePort pedidoServicePort;
 
   @Operation(
           summary = "Get all Pagamentos",
@@ -70,9 +75,30 @@ public class PagamentoController {
           @ApiResponse(responseCode = "400", content = { @Content(schema = @Schema()) }),
           @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) })
   })
-  @PostMapping("/pagamentos")
-  public ResponseEntity<Object> createPagamento(@RequestBody Pagamento pagamento) {
+  @PostMapping("/pedidos/checkout/{numeroPedido}")
+  public ResponseEntity<Object> createPagamento(@PathVariable(name = "numeroPedido") String numeroPedido, @RequestBody CriarCheckoutRequest request) {
     try {
+
+      Pedido pedido = pedidoServicePort.findByNumeroPedido(numeroPedido);
+      if (pedido == null) {
+        ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_NOT_FOUND.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+      }
+
+      //TO-DO: Executar pagamento externamente e com o retorno, atualizar o pagamento.
+
+      Pagamento pagamento = Pagamento.builder()
+          .pedido(pedido)
+          .status(PagamentoStatus.APROVADO)
+          .metodoPagamento(
+              MetodoPagamento.builder()
+                  .cvv(request.getCvv())
+                  .dataExpiracao(request.getDataExpiracao())
+                  .numeroCartao(request.getNumeroCartao())
+                  .build()
+          )
+          .build();
+
       Pagamento createdPagamento = pagamentoServicePort.save(pagamento);
       return ResponseEntity.status(HttpStatus.CREATED).body(createdPagamento);
     } catch (DataIntegrityViolationException ex) {
