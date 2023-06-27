@@ -31,13 +31,13 @@ class PagamentoJpaRepositoryTest {
 
     @DisplayName("Quando executar a busca findAllByStatus com status deve retornar lista de PagamentoEntity")
     @Test
-    void when_CallfindAllByStatus_shouldReturnListOfPagamentoEntity() {
+    void whenCallfindAllByStatus_shouldReturnListOfPagamentoEntity() {
         // Arrange
         final var expectedPedidoStatus = CRIADO;
         final var expectedPagamentoStatus = PENDENTE;
 
         // Act
-        var pagamentoEntity = this.pagamentoJpaRepository.findAllByStatus(PENDENTE);
+        final var pagamentoEntity = this.pagamentoJpaRepository.findAllByStatus(PENDENTE);
 
         // Assert
         assertNotNull(pagamentoEntity);
@@ -47,9 +47,9 @@ class PagamentoJpaRepositoryTest {
     }
 
     void salvaPagamentoEntity() {
-        var pedidoEntity = PedidoEntityMock.criaPedidoEntity();
+        final var pedidoEntity = PedidoEntityMock.criaPedidoEntity();
         this.pedidoJpaRepository.save(pedidoEntity);
-        var pagamentoEntity = PagamentoEntityMock.criaPagamentoEntity();
+        final var pagamentoEntity = PagamentoEntityMock.criaPagamentoEntity();
         pagamentoEntity.setPedido(pedidoEntity);
         this.pagamentoJpaRepository.save(pagamentoEntity);
     }

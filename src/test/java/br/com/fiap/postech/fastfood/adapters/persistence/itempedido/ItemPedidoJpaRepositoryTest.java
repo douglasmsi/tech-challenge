@@ -1,6 +1,9 @@
 package br.com.fiap.postech.fastfood.adapters.persistence.itempedido;
 
+import br.com.fiap.postech.fastfood.adapters.persistence.item.ItemJpaRepository;
 import br.com.fiap.postech.fastfood.adapters.persistence.pedido.PedidoJpaRepository;
+import br.com.fiap.postech.fastfood.mock.ItemEntityMock;
+import br.com.fiap.postech.fastfood.mock.ItemPedidoEntityMock;
 import br.com.fiap.postech.fastfood.mock.PedidoEntityMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,42 +12,49 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.math.BigDecimal;
-
-import static br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus.CRIADO;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ActiveProfiles("test")
 @DataJpaTest
 class ItemPedidoJpaRepositoryTest {
 
-        @Autowired
-        private ItemPedidoJpaRepository itemPedidoJpaRepository;
+    @Autowired
+    private ItemPedidoJpaRepository itemPedidoJpaRepository;
 
-        @BeforeEach
-        void setUp() {
-            salvaItemPedidoEntity();
-        }
+    @Autowired
+    private PedidoJpaRepository pedidoJpaRepository;
 
-        @DisplayName("Quando executar a busca findByNumeroPedido com numero de pedido deve retornar PedidoEntity")
-        @Test
-        void when_callFindByNumeroPedido_shouldReturnPedidoEntity() {
-            // Arrange
-            final var expectedNumeroPedido = "123456";
-            final var expectedPedidoStatus = CRIADO;
-            final var expectedValorTotal = BigDecimal.TEN;
+    @Autowired
+    private ItemJpaRepository itemJpaRepository;
 
-            // Act
-            var pedidoEntity = this.pedidoJpaRepository.findByNumeroPedido(expectedNumeroPedido);
+    @BeforeEach
+    void setUp() {
+        salvaItemPedidoEntity();
+    }
 
-            // Assert
-            assertNotNull(pedidoEntity);
-            assertEquals(expectedNumeroPedido, pedidoEntity.getNumeroPedido());
-            assertEquals(expectedPedidoStatus, pedidoEntity.getPedidoStatus());
-            assertEquals(expectedValorTotal, pedidoEntity.getValorTotal());
-        }
+    @DisplayName("Quando executar a busca findByPedidoAndItem com pedido e item deve retornar ItemPedidoEntity")
+    @Test
+    void whenCallFindByPedidoAndItem_shouldReturnItemPedidoEntity() {
+        // Arrange
+        final var expectedPedido = this.pedidoJpaRepository.findByNumeroPedido("123456");
+        final var expectedItem = this.itemJpaRepository.findById(1L).get();
 
-        void salvaItemPedidoEntity() {
-            var pedidoEntity = PedidoEntityMock.criaPedidoEntity();
-            this.pedidoJpaRepository.save(pedidoEntity);
-        }
+        // Act
+        final var itemPedidoEntity = this.itemPedidoJpaRepository.findByPedidoAndItem(expectedPedido, expectedItem);
+
+        // Assert
+        assertNotNull(itemPedidoEntity);
+        assertEquals(expectedPedido, itemPedidoEntity.getPedido());
+        assertEquals(expectedItem, itemPedidoEntity.getItem());
+    }
+
+    void salvaItemPedidoEntity() {
+        final var pedidoEntity = PedidoEntityMock.criaPedidoEntity();
+        this.pedidoJpaRepository.save(pedidoEntity);
+        final var itemEntity = ItemEntityMock.criaItemEntity();
+        this.itemJpaRepository.save(itemEntity);
+        this.itemPedidoJpaRepository.save(ItemPedidoEntityMock.criaItemPedidoEntity(pedidoEntity, itemEntity));
+    }
+
+}

@@ -28,14 +28,14 @@ class PedidoJpaRepositoryTest {
 
     @DisplayName("Quando executar a busca findByNumeroPedido com numero de pedido deve retornar PedidoEntity")
     @Test
-    void when_callFindByNumeroPedido_shouldReturnPedidoEntity() {
+    void whenCallFindByNumeroPedido_shouldReturnPedidoEntity() {
         // Arrange
         final var expectedNumeroPedido = "123456";
         final var expectedPedidoStatus = CRIADO;
         final var expectedValorTotal = BigDecimal.TEN;
 
         // Act
-        var pedidoEntity = this.pedidoJpaRepository.findByNumeroPedido(expectedNumeroPedido);
+        final var pedidoEntity = this.pedidoJpaRepository.findByNumeroPedido(expectedNumeroPedido);
 
         // Assert
         assertNotNull(pedidoEntity);
@@ -45,7 +45,7 @@ class PedidoJpaRepositoryTest {
     }
 
     void salvaPedidoEntity() {
-        var pedidoEntity = PedidoEntityMock.criaPedidoEntity();
+        final var pedidoEntity = PedidoEntityMock.criaPedidoEntity();
         this.pedidoJpaRepository.save(pedidoEntity);
     }
 
