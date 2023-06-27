@@ -8,13 +8,9 @@ import java.util.List;
 public interface PagamentoServicePort {
 
   Pagamento save(final Pagamento pagamento);
-
   Pagamento findById(final Long id);
-
   Pagamento updateStatusPagamento(final Pagamento pagamento);
-
   List<Pagamento> findAll();
-
   List<Pagamento> findAllByStatus(final PagamentoStatus status);
 
 }

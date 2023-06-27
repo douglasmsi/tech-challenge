@@ -20,6 +20,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static java.util.Objects.isNull;
+
 @OpenAPIDefinition(info = @Info(title = "Pedido", description = "Pedidos", version = "1.00"))
 @Tag(name = "Pedido", description = "Pedidos")
 @RestController
@@ -56,10 +58,10 @@ public class PedidoController {
         }
     )
     @GetMapping(value = "/pedidos/{numeroPedido}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getPedidoByNumero(@PathVariable(value = "numeroPedido") String numeroPedido) {
+    public ResponseEntity<Object> getPedidoByNumero(@PathVariable(value = "numeroPedido") final String numeroPedido) {
         Pedido pedido = pedidoServicePort.findByNumeroPedido(numeroPedido);
-        if (pedido == null) {
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_NOT_FOUND.getMessage());
+        if (isNull(pedido)) {
+            var errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_NOT_FOUND.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
         return ResponseEntity.ok(pedido);
@@ -74,33 +76,31 @@ public class PedidoController {
         }
     )
     @PostMapping(value = "/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> createPedido(@RequestBody CriarPedidoRequest request) {
+    public ResponseEntity<Object> createPedido(@RequestBody final CriarPedidoRequest request) {
         try {
             // Verifique se o CPF foi fornecido
-            if (request.getCpf() == null || request.getCpf().isEmpty()) {
-                ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_WITHOUT_CPF_REQUEST.getMessage());
+            if (isNull(request.getCpf()) || request.getCpf().isEmpty()) {
+                var errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_WITHOUT_CPF_REQUEST.getMessage());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
             }
 
-            Pedido pedido = Pedido.builder()
+            var pedido = Pedido.builder()
                 .statusPedido(PedidoStatus.valueOf(request.getStatusPedido()))
                 .valorTotal(request.getValorTotal())
                 .statusPagamento(PagamentoStatus.valueOf(request.getStatusPagamento()))
                 .cpf(request.getCpf())
                 .build();
 
-            Pedido createdPedido = pedidoServicePort.createPedido(pedido);
-
+            var createdPedido = pedidoServicePort.createPedido(pedido);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPedido);
         } catch (DataIntegrityViolationException ex) {
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_ALREADY_EXISTS.getMessage());
+            var errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_ALREADY_EXISTS.getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (Exception ex) {
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_CREATION_FAILED.getMessage());
+            var errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_CREATION_FAILED.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
-
 
     @Operation(
         summary = "Update Status Pedido",
@@ -111,16 +111,16 @@ public class PedidoController {
         }
     )
     @PutMapping(value = "/pedidos/{numeroPedido}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> updateStatusPedido(@PathVariable(value = "numeroPedido") String numeroPedido, @RequestBody Pedido pedido) {
+    public ResponseEntity<Object> updateStatusPedido(@PathVariable(value = "numeroPedido") final String numeroPedido,
+                                                     @RequestBody final Pedido pedido) {
         try {
-            Pedido updatedPedido = pedidoServicePort.updateStatusPedido(pedido);
-
+            var updatedPedido = pedidoServicePort.updateStatusPedido(pedido);
             return ResponseEntity.status(HttpStatus.OK).body(updatedPedido);
         } catch (DataIntegrityViolationException ex) {
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_ALREADY_EXISTS.getMessage());
+            var errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_ALREADY_EXISTS.getMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (Exception ex) {
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_UPDATE_FAILED.getMessage());
+            var errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_UPDATE_FAILED.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }

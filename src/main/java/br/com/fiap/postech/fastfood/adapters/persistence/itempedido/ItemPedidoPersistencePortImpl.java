@@ -70,15 +70,15 @@ public class ItemPedidoPersistencePortImpl implements ItemPedidoPersistencePort 
   }
 
   @Override
-  public List<ItemPedido> findByID(Long id) {
+  public List<ItemPedido> findByID(final Long id) {
     return Collections.emptyList();
   }
 
   @Override
-  public List<ItemPedido> findByNumeroPedido(String numeroPedido) {
-    PedidoEntity pedidoEntity = pedidoJpaRepository.findByNumeroPedido(numeroPedido);
-    return itemPedidoJpaRepository.findByPedido(pedidoEntity).stream().map(entity -> modelMapper.map(entity, ItemPedido.class)).collect(
-        java.util.stream.Collectors.toList());
+  public List<ItemPedido> findByNumeroPedido(final String numeroPedido) {
+    var pedidoEntity = pedidoJpaRepository.findByNumeroPedido(numeroPedido);
+    return itemPedidoJpaRepository.findByPedido(pedidoEntity).stream().map(entity -> modelMapper.map(entity,
+                                                                                                     ItemPedido.class)).toList();
   }
 
 }

@@ -39,7 +39,7 @@ public class ItemPedidoServicePortImpl implements ItemPedidoServicePort {
   }
 
   @Override
-  public List<ItemPedido> findByNumeroPedido(String numeroPedido) {
+  public List<ItemPedido> findByNumeroPedido(final String numeroPedido) {
     return itemPedidoPersistencePort.findByNumeroPedido(numeroPedido);
   }
 

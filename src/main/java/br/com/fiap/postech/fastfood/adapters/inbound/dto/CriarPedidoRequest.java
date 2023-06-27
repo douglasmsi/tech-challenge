@@ -14,4 +14,5 @@ public class CriarPedidoRequest {
   private String statusPagamento;
   private String cpf;
   private BigDecimal valorTotal;
+
 }

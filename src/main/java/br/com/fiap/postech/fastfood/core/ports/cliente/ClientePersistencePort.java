@@ -7,11 +7,8 @@ import java.util.List;
 public interface ClientePersistencePort {
 
     Cliente save(final Cliente cliente);
-
     List<Cliente> findAll();
-
     Cliente findByNome(final String nome);
-
     Cliente findByCpf(final String cpf);
 
 }

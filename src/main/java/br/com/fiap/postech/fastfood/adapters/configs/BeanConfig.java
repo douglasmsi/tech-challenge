@@ -10,11 +10,17 @@ import br.com.fiap.postech.fastfood.core.services.item.ItemServicePortImpl;
 import br.com.fiap.postech.fastfood.core.services.itempedido.ItemPedidoServicePortImpl;
 import br.com.fiap.postech.fastfood.core.services.pagamento.PagamentoServicePortImpl;
 import br.com.fiap.postech.fastfood.core.services.pedido.PedidoServicePortImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class BeanConfig {
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
     @Bean
     public ClienteServicePortImpl clienteServicePortImpl(final ClientePersistencePort persistence) {

@@ -34,7 +34,7 @@ public class PedidoPersistencePortImpl implements PedidoPersistencePort {
         Optional<ClienteEntity> clienteEntity = clienteJpaRepository.findByCpf(pedido.getCpf());
         if (clienteEntity.isPresent()) {
 
-            PedidoEntity pedidoEntity = modelMapper.map(pedido, PedidoEntity.class);
+            var pedidoEntity = modelMapper.map(pedido, PedidoEntity.class);
             pedidoEntity.setCliente(clienteEntity.get());
 
             pedidoEntity = pedidoJpaRepository.save(pedidoEntity);

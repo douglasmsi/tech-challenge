@@ -8,13 +8,9 @@ import java.util.List;
 public interface ItemServicePort {
 
     Item save(final Item item);
-
     List<Item> findAll();
-
     Item findById(final Long id);
-
     List<Item> findAllByCategoria(final CategoriaItem categoriaItem);
-
     void deletarItem(final Long id);
 
 }

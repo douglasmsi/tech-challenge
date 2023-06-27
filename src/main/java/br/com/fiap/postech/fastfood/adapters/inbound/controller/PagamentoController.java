@@ -71,11 +71,10 @@ public class PagamentoController {
           @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) })
   })
   @PostMapping("/pedidos/checkout/{numeroPedido}")
-  public ResponseEntity<Object> createPagamento(@PathVariable(name = "numeroPedido") String numeroPedido, @RequestBody CriarCheckoutRequest request) {
+  public ResponseEntity<Object> createPagamento(@PathVariable(name = "numeroPedido") final String numeroPedido,
+                                                @RequestBody final CriarCheckoutRequest request) {
     try {
-      var createdPagamento = pagamentoServicePort.save(pagamento);
-
-      Pedido pedido = pedidoServicePort.findByNumeroPedido(numeroPedido);
+      var pedido = pedidoServicePort.findByNumeroPedido(numeroPedido);
       if (isNull(pedido)) {
         var errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_NOT_FOUND.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
@@ -83,7 +82,7 @@ public class PagamentoController {
 
       //TO-DO: Executar pagamento externamente e com o retorno, atualizar o pagamento.
 
-      Pagamento pagamento = Pagamento.builder()
+      var pagamento = Pagamento.builder()
           .pedido(pedido)
           .status(PagamentoStatus.APROVADO)
           .metodoPagamento(
@@ -95,7 +94,7 @@ public class PagamentoController {
           )
           .build();
 
-      Pagamento createdPagamento = pagamentoServicePort.save(pagamento);
+      var createdPagamento = pagamentoServicePort.save(pagamento);
       return ResponseEntity.status(HttpStatus.CREATED).body(createdPagamento);
     } catch (DataIntegrityViolationException ex) {
       var errorResponse = new ErrorResponse(ErrorMessages.PAGAMENTO_ALREADY_EXISTS.getMessage());

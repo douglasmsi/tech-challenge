@@ -4,6 +4,7 @@ import br.com.fiap.postech.fastfood.adapters.dtos.ErrorResponse;
 import br.com.fiap.postech.fastfood.adapters.inbound.dto.ItemRequest;
 import br.com.fiap.postech.fastfood.core.domain.Item;
 import br.com.fiap.postech.fastfood.core.domain.enums.CategoriaItem;
+import br.com.fiap.postech.fastfood.core.domain.enums.ErrorMessages;
 import br.com.fiap.postech.fastfood.core.ports.item.ItemServicePort;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +39,7 @@ public class ItemController {
         description = "Returns a list of all items",
         responses = {@ApiResponse(responseCode = "200", description = "Get a list of all items.")})
     @GetMapping(value = "/items", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Object> getAllItems(@RequestParam(name = "categoria", required = false) CategoriaItem categoria) {
+    ResponseEntity<Object> getAllItems(@RequestParam(name = "categoria", required = false) final CategoriaItem categoria) {
         List<Item> items = null;
         if (nonNull(categoria)) {
             items = itemServicePort.findAllByCategoria(categoria);
@@ -57,22 +59,22 @@ public class ItemController {
         }
     )
     @PostMapping(value = "/items", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Object> createItem(@RequestBody ItemRequest request) {
+    ResponseEntity<Object> createItem(@RequestBody final ItemRequest request) {
         try {
-            Item item = Item.builder()
+            var item = Item.builder()
                 .nome(request.getNome())
                 .descricao(request.getDescricao())
                 .valor(request.getValor())
                 .categoria(CategoriaItem.valueOf(request.getCategoria()))
                 .build();
 
-            Item createdItem = itemServicePort.save(item);
+            var createdItem = itemServicePort.save(item);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdItem);
         } catch (DataIntegrityViolationException ex) {
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.INVALID_ITEM_REQUEST.getMessage());
+            var errorResponse = new ErrorResponse(ErrorMessages.INVALID_ITEM_REQUEST.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         } catch (Exception ex) {
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.ITEM_CREATION_FAILED.getMessage());
+            var errorResponse = new ErrorResponse(ErrorMessages.ITEM_CREATION_FAILED.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
@@ -85,12 +87,12 @@ public class ItemController {
             @ApiResponse(responseCode = "404", description = "Item not found.")
         })
     @GetMapping(value = "/items/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Object> getItemById(@PathVariable(name = "id", required = true) Long id) {
-        Item item = itemServicePort.findById(id);
+    ResponseEntity<Object> getItemById(@PathVariable(name = "id", required = true) final Long id) {
+        var item = itemServicePort.findById(id);
         if (nonNull(item)) {
             return ResponseEntity.ok(item);
         }
-        ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.ITEM_NOT_FOUND.getMessage());
+        var errorResponse = new ErrorResponse(ErrorMessages.ITEM_NOT_FOUND.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
 
     }
@@ -103,12 +105,12 @@ public class ItemController {
             @ApiResponse(responseCode = "404", description = "Item not found.")
         })
     @PutMapping(value = "/items/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Object> atualizarItem(@PathVariable(name = "id") Long id,@RequestBody Item item) {
+    ResponseEntity<Object> atualizarItem(@PathVariable(name = "id") final Long id,@RequestBody final Item item) {
         try {
-            Item updatedItem = itemServicePort.save(item);
+            var updatedItem = itemServicePort.save(item);
             return ResponseEntity.status(HttpStatus.OK).body(updatedItem);
         } catch (Exception ex) {
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.ITEM_UPDATE_FAILED.getMessage());
+            var errorResponse = new ErrorResponse(ErrorMessages.ITEM_UPDATE_FAILED.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
@@ -118,19 +120,19 @@ public class ItemController {
         description = "Delete an existing item",
         responses = {@ApiResponse(responseCode = "200", description = "Delete an existing item.")})
     @DeleteMapping("/items/{id}")
-    ResponseEntity<Object> deletarItem(@PathVariable(name = "id") Long id) {
+    ResponseEntity<Object> deletarItem(@PathVariable(name = "id") final Long id) {
         try {
             itemServicePort.deletarItem(id);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (Exception ex) {
-            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.ITEM_DELETION_FAILED.getMessage());
+            var errorResponse = new ErrorResponse(ErrorMessages.ITEM_DELETION_FAILED.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public Map<String, String> handleValidationExceptions(final MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();

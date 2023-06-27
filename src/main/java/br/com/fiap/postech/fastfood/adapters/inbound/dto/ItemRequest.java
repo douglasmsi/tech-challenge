@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.adapters.inbound.dto;
 
-
 import java.math.BigDecimal;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,4 +14,5 @@ public class ItemRequest {
     private String descricao;
     private BigDecimal valor;
     private String categoria;
+
 }

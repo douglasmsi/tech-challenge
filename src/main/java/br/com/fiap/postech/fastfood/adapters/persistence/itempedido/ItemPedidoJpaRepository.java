@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
 public interface ItemPedidoJpaRepository extends JpaRepository<ItemPedidoEntity, Long> {
-  ItemPedidoEntity findByPedidoAndItem(PedidoEntity pedido, ItemEntity item);
-  List<ItemPedidoEntity> findByPedido(PedidoEntity pedido);
+  ItemPedidoEntity findByPedidoAndItem(final PedidoEntity pedido, final ItemEntity item);
+  List<ItemPedidoEntity> findByPedido(final PedidoEntity pedido);
+
 }

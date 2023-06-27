@@ -1,6 +1,7 @@
 package br.com.fiap.postech.fastfood.core.domain.enums;
 
 public enum ErrorMessages {
+
   CLIENTE_NOT_FOUND("Cliente não encontrado"),
   CLIENTE_ALREADY_EXISTS("Cliente já cadastrado"),
   CLIENTE_CPF_ALREADY_EXISTS("CPF já cadastrado"),

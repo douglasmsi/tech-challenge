@@ -7,11 +7,8 @@ import java.util.List;
 public interface ClienteServicePort {
 
     Cliente save(final Cliente cliente);
-
     List<Cliente> findAll();
-
     Cliente findByCpf(final String cpf);
-
     Cliente findByNome(final String nome);
 
 }
