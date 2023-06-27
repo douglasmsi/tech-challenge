@@ -1,35 +1,34 @@
 version: "3.8"
 
+networks:
+  my-network:
+    driver: bridge
 services:
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    networks:
-      - tech-challenge-network
-    depends_on:
-      db:
-        condition: service_healthy
-
-  db:
-    build:
-      context: .
-      dockerfile: Dockerfile-mysql
-    ports:
-      - "3306:3306"
-    networks:
-      - tech-challenge-network
+  db-fastfood:
+    image: mysql:8
+    container_name: db-fastfood
     environment:
       MYSQL_DATABASE: fastfood
       MYSQL_USER: fastfooduser
       MYSQL_PASSWORD: fastfoodpass
       MYSQL_ROOT_PASSWORD: fastfoodroot
+    ports:
+      - "3306:3306"
     healthcheck:
-      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
       timeout: 20s
       retries: 10
-networks:
-  tech-challenge-network:
-    name: tech-challenge-network
+    networks:
+      - my-network
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastfood
+    ports:
+      - "8080:8080"
+    depends_on:
+      db-fastfood:
+        condition: service_healthy
+    networks:
+      - my-network

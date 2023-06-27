@@ -23,6 +23,9 @@ public class PagamentoEntity {
   @Column(name = "status")
   private PagamentoStatus status;
 
+  @Column
+  private String numeroPedido;
+
   @OneToOne(mappedBy = "pagamentoEntity")
   private PedidoEntity pedido;
 
@@ -40,6 +43,7 @@ public class PagamentoEntity {
     return "PagamentoEntity{" +
         "id=" + id +
         ", status=" + status +
+        ", numeroPedido='" + numeroPedido + '\'' +
         ", pedido=" + (pedido != null ? pedido.getNumeroPedido() : null) + // Evita a recursão infinita
         ", metodoPagamento=" + (metodoPagamento != null ? metodoPagamento.getId() : null) + // Evita a recursão infinita
         '}';

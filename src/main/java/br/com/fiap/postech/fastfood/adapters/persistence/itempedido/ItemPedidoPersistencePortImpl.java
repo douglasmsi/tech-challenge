@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 @RequiredArgsConstructor
 @Component
@@ -36,7 +37,7 @@ public class ItemPedidoPersistencePortImpl implements ItemPedidoPersistencePort 
 
     var itemPedidoEntity = itemPedidoJpaRepository.findByPedidoAndItem(pedidoEntity, itemEntity);
 
-    if (itemPedidoEntity != null) {
+    if (nonNull(itemPedidoEntity)) {
       // Já existe um ItemPedidoEntity para o mesmo pedido e item, então atualize a quantidade e o valor
       itemPedidoEntity.setQuantidade(quantidade);
       itemPedidoEntity.setValor(item.getValor());
@@ -71,6 +72,13 @@ public class ItemPedidoPersistencePortImpl implements ItemPedidoPersistencePort 
   @Override
   public List<ItemPedido> findByID(Long id) {
     return Collections.emptyList();
+  }
+
+  @Override
+  public List<ItemPedido> findByNumeroPedido(String numeroPedido) {
+    PedidoEntity pedidoEntity = pedidoJpaRepository.findByNumeroPedido(numeroPedido);
+    return itemPedidoJpaRepository.findByPedido(pedidoEntity).stream().map(entity -> modelMapper.map(entity, ItemPedido.class)).collect(
+        java.util.stream.Collectors.toList());
   }
 
 }

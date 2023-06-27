@@ -24,7 +24,17 @@ public enum ErrorMessages {
   PAGAMENTO_NOT_FOUND("Pagamento não encontrado"),
   PAGAMENTO_STATUS_NOT_FOUND("Status não encontrado"),
   PAGAMENTO_STATUS_INVALID("Status inválido"),
-  PAGAMENTO_PAYLOAD_INVALID("Payload inválido");
+  PAGAMENTO_PAYLOAD_INVALID("Payload inválido"),
+  ITEM_CREATION_FAILED("Falha ao criar item"),
+  ITEM_NOT_FOUND( "Item não encontrado"),
+  ITEM_UPDATE_FAILED( "Falha ao atualizar item"),
+  ITEM_DELETION_FAILED( "Falha ao deletar item"),
+  ITEM_PEDIDOS_NOT_FOUND("Item não encontrado"),
+  ITEM_PEDIDO_ADD_FAILED("Falha ao adicionar item ao pedido"),
+  PEDIDO_CREATION_FAILED("Falha ao criar pedido"),
+  PEDIDO_UPDATE_FAILED( "Falha ao atualizar pedido"),
+  PEDIDO_WITHOUT_CPF_REQUEST("Pedido sem CPF Válido"),
+  INVALID_ITEM_REQUEST("Item inválido");
 
   private final String message;
 

@@ -1,9 +1,0 @@
-# Usar a imagem base do MySQL 8
-FROM mysql:8
-
-# Definir as variáveis de ambiente para a configuração do MySQL
-ENV MYSQL_DATABASE fastfood
-ENV MYSQL_USER fastfooduser
-ENV MYSQL_PASSWORD fastfoodpass
-ENV MYSQL_ROOT_PASSWORD fastfoodroot
-

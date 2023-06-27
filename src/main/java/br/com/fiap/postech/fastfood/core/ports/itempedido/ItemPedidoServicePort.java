@@ -12,5 +12,6 @@ public interface ItemPedidoServicePort {
   ItemPedido deleteItemPedido(final ItemPedido itemPedido);
   List<ItemPedido> findAll();
   List<ItemPedido> findByID(final Long id);
+  List<ItemPedido> findByNumeroPedido(final String numeroPedido);
 
 }

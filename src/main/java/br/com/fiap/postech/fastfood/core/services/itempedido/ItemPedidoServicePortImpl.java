@@ -38,4 +38,9 @@ public class ItemPedidoServicePortImpl implements ItemPedidoServicePort {
     return itemPedidoPersistencePort.findAll();
   }
 
+  @Override
+  public List<ItemPedido> findByNumeroPedido(String numeroPedido) {
+    return itemPedidoPersistencePort.findByNumeroPedido(numeroPedido);
+  }
+
 }
