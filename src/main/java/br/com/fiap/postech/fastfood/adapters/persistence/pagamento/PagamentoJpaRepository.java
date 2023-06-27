@@ -13,4 +13,8 @@ public interface PagamentoJpaRepository extends JpaRepository<PagamentoEntity, L
 
   List<PagamentoEntity> findAllByStatus(PagamentoStatus status);
 
+  PagamentoEntity findByNumeroPedido(String numeroPedido);
+
+
+
 }

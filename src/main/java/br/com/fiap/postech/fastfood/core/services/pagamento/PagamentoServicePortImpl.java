@@ -36,4 +36,9 @@ public class PagamentoServicePortImpl implements PagamentoServicePort {
   public List<Pagamento> findAllByStatus(PagamentoStatus status) {
     return pagamentoPersistencePort.findAllByStatus(status);
   }
+
+  @Override
+  public PagamentoStatus getStatusPagamento(String numeroPedido) {
+    return pagamentoPersistencePort.getStatusPagamento(numeroPedido);
+  }
 }

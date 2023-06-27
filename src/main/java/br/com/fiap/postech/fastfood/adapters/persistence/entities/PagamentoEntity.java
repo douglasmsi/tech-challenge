@@ -31,11 +31,8 @@ public class PagamentoEntity {
   @Column(name = "status")
   private PagamentoStatus status;
 
-  @Column
+  @Column(name = "numero_pedido")
   private String numeroPedido;
-
-  @OneToOne(mappedBy = "pagamentoEntity")
-  private PedidoEntity pedido;
 
 
   @ManyToOne
@@ -44,14 +41,13 @@ public class PagamentoEntity {
 
 
   @OneToOne(mappedBy = "pagamentoEntity", orphanRemoval = true)
-  private PedidoEntity pedidoEntity;
+  private PedidoEntity pedido;
 
   @Override
   public String toString() {
     return "PagamentoEntity{" +
         "id=" + id +
         ", status=" + status +
-        ", numeroPedido='" + numeroPedido + '\'' +
         ", pedido=" + (pedido != null ? pedido.getNumeroPedido() : null) + // Evita a recursão infinita
         ", metodoPagamento=" + (metodoPagamento != null ? metodoPagamento.getId() : null) + // Evita a recursão infinita
         '}';

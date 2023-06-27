@@ -1,6 +1,8 @@
 package br.com.fiap.postech.fastfood.adapters.persistence.pagamento;
 
 import br.com.fiap.postech.fastfood.adapters.persistence.entities.PagamentoEntity;
+import br.com.fiap.postech.fastfood.adapters.persistence.entities.PedidoEntity;
+import br.com.fiap.postech.fastfood.adapters.persistence.pedido.PedidoJpaRepository;
 import br.com.fiap.postech.fastfood.core.domain.Pagamento;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.core.ports.pagamento.PagamentoPersistencePort;
@@ -14,11 +16,26 @@ import org.springframework.stereotype.Component;
 public class PagamentoPersistencePortImpl implements PagamentoPersistencePort {
 
   private final PagamentoJpaRepository pagamentoJpaRepository;
+  private final PedidoJpaRepository pedidoJpaRepository;
   private final ModelMapper modelMapper;
 
   @Override
     public Pagamento save(Pagamento pagamento) {
-    PagamentoEntity pagamentoEntity = pagamentoJpaRepository.save(modelMapper.map(pagamento, PagamentoEntity.class));
+    PedidoEntity pedidoEntity = pedidoJpaRepository.findByNumeroPedido(pagamento.getPedido().getNumeroPedido());
+
+    if (pedidoEntity == null) {
+      throw new RuntimeException("Pedido não encontrado");
+    }
+
+    PagamentoEntity pagamentoEntity = modelMapper.map(pagamento, PagamentoEntity.class);
+    pagamentoEntity.setPedido(pedidoEntity);
+
+    pagamentoEntity = pagamentoJpaRepository.save(pagamentoEntity);
+
+    pedidoEntity.setPagamentoStatus(pagamentoEntity.getStatus());
+    pedidoJpaRepository.saveAndFlush(pedidoEntity);
+    pagamentoJpaRepository.saveAndFlush(pagamentoEntity);
+
     return modelMapper.map(pagamentoEntity, Pagamento.class);
     }
 
@@ -44,6 +61,13 @@ public class PagamentoPersistencePortImpl implements PagamentoPersistencePort {
       return pagamentoJpaRepository.findAllByStatus(status).stream().map(entity -> modelMapper.map(entity, Pagamento.class)).collect(
           java.util.stream.Collectors.toList());
     }
+
+
+  @Override
+  public PagamentoStatus getStatusPagamento(String numeroPedido) {
+    PagamentoEntity pagamentoEntity = pagamentoJpaRepository.findByNumeroPedido(numeroPedido);
+    return pagamentoEntity.getStatus();
+  }
 
 
 

@@ -2,12 +2,15 @@ package br.com.fiap.postech.fastfood.adapters.inbound.controller;
 
 import br.com.fiap.postech.fastfood.adapters.dtos.ErrorResponse;
 import br.com.fiap.postech.fastfood.adapters.inbound.dto.CriarCheckoutRequest;
+import br.com.fiap.postech.fastfood.adapters.persistence.pagamento.MetodoPagamentoJpaRepository;
 import br.com.fiap.postech.fastfood.core.domain.Cliente;
 import br.com.fiap.postech.fastfood.core.domain.MetodoPagamento;
 import br.com.fiap.postech.fastfood.core.domain.Pagamento;
 import br.com.fiap.postech.fastfood.core.domain.Pedido;
 import br.com.fiap.postech.fastfood.core.domain.enums.ErrorMessages;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
+import br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus;
+import br.com.fiap.postech.fastfood.core.ports.pagamento.MetodoPagamentoServicePort;
 import br.com.fiap.postech.fastfood.core.ports.pagamento.PagamentoServicePort;
 import br.com.fiap.postech.fastfood.core.ports.pedido.PedidoServicePort;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,6 +35,8 @@ public class PagamentoController {
 
   private final PagamentoServicePort pagamentoServicePort;
   private final PedidoServicePort pedidoServicePort;
+  private final MetodoPagamentoJpaRepository metodoPagamentoJpaRepository;
+  private final MetodoPagamentoServicePort metodoPagamentoServicePort;
 
   @Operation(
           summary = "Get all Pagamentos",
@@ -85,19 +90,37 @@ public class PagamentoController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
       }
 
+      // Validar se o pedido já foi pago.
+      if (pedido.getStatusPagamento() != PagamentoStatus.PENDENTE) {
+        ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PAGAMENTO_INVALID_STATUS.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+      }
+
+      //Validar se o pedido já foi cancelado.
+      if (pedido.getStatusPedido() == PedidoStatus.CANCELADO) {
+        ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_CANCELADO.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+      }
+
+      // Validar se o pedido já foi entregue.
+      if (pedido.getStatusPedido() == PedidoStatus.ENTREGA) {
+        ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_ENTREGUE.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+      }
+
+      MetodoPagamento metodoPagamento = metodoPagamentoServicePort.findByIdAndCPF(request.getMetodoPagamentoId(), request.getCpf());
+      if (metodoPagamento == null) {
+        ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.METODO_PAGAMENTO_NOT_FOUND.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+      }
+
       //TO-DO: Executar pagamento externamente e com o retorno, atualizar o pagamento.
 
       Pagamento pagamento = Pagamento.builder()
-          .pedido(pedido)
-          .status(PagamentoStatus.APROVADO)
-          .metodoPagamento(
-              MetodoPagamento.builder()
-                  .cvv(request.getCvv())
-                  .dataExpiracao(request.getDataExpiracao())
-                  .numeroCartao(request.getNumeroCartao())
-                  .build()
-          )
-          .build();
+              .pedido(pedido)
+              .metodoPagamento(metodoPagamento)
+              .status(PagamentoStatus.APROVADO)
+              .build();
 
       Pagamento createdPagamento = pagamentoServicePort.save(pagamento);
       return ResponseEntity.status(HttpStatus.CREATED).body(createdPagamento);

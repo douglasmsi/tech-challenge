@@ -12,4 +12,6 @@ public interface PagamentoPersistencePort {
 
   List<Pagamento> findAll();
   List<Pagamento> findAllByStatus(PagamentoStatus status);
+
+  PagamentoStatus getStatusPagamento(String numeroPedido);
 }

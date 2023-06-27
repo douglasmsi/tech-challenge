@@ -2,6 +2,7 @@ package br.com.fiap.postech.fastfood.adapters.inbound.controller;
 
 import br.com.fiap.postech.fastfood.adapters.dtos.ErrorResponse;
 import br.com.fiap.postech.fastfood.adapters.inbound.dto.CriarPedidoRequest;
+import br.com.fiap.postech.fastfood.adapters.inbound.dto.UpdatePedidoRequest;
 import br.com.fiap.postech.fastfood.core.domain.Pedido;
 import br.com.fiap.postech.fastfood.core.domain.enums.ErrorMessages;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
@@ -117,9 +118,17 @@ public class PedidoController {
         }
     )
     @PutMapping(value = "/pedidos/{numeroPedido}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> updateStatusPedido(@PathVariable(value = "numeroPedido") String numeroPedido, @RequestBody Pedido pedido) {
+    public ResponseEntity<Object> updateStatusPedido(@PathVariable(value = "numeroPedido") String numeroPedido, @RequestBody UpdatePedidoRequest request) {
         try {
-            Pedido updatedPedido = pedidoServicePort.updateStatusPedido(pedido);
+            Pedido pedido = pedidoServicePort.findByNumeroPedido(numeroPedido);
+            if (pedido == null) {
+                ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_NOT_FOUND.getMessage());
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+            }
+
+
+            // Chama o serviço para atualizar o status do pedido
+            Pedido updatedPedido = pedidoServicePort.updateStatusPedido(request);
 
             return ResponseEntity.status(HttpStatus.OK).body(updatedPedido);
         } catch (DataIntegrityViolationException ex) {

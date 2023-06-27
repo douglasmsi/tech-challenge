@@ -26,9 +26,17 @@ public class MetodoPagamentoEntity {
   @Column(name = "id", nullable = false)
   private Long id;
 
+  @Column(name = "cvv")
   private String cvv;
+
+  @Column(name = "numero_cartao")
   private String numeroCartao;
+
+  @Column(name = "data_expiracao")
   private String dataExpiracao;
+
+  @Column(name = "cpf")
+  private String cpf;
 
   @OneToMany(mappedBy = "metodoPagamento")
   private List<PagamentoEntity> pagamentos;

@@ -1,18 +1,15 @@
 package br.com.fiap.postech.fastfood.adapters.inbound.dto;
 
-import java.math.BigDecimal;
+import br.com.fiap.postech.fastfood.core.domain.MetodoPagamento;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @Builder
-public class CriarCheckoutRequest {
+public class MetodoPagamentoRequest {
 
   private String cpf;
-  private Long metodoPagamentoId;
-  private BigDecimal valor;
-
+  private MetodoPagamento metodoPagamento;
 }

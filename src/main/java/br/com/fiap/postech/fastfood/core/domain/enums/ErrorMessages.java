@@ -35,7 +35,11 @@ public enum ErrorMessages {
   PEDIDO_CREATION_FAILED("Falha ao criar pedido"),
   PEDIDO_UPDATE_FAILED( "Falha ao atualizar pedido"),
   PEDIDO_WITHOUT_CPF_REQUEST("Pedido sem CPF Válido"),
-  INVALID_ITEM_REQUEST("Item inválido");
+  INVALID_ITEM_REQUEST("Item inválido"),
+  METODO_PAGAMENTO_NOT_FOUND(  "Método de pagamento não encontrado"), PAGAMENTO_INVALID_STATUS( "Status inválido para pagamento"),
+  PEDIDO_CANCELADO("Pedido cancelado"),
+  PEDIDO_ENTREGUE("Pedido entregue");
+
 
   private final String message;
 

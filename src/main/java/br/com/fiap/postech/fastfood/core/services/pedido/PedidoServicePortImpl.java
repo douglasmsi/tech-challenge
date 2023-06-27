@@ -1,9 +1,10 @@
 package br.com.fiap.postech.fastfood.core.services.pedido;
 
-import br.com.fiap.postech.fastfood.core.domain.ItemPedido;
+import br.com.fiap.postech.fastfood.adapters.inbound.dto.UpdatePedidoRequest;
 import br.com.fiap.postech.fastfood.core.domain.Pedido;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus;
+import br.com.fiap.postech.fastfood.core.ports.pagamento.PagamentoServicePort;
 import br.com.fiap.postech.fastfood.core.ports.pedido.PedidoPersistencePort;
 import br.com.fiap.postech.fastfood.core.ports.pedido.PedidoServicePort;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class PedidoServicePortImpl implements PedidoServicePort {
     }
 
     @Override
-    public Pedido updateStatusPedido(Pedido pedido) {
+    public Pedido updateStatusPedido(UpdatePedidoRequest pedido) {
         // Retrieve the existing Pedido from the persistence layer
         Pedido existingPedido = pedidoPersistencePort.findByNumeroPedido(pedido.getNumeroPedido());
 
