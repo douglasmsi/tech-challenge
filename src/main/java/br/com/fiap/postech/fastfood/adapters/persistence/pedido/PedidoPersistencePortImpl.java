@@ -59,13 +59,20 @@ public class PedidoPersistencePortImpl implements PedidoPersistencePort {
     @Override
     public Pedido findByNumeroPedido(String numeroPedido) {
         PedidoEntity pedidoEntity = pedidoJpaRepository.findByNumeroPedido(numeroPedido);
-        return modelMapper.map(pedidoEntity, Pedido.class);
+        if (pedidoEntity != null) {
+            return modelMapper.map(pedidoEntity, Pedido.class);
+        }
+        return null;
     }
 
     @Override
     public Pedido updateStatusPedido(UpdatePedidoRequest request) {
 
         PedidoEntity pedidoEntity = pedidoJpaRepository.findByNumeroPedido(request.getNumeroPedido());
+
+        if (pedidoEntity == null) {
+            return null;
+        }
         pedidoEntity.setPedidoStatus(request.getStatusPedido());
         // Verifique se o novo status do pedido é CANCELADO
         if (request.getStatusPedido() == PedidoStatus.CANCELADO) {
@@ -75,6 +82,7 @@ public class PedidoPersistencePortImpl implements PedidoPersistencePort {
             // Atualize o status do Pagamento para ESTORNADO
             pagamentoEntity.setStatus(PagamentoStatus.ESTORNADO);
             pagamentoJpaRepository.save(pagamentoEntity);
+            pedidoEntity.setPagamentoStatus(PagamentoStatus.ESTORNADO);
         }
 
 

@@ -1,7 +1,6 @@
 package br.com.fiap.postech.fastfood.adapters.inbound.controller;
 
 import br.com.fiap.postech.fastfood.adapters.inbound.dto.MetodoPagamentoRequest;
-import br.com.fiap.postech.fastfood.core.domain.MetodoPagamento;
 import br.com.fiap.postech.fastfood.core.ports.pagamento.MetodoPagamentoServicePort;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;

@@ -3,7 +3,6 @@ package br.com.fiap.postech.fastfood.adapters.inbound.controller;
 import br.com.fiap.postech.fastfood.adapters.dtos.ErrorResponse;
 import br.com.fiap.postech.fastfood.adapters.inbound.dto.CriarCheckoutRequest;
 import br.com.fiap.postech.fastfood.adapters.persistence.pagamento.MetodoPagamentoJpaRepository;
-import br.com.fiap.postech.fastfood.core.domain.Cliente;
 import br.com.fiap.postech.fastfood.core.domain.MetodoPagamento;
 import br.com.fiap.postech.fastfood.core.domain.Pagamento;
 import br.com.fiap.postech.fastfood.core.domain.Pedido;

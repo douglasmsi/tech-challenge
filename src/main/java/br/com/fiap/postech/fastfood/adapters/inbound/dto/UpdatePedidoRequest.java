@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.adapters.inbound.dto;
 
-import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus;
 import lombok.Builder;
 import lombok.Getter;

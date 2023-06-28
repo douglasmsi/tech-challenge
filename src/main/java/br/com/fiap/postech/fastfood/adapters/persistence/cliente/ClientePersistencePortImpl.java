@@ -5,11 +5,9 @@ import br.com.fiap.postech.fastfood.core.domain.Cliente;
 import br.com.fiap.postech.fastfood.core.ports.cliente.ClientePersistencePort;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-
 import java.util.List;
 
 
