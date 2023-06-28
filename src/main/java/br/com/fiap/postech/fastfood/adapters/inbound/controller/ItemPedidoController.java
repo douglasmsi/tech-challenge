@@ -43,10 +43,17 @@ public class ItemPedidoController {
   @GetMapping(value = "/pedidos/itempedido/{numeroPedido}", produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<Object> getAllItemPedidos(@PathVariable(name = "numeroPedido") String numeroPedido) {
     List<ItemPedido> itemPedidos = itemPedidoServicePort.findByNumeroPedido(numeroPedido);
+
+    if (Objects.isNull(itemPedidos)) {
+      ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_NOT_FOUND.getMessage());
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
     if (itemPedidos.isEmpty()) {
       ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.ITEM_PEDIDOS_NOT_FOUND.getMessage());
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
+
     return ResponseEntity.ok(itemPedidos);
   }
 

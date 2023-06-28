@@ -1,5 +1,6 @@
 package br.com.fiap.postech.fastfood.adapters.persistence.pedido;
 
+import br.com.fiap.postech.fastfood.adapters.inbound.dto.CriarPedidoRequest;
 import br.com.fiap.postech.fastfood.adapters.inbound.dto.UpdatePedidoRequest;
 import br.com.fiap.postech.fastfood.adapters.persistence.cliente.ClienteJpaRepository;
 import br.com.fiap.postech.fastfood.adapters.persistence.entities.ClienteEntity;
@@ -33,17 +34,22 @@ public class PedidoPersistencePortImpl implements PedidoPersistencePort {
 
 
     @Override
-    public Pedido createPedido(final Pedido pedido) {
+    public Pedido createPedido(final CriarPedidoRequest request) {
         String numeroPedido = PedidoNumberGenerator.generateNumber();
-        pedido.setNumeroPedido(numeroPedido);
-        pedido.setStatusPagamento(PagamentoStatus.PENDENTE);
-        pedido.setStatusPedido(PedidoStatus.CRIADO);
 
-        Optional<ClienteEntity> clienteEntity = clienteJpaRepository.findByCpf(pedido.getCpf());
-        if (clienteEntity.isPresent()) {
+
+        Pedido pedido = Pedido.builder()
+            .cpf(request.getCpf())
+            .numeroPedido(numeroPedido)
+            .statusPagamento(PagamentoStatus.PENDENTE)
+            .statusPedido(PedidoStatus.CRIADO)
+            .build();
+
+        ClienteEntity clienteEntity = clienteJpaRepository.findByCpf(pedido.getCpf());
+        if (clienteEntity != null) {
 
             PedidoEntity pedidoEntity = modelMapper.map(pedido, PedidoEntity.class);
-            pedidoEntity.setCliente(clienteEntity.get());
+            pedidoEntity.setCliente(clienteEntity);
 
             pedidoEntity = pedidoJpaRepository.save(pedidoEntity);
             return modelMapper.map(pedidoEntity, Pedido.class);

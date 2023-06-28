@@ -77,6 +77,10 @@ public class ItemPedidoPersistencePortImpl implements ItemPedidoPersistencePort 
   @Override
   public List<ItemPedido> findByNumeroPedido(String numeroPedido) {
     PedidoEntity pedidoEntity = pedidoJpaRepository.findByNumeroPedido(numeroPedido);
+    if (pedidoEntity == null) {
+      // Lógica de tratamento caso o pedido não seja encontrado
+      return null;
+    }
     return itemPedidoJpaRepository.findByPedido(pedidoEntity).stream().map(entity -> modelMapper.map(entity, ItemPedido.class)).collect(
         java.util.stream.Collectors.toList());
   }

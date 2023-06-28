@@ -89,14 +89,12 @@ public class PedidoController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
             }
 
-            Pedido pedido = Pedido.builder()
-                .statusPedido(PedidoStatus.valueOf(request.getStatusPedido()))
-                .valorTotal(request.getValorTotal())
-                .statusPagamento(PagamentoStatus.valueOf(request.getStatusPagamento()))
-                .cpf(request.getCpf())
-                .build();
+            Pedido createdPedido = pedidoServicePort.createPedido(request);
 
-            Pedido createdPedido = pedidoServicePort.createPedido(pedido);
+            if (createdPedido == null) {
+                ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_CREATION_FAILED.getMessage());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+            }
 
             return ResponseEntity.status(HttpStatus.CREATED).body(createdPedido);
         } catch (DataIntegrityViolationException ex) {

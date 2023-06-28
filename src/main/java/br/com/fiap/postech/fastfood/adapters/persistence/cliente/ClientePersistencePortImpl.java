@@ -31,18 +31,18 @@ public class ClientePersistencePortImpl implements ClientePersistencePort {
 
     @Override
     public Cliente findByNome(String nome) {
-        Optional<ClienteEntity> cliente = clienteJpaRepository.findByCpf(nome);
-        if(cliente.isPresent()){
-            return modelMapper.map(cliente.get(), Cliente.class);
+        ClienteEntity cliente = clienteJpaRepository.findByCpf(nome);
+        if(cliente != null ){
+            return modelMapper.map(cliente, Cliente.class);
         }
         return null;
     }
 
     @Override
     public Cliente findByCpf(String cpf) {
-        Optional<ClienteEntity> cliente = clienteJpaRepository.findByCpf(cpf);
-        if(cliente.isPresent()){
-            return modelMapper.map(cliente.get(), Cliente.class);
+        ClienteEntity cliente = clienteJpaRepository.findByCpf(cpf);
+        if(cliente != null){
+            return modelMapper.map(cliente, Cliente.class);
         }
         return null;
     }

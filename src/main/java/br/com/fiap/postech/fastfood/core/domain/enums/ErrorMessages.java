@@ -30,7 +30,7 @@ public enum ErrorMessages {
   ITEM_NOT_FOUND( "Item não encontrado"),
   ITEM_UPDATE_FAILED( "Falha ao atualizar item"),
   ITEM_DELETION_FAILED( "Falha ao deletar item"),
-  ITEM_PEDIDOS_NOT_FOUND("Item não encontrado"),
+  ITEM_PEDIDOS_NOT_FOUND("Itens não encontrados"),
   ITEM_PEDIDO_ADD_FAILED("Falha ao adicionar item ao pedido"),
   PEDIDO_CREATION_FAILED("Falha ao criar pedido"),
   PEDIDO_UPDATE_FAILED( "Falha ao atualizar pedido"),

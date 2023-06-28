@@ -1,9 +1,13 @@
 package br.com.fiap.postech.fastfood.core.services.pedido;
 
+import br.com.fiap.postech.fastfood.adapters.inbound.dto.CriarPedidoRequest;
 import br.com.fiap.postech.fastfood.adapters.inbound.dto.UpdatePedidoRequest;
+import br.com.fiap.postech.fastfood.adapters.persistence.cliente.ClientePersistencePortImpl;
+import br.com.fiap.postech.fastfood.core.domain.Cliente;
 import br.com.fiap.postech.fastfood.core.domain.Pedido;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus;
+import br.com.fiap.postech.fastfood.core.ports.cliente.ClientePersistencePort;
 import br.com.fiap.postech.fastfood.core.ports.pagamento.PagamentoServicePort;
 import br.com.fiap.postech.fastfood.core.ports.pedido.PedidoPersistencePort;
 import br.com.fiap.postech.fastfood.core.ports.pedido.PedidoServicePort;
@@ -17,8 +21,9 @@ public class PedidoServicePortImpl implements PedidoServicePort {
     private final PedidoPersistencePort pedidoPersistencePort;
 
     @Override
-    public Pedido createPedido(final Pedido pedido) {
-        return pedidoPersistencePort.createPedido(pedido);
+    public Pedido createPedido(final CriarPedidoRequest request) {
+
+        return pedidoPersistencePort.createPedido(request);
     }
 
     @Override

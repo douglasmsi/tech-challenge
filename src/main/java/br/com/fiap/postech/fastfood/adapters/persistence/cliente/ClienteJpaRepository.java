@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 @EnableJpaRepositories
 public interface ClienteJpaRepository extends JpaRepository<ClienteEntity, Long> {
-    Optional<ClienteEntity> findByCpf(final String cpf);
+    ClienteEntity findByCpf(final String cpf);
 
-    Optional<ClienteEntity> findByNome(final String nome);
+    ClienteEntity findByNome(final String nome);
 }
