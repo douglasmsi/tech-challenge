@@ -51,12 +51,6 @@ In this hexagonal structure, the clear separation of responsibilities in differe
      
 ## Run the application
 
-Using mavem, run the following command in the root directory of the project:
-
-```bash
-mvn clean package
-```
-
 To run the application, you need to have Docker installed on your machine. Then, run the following command in the root directory of the project:
 
 ```bash
