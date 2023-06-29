@@ -9,7 +9,7 @@ public interface MetodoPagamentoServicePort {
   MetodoPagamento createMetodoPagamento(MetodoPagamentoRequest metodoPagamento);
   MetodoPagamento findByIdAndCPF(Long id, String cpf);
 
-  List<MetodoPagamento> findAllByCPF(String cpf);
+  List<MetodoPagamento> findByCpf(String cpf);
 
   MetodoPagamento deleteByIdAndCPF(Long id, String cpf);
 }

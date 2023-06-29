@@ -17,5 +17,6 @@ public class Cliente {
     private String endereco;
     private String email;
     private List<Pedido> pedidos;
+    private List<MetodoPagamento> metodosPagamento;
 
 }

@@ -28,8 +28,8 @@ public class MetodoPagamentoServicePortImpl implements MetodoPagamentoServicePor
   }
 
   @Override
-  public List<MetodoPagamento> findAllByCPF(String cpf) {
-    return metodoPagamentoPersistencePort.findAllByCPF(cpf);
+  public List<MetodoPagamento> findByCpf(String cpf) {
+    return metodoPagamentoPersistencePort.findByCpf(cpf);
   }
 
   @Override

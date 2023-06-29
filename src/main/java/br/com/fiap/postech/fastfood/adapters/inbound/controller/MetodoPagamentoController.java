@@ -1,6 +1,10 @@
 package br.com.fiap.postech.fastfood.adapters.inbound.controller;
 
+import br.com.fiap.postech.fastfood.adapters.dtos.ErrorResponse;
 import br.com.fiap.postech.fastfood.adapters.inbound.dto.MetodoPagamentoRequest;
+import br.com.fiap.postech.fastfood.core.domain.Cliente;
+import br.com.fiap.postech.fastfood.core.domain.MetodoPagamento;
+import br.com.fiap.postech.fastfood.core.domain.enums.ErrorMessages;
 import br.com.fiap.postech.fastfood.core.ports.pagamento.MetodoPagamentoServicePort;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,7 +12,10 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,7 +45,20 @@ public class MetodoPagamentoController {
           @ApiResponse(responseCode = "409", description = "Metodo Pagamento already exists")})
   @PostMapping(value = "/metodo-pagamentos")
   public ResponseEntity<Object> createMetodoPagamento(@RequestBody MetodoPagamentoRequest request) {
-    return ResponseEntity.ok(metodoPagamentoServicePort.createMetodoPagamento(request));
+    try {
+      MetodoPagamento createdMetodoPagamento = metodoPagamentoServicePort.createMetodoPagamento(request);
+      if (createdMetodoPagamento == null) {
+        ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.CLIENTE_CPF_NOT_FOUND.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+      }
+      return ResponseEntity.status(HttpStatus.CREATED).body(createdMetodoPagamento);
+    } catch (DataIntegrityViolationException ex) {
+      ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.METODO_PAGAMENTO_ALREADY_EXISTS.getMessage());
+      return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    } catch (Exception ex) {
+      ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.METODO_PAGAMENTO_CREATION_FAILED.getMessage());
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    }
   }
 
   @Operation(
@@ -50,8 +70,13 @@ public class MetodoPagamentoController {
           @ApiResponse(responseCode = "200", description = "Metodo Pagamento found"),
           @ApiResponse(responseCode = "404", description = "Metodo Pagamento not found")})
   @GetMapping(value = "/metodo-pagamentos")
-  public ResponseEntity<Object> getAllMetodoPagamento(@RequestBody String cpf) {
-    return ResponseEntity.ok(metodoPagamentoServicePort.findAllByCPF(cpf));
+  public ResponseEntity<Object> getAllMetodoPagamento(@RequestBody Cliente cliente) {
+    List<MetodoPagamento> metodoPagamentos = metodoPagamentoServicePort.findByCpf(cliente.getCpf());
+    if (metodoPagamentos.isEmpty()) {
+      ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.METODO_PAGAMENTO_NOT_FOUND.getMessage());
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+    return ResponseEntity.ok(metodoPagamentos);
   }
 
   @Operation(

@@ -37,6 +37,9 @@ public class ClienteEntity implements Serializable {
         @OneToMany(mappedBy = "cliente")
         List<PedidoEntity> pedidos;
 
+        @OneToMany(mappedBy = "cliente")
+        private List<MetodoPagamentoEntity> metodosPagamento;
+
         @Override
         public String toString() {
                 return "ClienteEntity{" +

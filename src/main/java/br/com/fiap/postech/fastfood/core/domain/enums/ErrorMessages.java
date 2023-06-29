@@ -38,7 +38,9 @@ public enum ErrorMessages {
   INVALID_ITEM_REQUEST("Item inválido"),
   METODO_PAGAMENTO_NOT_FOUND(  "Método de pagamento não encontrado"), PAGAMENTO_INVALID_STATUS( "Status inválido para pagamento"),
   PEDIDO_CANCELADO("Pedido cancelado"),
-  PEDIDO_ENTREGUE("Pedido entregue");
+  PEDIDO_ENTREGUE("Pedido entregue"),
+  METODO_PAGAMENTO_ALREADY_EXISTS("Método de pagamento já cadastrado"),
+  METODO_PAGAMENTO_CREATION_FAILED("Falha ao criar método de pagamento");
 
 
   private final String message;

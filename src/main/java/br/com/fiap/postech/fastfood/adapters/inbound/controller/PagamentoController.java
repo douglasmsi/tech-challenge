@@ -34,7 +34,6 @@ public class PagamentoController {
 
   private final PagamentoServicePort pagamentoServicePort;
   private final PedidoServicePort pedidoServicePort;
-  private final MetodoPagamentoJpaRepository metodoPagamentoJpaRepository;
   private final MetodoPagamentoServicePort metodoPagamentoServicePort;
 
   @Operation(

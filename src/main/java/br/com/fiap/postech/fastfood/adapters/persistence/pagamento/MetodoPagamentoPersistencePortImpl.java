@@ -1,6 +1,8 @@
 package br.com.fiap.postech.fastfood.adapters.persistence.pagamento;
 
 import br.com.fiap.postech.fastfood.adapters.inbound.dto.MetodoPagamentoRequest;
+import br.com.fiap.postech.fastfood.adapters.persistence.cliente.ClienteJpaRepository;
+import br.com.fiap.postech.fastfood.adapters.persistence.entities.ClienteEntity;
 import br.com.fiap.postech.fastfood.adapters.persistence.entities.MetodoPagamentoEntity;
 import br.com.fiap.postech.fastfood.core.domain.MetodoPagamento;
 import br.com.fiap.postech.fastfood.core.ports.pagamento.MetodoPagamentoPersistencePort;
@@ -15,17 +17,30 @@ public class MetodoPagamentoPersistencePortImpl implements MetodoPagamentoPersis
 
   private final ModelMapper modelMapper;
   private final MetodoPagamentoJpaRepository metodoPagamentoJpaRepository;
+  private final ClienteJpaRepository clienteJpaRepository;
   @Override
   public MetodoPagamento createMetodoPagamento(MetodoPagamentoRequest request) {
+
+    ClienteEntity cliente = clienteJpaRepository.findByCpf(request.getMetodoPagamento().getCpf());
+    if (cliente == null) {
+      return null;
+    }
+
 
     MetodoPagamento metodoPagamento = MetodoPagamento.builder()
         .cvv(request.getMetodoPagamento().getCvv())
         .numeroCartao(request.getMetodoPagamento().getNumeroCartao())
-        .dataExpiracao(request.getMetodoPagamento().getDataExpiracao()).
-        build();
+        .dataExpiracao(request.getMetodoPagamento().getDataExpiracao())
+        .cpf(request.getMetodoPagamento().getCpf())
+        .build();
 
     MetodoPagamentoEntity metodoPagamentoEntity = modelMapper.map(metodoPagamento, MetodoPagamentoEntity.class);
+    metodoPagamentoEntity.setCliente(cliente);
     metodoPagamentoEntity = metodoPagamentoJpaRepository.save(metodoPagamentoEntity);
+
+    cliente.setMetodosPagamento(metodoPagamentoEntity.getCliente().getMetodosPagamento());
+    clienteJpaRepository.saveAndFlush(cliente);
+
     return modelMapper.map(metodoPagamentoEntity, MetodoPagamento.class);
   }
 
@@ -35,9 +50,8 @@ public class MetodoPagamentoPersistencePortImpl implements MetodoPagamentoPersis
   }
 
   @Override
-  public List<MetodoPagamento> findAllByCPF(String cpf) {
-    return metodoPagamentoJpaRepository.findAll().stream().map(entity -> modelMapper.map(entity, MetodoPagamento.class)).collect(
-        java.util.stream.Collectors.toList());
+  public List<MetodoPagamento> findByCpf(String cpf) {
+    return metodoPagamentoJpaRepository.findByCpf(cpf).stream().map(entity -> modelMapper.map(entity, MetodoPagamento.class)).toList();
   }
 
   @Override

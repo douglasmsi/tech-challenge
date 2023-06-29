@@ -16,4 +16,5 @@ public class MetodoPagamento {
   private String cvv;
   private String dataExpiracao;
   private String numeroCartao;
+  private String cpf;
 }
