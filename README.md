@@ -59,7 +59,7 @@ docker-compose up
 
 ## Testing the application with Postman Collection
 
-[Postman Collection](https://interstellar-capsule-343115.postman.co/workspace/Tech-Challenge---FIAP-%2F-Alura-P~45fd98c7-6120-45b2-8142-ca10997141ce/collection/484183-a8ab2e64-8fdc-4fb8-917f-9e20003785ba?action=share&creator=484183)
+[Postman Collection](docs/fastfood.postman_collections.json)
 
 ## API Documentation
 
