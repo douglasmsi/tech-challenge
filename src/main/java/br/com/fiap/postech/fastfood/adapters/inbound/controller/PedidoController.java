@@ -3,6 +3,7 @@ package br.com.fiap.postech.fastfood.adapters.inbound.controller;
 import br.com.fiap.postech.fastfood.adapters.dtos.ErrorResponse;
 import br.com.fiap.postech.fastfood.adapters.inbound.dto.CriarPedidoRequest;
 import br.com.fiap.postech.fastfood.adapters.inbound.dto.UpdatePedidoRequest;
+import br.com.fiap.postech.fastfood.core.domain.Cliente;
 import br.com.fiap.postech.fastfood.core.domain.Pedido;
 import br.com.fiap.postech.fastfood.core.domain.enums.ErrorMessages;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
@@ -81,7 +82,7 @@ public class PedidoController {
         }
     )
     @PostMapping(value = "/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> createPedido(@RequestBody CriarPedidoRequest request) {
+    public ResponseEntity<Object> createPedido(@RequestBody Cliente request) {
         try {
             // Verifique se o CPF foi fornecido
             if (request.getCpf() == null || request.getCpf().isEmpty()) {

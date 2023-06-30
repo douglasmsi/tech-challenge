@@ -21,9 +21,9 @@ public class PedidoServicePortImpl implements PedidoServicePort {
     private final PedidoPersistencePort pedidoPersistencePort;
 
     @Override
-    public Pedido createPedido(final CriarPedidoRequest request) {
+    public Pedido createPedido(final Cliente cliente) {
 
-        return pedidoPersistencePort.createPedido(request);
+        return pedidoPersistencePort.createPedido(cliente);
     }
 
     @Override

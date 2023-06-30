@@ -79,6 +79,14 @@ And to stop this aplication run this one:
 make down
 ```
 
+## Testing the application with Postman Collection
+
+[Postman Collection](docs/fastfood.postman_collections.json)
+
+## API Documentation
+
+[Swagger Documentation](http://localhost:8080/swagger-ui/index.html#/)
+
 
 
 Passo 1:

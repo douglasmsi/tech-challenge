@@ -10,8 +10,6 @@ import lombok.Setter;
 @Builder
 public class CriarPedidoRequest {
 
-  private String statusPedido;
-  private String statusPagamento;
-  private String cpf;
-  private BigDecimal valorTotal;
+  private String clienteCpf;
+
 }

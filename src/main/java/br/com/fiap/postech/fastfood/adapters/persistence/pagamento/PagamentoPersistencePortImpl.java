@@ -29,10 +29,11 @@ public class PagamentoPersistencePortImpl implements PagamentoPersistencePort {
 
     PagamentoEntity pagamentoEntity = modelMapper.map(pagamento, PagamentoEntity.class);
     pagamentoEntity.setPedido(pedidoEntity);
-
+    pedidoEntity.setPagamentoEntity(pagamentoEntity);
     pagamentoEntity = pagamentoJpaRepository.save(pagamentoEntity);
 
     pedidoEntity.setPagamentoStatus(pagamentoEntity.getStatus());
+
     pedidoJpaRepository.saveAndFlush(pedidoEntity);
     pagamentoJpaRepository.saveAndFlush(pagamentoEntity);
 

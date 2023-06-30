@@ -8,6 +8,7 @@ import br.com.fiap.postech.fastfood.adapters.persistence.entities.PagamentoEntit
 import br.com.fiap.postech.fastfood.adapters.persistence.entities.PedidoEntity;
 import br.com.fiap.postech.fastfood.adapters.persistence.item.ItemJpaRepository;
 import br.com.fiap.postech.fastfood.adapters.persistence.pagamento.PagamentoJpaRepository;
+import br.com.fiap.postech.fastfood.core.domain.Cliente;
 import br.com.fiap.postech.fastfood.core.domain.Pedido;
 import br.com.fiap.postech.fastfood.core.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.core.domain.enums.PedidoStatus;
@@ -34,7 +35,7 @@ public class PedidoPersistencePortImpl implements PedidoPersistencePort {
 
 
     @Override
-    public Pedido createPedido(final CriarPedidoRequest request) {
+    public Pedido createPedido(final Cliente request) {
         String numeroPedido = PedidoNumberGenerator.generateNumber();
 
 
