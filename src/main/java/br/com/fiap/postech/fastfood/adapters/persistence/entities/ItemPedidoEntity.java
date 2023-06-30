@@ -13,9 +13,7 @@ import java.math.BigDecimal;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "ITEM_PEDIDO", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"pedido_id", "item_id"})
-})
+@Table(name = "ITEM_PEDIDO")
 public class ItemPedidoEntity {
 
     @Id
