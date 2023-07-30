@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fast-food-pod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fast-food-pod
+  template:
+    metadata:
+      labels:
+        app: fast-food-pod
+    spec:
+      containers:
+        - name:
+          image: victorelvis/fast-food
+          ports:
+            - containerPort: 8080
