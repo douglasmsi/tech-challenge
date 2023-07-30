@@ -1,10 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    app: mysql
   name: svc-mysql
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-    - port: 3302
+    - port: 3306
+      protocol: TCP
+      targetPort: 3306
+      nodePort: 32000
   selector:
-    app: fastfood-db
+    app: mysql-pod
