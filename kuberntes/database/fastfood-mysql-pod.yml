@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fastfood-db
+  labels:
+    app: fastfood-db
+spec:
+  containers:
+    - name: mongodb
+      image: mongo
+      ports:
+        - containerPort: 3302
+      env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: tadriano
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: batatafrita
