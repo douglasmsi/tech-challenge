@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://postgresdb:5432/fastfood
+    url: jdbc:postgresql://localhost:5432/fastfood
     username: fastfooduser
     password: fastfoodpass
   jpa:
@@ -9,5 +9,5 @@ spring:
     driver-class-name: org.postgresql.Driver
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL81Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true

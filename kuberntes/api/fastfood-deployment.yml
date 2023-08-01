@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: fast-food-pod
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: fast-food-pod
@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: fastfood
-          image: emersondiegoduartedias/fast-food
+          image: emersondiegoduarte/fastfood:v3
           ports:
             - containerPort: 8080
