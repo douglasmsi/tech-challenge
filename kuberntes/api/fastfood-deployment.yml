@@ -13,7 +13,7 @@ spec:
         app: fast-food-pod
     spec:
       containers:
-        - name:
-          image: victorelvis/fast-food
+        - name: fastfood
+          image: emersondiegoduartedias/fast-food
           ports:
             - containerPort: 8080
