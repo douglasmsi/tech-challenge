@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/fastfood
-    username: fastfooduser
-    password: fastfoodpass
+    url: jdbc:postgresql://postgresdb/fastfood
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update

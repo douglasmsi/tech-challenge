@@ -8,7 +8,7 @@ metadata:
     app: postgresdb
 spec:
   # Choose how to expose your service
-  type: NodePort
+  type: LoadBalancer
   ports:
     # The port number to expose the service
     - port: 5432
