@@ -7,7 +7,3 @@ metadata:
 data:
   # User DB
   POSTGRES_DB: fastfood
-  # Db user
-  POSTGRES_USER: fastfooduser
-  # Db password
-  POSTGRES_PASSWORD: fastfoodpass

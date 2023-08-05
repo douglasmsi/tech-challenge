@@ -27,6 +27,8 @@ spec:
             # Assign ports to expose container
             - containerPort: 5432
           envFrom:
+            - secretRef:
+                  name: fastfood-security
             # Load the environment variables/PostgresSQL credentials
             - configMapRef:
                 # This should be the ConfigMap name created ealier
