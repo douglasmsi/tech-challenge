@@ -1,7 +1,8 @@
-package br.com.fiap.postech.fastfood.repository.pagamento;
+package br.com.fiap.postech.fastfood.ports.pagamento;
 
 import br.com.fiap.postech.fastfood.repository.entities.PagamentoEntity;
 import br.com.fiap.postech.fastfood.repository.entities.PedidoEntity;
+import br.com.fiap.postech.fastfood.repository.pagamento.PagamentoJpaRepository;
 import br.com.fiap.postech.fastfood.repository.pedido.PedidoJpaRepository;
 import br.com.fiap.postech.fastfood.domain.pagamento.Pagamento;
 import br.com.fiap.postech.fastfood.domain.enums.PagamentoStatus;

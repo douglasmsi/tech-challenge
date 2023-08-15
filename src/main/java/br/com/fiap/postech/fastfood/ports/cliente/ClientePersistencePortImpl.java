@@ -1,5 +1,6 @@
-package br.com.fiap.postech.fastfood.repository.cliente;
+package br.com.fiap.postech.fastfood.ports.cliente;
 
+import br.com.fiap.postech.fastfood.repository.cliente.ClienteJpaRepository;
 import br.com.fiap.postech.fastfood.repository.entities.ClienteEntity;
 import br.com.fiap.postech.fastfood.domain.cliente.Cliente;
 import br.com.fiap.postech.fastfood.ports.cliente.ClientePersistencePort;

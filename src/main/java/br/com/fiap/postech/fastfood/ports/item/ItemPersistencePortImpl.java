@@ -1,10 +1,11 @@
-package br.com.fiap.postech.fastfood.repository.item;
+package br.com.fiap.postech.fastfood.ports.item;
 
 
 import br.com.fiap.postech.fastfood.repository.entities.ItemEntity;
 import br.com.fiap.postech.fastfood.domain.item.Item;
 import br.com.fiap.postech.fastfood.domain.enums.CategoriaItem;
 import br.com.fiap.postech.fastfood.ports.item.ItemPersistencePort;
+import br.com.fiap.postech.fastfood.repository.item.ItemJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

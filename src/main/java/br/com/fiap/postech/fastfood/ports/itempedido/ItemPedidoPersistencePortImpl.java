@@ -1,9 +1,10 @@
-package br.com.fiap.postech.fastfood.repository.itempedido;
+package br.com.fiap.postech.fastfood.ports.itempedido;
 
 import br.com.fiap.postech.fastfood.repository.entities.ItemEntity;
 import br.com.fiap.postech.fastfood.repository.entities.ItemPedidoEntity;
 import br.com.fiap.postech.fastfood.repository.entities.PedidoEntity;
 import br.com.fiap.postech.fastfood.repository.item.ItemJpaRepository;
+import br.com.fiap.postech.fastfood.repository.itempedido.ItemPedidoJpaRepository;
 import br.com.fiap.postech.fastfood.repository.pedido.PedidoJpaRepository;
 import br.com.fiap.postech.fastfood.domain.item.Item;
 import br.com.fiap.postech.fastfood.domain.itempedido.ItemPedido;
