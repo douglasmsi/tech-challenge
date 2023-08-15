@@ -6,4 +6,4 @@ metadata:
     app: postgresdb
 data:
   # User DB
-  POSTGRES_DB: fastfood
+  POSTGRES_DB: "fastfood"
