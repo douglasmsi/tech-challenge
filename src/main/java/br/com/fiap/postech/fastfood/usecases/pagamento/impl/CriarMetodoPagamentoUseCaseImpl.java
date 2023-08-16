@@ -15,4 +15,3 @@ public class CriarMetodoPagamentoUseCaseImpl implements CriarMetodoPagamentoUseC
     return metodoPagamentoPersistencePort.createMetodoPagamento(metodoPagamento);
   }
 }
-

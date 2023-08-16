@@ -20,4 +20,3 @@ public class BuscarItemPedidoUseCaseImpl implements BuscarItemPedidoUseCase {
     return itemPedidoPersistencePort.findAll();
   }
 }
-

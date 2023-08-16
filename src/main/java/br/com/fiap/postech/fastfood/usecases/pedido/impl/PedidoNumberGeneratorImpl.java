@@ -1,9 +1,11 @@
 package br.com.fiap.postech.fastfood.usecases.pedido.impl;
 
+import br.com.fiap.postech.fastfood.usecases.pedido.PedidoNumberGenerator;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class PedidoNumberGenerator implements br.com.fiap.postech.fastfood.usecases.pedido.PedidoNumberGenerator {
+public class PedidoNumberGeneratorImpl implements PedidoNumberGenerator {
 
   private static final String FIXED_PREFIX = "FF";
   private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("ddMMyy");

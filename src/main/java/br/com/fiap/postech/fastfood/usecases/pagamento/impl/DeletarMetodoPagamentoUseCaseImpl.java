@@ -14,4 +14,3 @@ public class DeletarMetodoPagamentoUseCaseImpl implements DeletarMetodoPagamento
     return metodoPagamentoPersistencePort.deleteByIdAndCPF(id, cpf);
   }
 }
-

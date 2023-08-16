@@ -5,4 +5,3 @@ import br.com.fiap.postech.fastfood.domain.pagamento.Pagamento;
 public interface AtualizarStatusPagamentoUseCase {
   Pagamento updateStatusPagamento(Pagamento pagamento);
 }
-

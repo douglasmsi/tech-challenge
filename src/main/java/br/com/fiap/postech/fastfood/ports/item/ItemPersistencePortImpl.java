@@ -1,17 +1,15 @@
 package br.com.fiap.postech.fastfood.ports.item;
 
-
-import br.com.fiap.postech.fastfood.repository.entities.ItemEntity;
-import br.com.fiap.postech.fastfood.domain.item.Item;
 import br.com.fiap.postech.fastfood.domain.enums.CategoriaItem;
-import br.com.fiap.postech.fastfood.ports.item.ItemPersistencePort;
+import br.com.fiap.postech.fastfood.domain.item.Item;
+import br.com.fiap.postech.fastfood.repository.entities.ItemEntity;
 import br.com.fiap.postech.fastfood.repository.item.ItemJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
@@ -28,7 +26,7 @@ public class ItemPersistencePortImpl implements ItemPersistencePort {
 
     @Override
     public List<Item> findAll() {
-        return itemJpaRepository.findAll().stream().map(entity -> modelMapper.map(entity, Item.class)).collect(Collectors.toList());
+        return itemJpaRepository.findAll().stream().map(entity -> modelMapper.map(entity, Item.class)).toList();
     }
 
     @Override
@@ -42,7 +40,8 @@ public class ItemPersistencePortImpl implements ItemPersistencePort {
 
     @Override
     public List<Item> findAllByCategoria(CategoriaItem categoriaItem) {
-        return itemJpaRepository.findByCategoriaItem(categoriaItem).stream().map(entity -> modelMapper.map(entity, Item.class)).collect(Collectors.toList());
+        return itemJpaRepository.findByCategoriaItem(categoriaItem).stream().map(entity -> modelMapper.map(entity,
+                                                                                                           Item.class)).toList();
     }
 
     @Override

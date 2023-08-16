@@ -31,5 +31,3 @@ public class BuscarPagamentoUseCaseImpl implements BuscarPagamentoUseCase {
     return pagamentoPersistencePort.getStatusPagamento(numeroPedido);
   }
 }
-
-

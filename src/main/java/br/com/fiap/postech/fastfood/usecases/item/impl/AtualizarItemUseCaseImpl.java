@@ -14,4 +14,3 @@ public class AtualizarItemUseCaseImpl implements AtualizarItemUseCase {
     return itemPersistencePort.save(item);
   }
 }
-

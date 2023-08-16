@@ -8,8 +8,6 @@ public interface MetodoPagamentoPersistencePort {
 
   MetodoPagamento createMetodoPagamento(MetodoPagamentoRequest metodoPagamento);
   MetodoPagamento findByIdAndCPF(Long id, String cpf);
-
   List<MetodoPagamento> findByCpf(String cpf);
-
   MetodoPagamento deleteByIdAndCPF(Long id, String cpf);
 }

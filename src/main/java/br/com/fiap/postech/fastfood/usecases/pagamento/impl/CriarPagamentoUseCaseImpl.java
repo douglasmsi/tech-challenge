@@ -14,6 +14,3 @@ public class CriarPagamentoUseCaseImpl implements CriarPagamentoUseCase {
     return pagamentoPersistencePort.save(pagamento);
   }
 }
-
-
-

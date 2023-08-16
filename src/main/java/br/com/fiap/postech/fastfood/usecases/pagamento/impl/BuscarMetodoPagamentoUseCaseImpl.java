@@ -20,4 +20,3 @@ public class BuscarMetodoPagamentoUseCaseImpl implements BuscarMetodoPagamentoUs
     return metodoPagamentoPersistencePort.findByCpf(cpf);
   }
 }
-

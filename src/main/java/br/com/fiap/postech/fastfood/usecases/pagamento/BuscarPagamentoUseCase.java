@@ -10,4 +10,3 @@ public interface BuscarPagamentoUseCase {
   List<Pagamento> findAllByStatus(PagamentoStatus status);
   PagamentoStatus getStatusPagamento(String numeroPedido);
 }
-

@@ -1,6 +1,5 @@
 package br.com.fiap.postech.fastfood.repository.entities;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;

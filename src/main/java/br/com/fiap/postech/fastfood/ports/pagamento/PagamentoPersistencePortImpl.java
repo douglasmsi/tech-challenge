@@ -1,16 +1,16 @@
 package br.com.fiap.postech.fastfood.ports.pagamento;
 
+import br.com.fiap.postech.fastfood.domain.enums.PagamentoStatus;
+import br.com.fiap.postech.fastfood.domain.pagamento.Pagamento;
 import br.com.fiap.postech.fastfood.repository.entities.PagamentoEntity;
 import br.com.fiap.postech.fastfood.repository.entities.PedidoEntity;
 import br.com.fiap.postech.fastfood.repository.pagamento.PagamentoJpaRepository;
 import br.com.fiap.postech.fastfood.repository.pedido.PedidoJpaRepository;
-import br.com.fiap.postech.fastfood.domain.pagamento.Pagamento;
-import br.com.fiap.postech.fastfood.domain.enums.PagamentoStatus;
-import br.com.fiap.postech.fastfood.ports.pagamento.PagamentoPersistencePort;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Component
@@ -43,8 +43,7 @@ public class PagamentoPersistencePortImpl implements PagamentoPersistencePort {
 
     @Override
     public List<Pagamento> findAll() {
-      return pagamentoJpaRepository.findAll().stream().map(entity -> modelMapper.map(entity, Pagamento.class)).collect(
-          java.util.stream.Collectors.toList());
+      return pagamentoJpaRepository.findAll().stream().map(entity -> modelMapper.map(entity, Pagamento.class)).toList();
     }
 
     @Override
@@ -60,8 +59,8 @@ public class PagamentoPersistencePortImpl implements PagamentoPersistencePort {
 
   @Override
     public List<Pagamento> findAllByStatus(PagamentoStatus status) {
-      return pagamentoJpaRepository.findAllByStatus(status).stream().map(entity -> modelMapper.map(entity, Pagamento.class)).collect(
-          java.util.stream.Collectors.toList());
+      return pagamentoJpaRepository.findAllByStatus(status).stream().map(entity -> modelMapper.map(entity,
+                                                                                                   Pagamento.class)).toList();
     }
 
 

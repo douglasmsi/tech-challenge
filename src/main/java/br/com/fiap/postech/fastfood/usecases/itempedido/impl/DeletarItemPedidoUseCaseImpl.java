@@ -14,4 +14,3 @@ public class DeletarItemPedidoUseCaseImpl implements DeletarItemPedidoUseCase {
     return itemPedidoPersistencePort.deleteItemPedido(itemPedido);
   }
 }
-

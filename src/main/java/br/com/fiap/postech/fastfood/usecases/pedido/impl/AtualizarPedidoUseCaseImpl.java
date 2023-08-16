@@ -27,23 +27,22 @@ public class AtualizarPedidoUseCaseImpl implements AtualizarPedidoUseCase {
     // Perform status transition validation
     PedidoStatus newStatus = pedido.getStatusPedido();
     switch (currentStatus) {
-      case CRIADO:
+      case CRIADO -> {
         if (newStatus != PedidoStatus.ANDAMENTO && newStatus != PedidoStatus.CANCELADO) {
           throw new IllegalStateException("Invalid status transition from CRIADO.");
         }
-        break;
-      case ANDAMENTO:
+      }
+      case ANDAMENTO -> {
         if (newStatus != PedidoStatus.CANCELADO && newStatus != PedidoStatus.ENTREGA && newStatus != PedidoStatus.FINALIZADO) {
           throw new IllegalStateException("Invalid status transition from EM_ANDAMENTO.");
         }
-        break;
-      case ENTREGA:
+      }
+      case ENTREGA -> {
         if (newStatus != PedidoStatus.CANCELADO && newStatus != PedidoStatus.FINALIZADO) {
           throw new IllegalStateException("Invalid status transition from ENTREGA.");
         }
-        break;
-      default:
-        throw new IllegalStateException("Invalid current status.");
+      }
+      default -> throw new IllegalStateException("Invalid current status.");
     }
 
     // Perform additional validation based on the new status

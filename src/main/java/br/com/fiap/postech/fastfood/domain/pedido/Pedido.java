@@ -1,13 +1,16 @@
 package br.com.fiap.postech.fastfood.domain.pedido;
 
-import br.com.fiap.postech.fastfood.domain.itempedido.ItemPedido;
 import br.com.fiap.postech.fastfood.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.domain.enums.PedidoStatus;
+import br.com.fiap.postech.fastfood.domain.itempedido.ItemPedido;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.util.List;
-
 
 @Builder
 @NoArgsConstructor
@@ -21,10 +24,8 @@ public class Pedido {
     BigDecimal valorTotal;
     String cpf;
 
-
     @JsonManagedReference
     List<ItemPedido> items;
-
 
     public BigDecimal getValorTotal() {
         BigDecimal total = BigDecimal.ZERO;

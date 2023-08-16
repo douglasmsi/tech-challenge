@@ -7,4 +7,3 @@ public interface BuscarMetodoPagamentoUseCase {
   MetodoPagamento findByIdAndCPF(Long id, String cpf);
   List<MetodoPagamento> findByCpf(String cpf);
 }
-

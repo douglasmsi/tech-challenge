@@ -1,16 +1,16 @@
 package br.com.fiap.postech.fastfood.ports.pagamento;
 
 import br.com.fiap.postech.fastfood.controller.dto.MetodoPagamentoRequest;
+import br.com.fiap.postech.fastfood.domain.pagamento.MetodoPagamento;
 import br.com.fiap.postech.fastfood.repository.cliente.ClienteJpaRepository;
 import br.com.fiap.postech.fastfood.repository.entities.ClienteEntity;
 import br.com.fiap.postech.fastfood.repository.entities.MetodoPagamentoEntity;
-import br.com.fiap.postech.fastfood.domain.pagamento.MetodoPagamento;
-import br.com.fiap.postech.fastfood.ports.pagamento.MetodoPagamentoPersistencePort;
 import br.com.fiap.postech.fastfood.repository.pagamento.MetodoPagamentoJpaRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Component

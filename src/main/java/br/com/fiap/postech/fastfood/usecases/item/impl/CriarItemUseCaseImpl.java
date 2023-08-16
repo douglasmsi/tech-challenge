@@ -14,4 +14,3 @@ public class CriarItemUseCaseImpl implements CriarItemUseCase {
     return itemPersistencePort.save(item);
   }
 }
-

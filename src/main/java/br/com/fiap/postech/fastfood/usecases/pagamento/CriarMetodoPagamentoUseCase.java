@@ -6,4 +6,3 @@ import br.com.fiap.postech.fastfood.domain.pagamento.MetodoPagamento;
 public interface CriarMetodoPagamentoUseCase {
   MetodoPagamento createMetodoPagamento(MetodoPagamentoRequest metodoPagamento);
 }
-

@@ -2,20 +2,13 @@ package br.com.fiap.postech.fastfood.controller.item;
 
 import br.com.fiap.postech.fastfood.controller.dto.ErrorResponse;
 import br.com.fiap.postech.fastfood.controller.dto.ItemRequest;
-import br.com.fiap.postech.fastfood.domain.item.Item;
 import br.com.fiap.postech.fastfood.domain.enums.CategoriaItem;
 import br.com.fiap.postech.fastfood.domain.enums.ErrorMessages;
+import br.com.fiap.postech.fastfood.domain.item.Item;
 import br.com.fiap.postech.fastfood.usecases.item.AtualizarItemUseCase;
 import br.com.fiap.postech.fastfood.usecases.item.BuscarItemUseCase;
 import br.com.fiap.postech.fastfood.usecases.item.CriarItemUseCase;
 import br.com.fiap.postech.fastfood.usecases.item.DeletarItemUseCase;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.HashMap;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -24,47 +17,35 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
-@OpenAPIDefinition(info = @Info(title = "Item", description = "Itens", version = "1.00"))
-@Tag(name = "Item", description = "Itens")
 @RequiredArgsConstructor
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class ItemController {
+public class ItemController implements ItemControllerSwagger {
 
     private final CriarItemUseCase criarItemUseCase;
     private final AtualizarItemUseCase atualizarItemUseCase;
     private final BuscarItemUseCase buscarItemUseCase;
     private final DeletarItemUseCase deletarItemUseCase;
 
-    @Operation(
-        summary = "Get All Items",
-        description = "Returns a list of all items",
-        responses = {@ApiResponse(responseCode = "200", description = "Get a list of all items.")})
     @GetMapping(value = "/items", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Object> getAllItems(@RequestParam(name = "categoria", required = false) CategoriaItem categoria) {
+    public ResponseEntity<Object> getAllItems(@RequestParam(name = "categoria", required = false) CategoriaItem categoria) {
         List<Item> items = null;
         if(Objects.nonNull(categoria)){
             items = buscarItemUseCase.findAllByCategoria(categoria);
         } else {
             items = buscarItemUseCase.findAll();
         }
-
         return ResponseEntity.ok(items);
     }
 
-    @Operation(
-        summary = "Create Item",
-        description = "Create a new item",
-        responses = {
-            @ApiResponse(responseCode = "201", description = "Create a new item."),
-            @ApiResponse(responseCode = "400", description = "Failed to create the item.")
-        }
-    )
     @PostMapping(value = "/items", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Object> createItem(@RequestBody ItemRequest request) {
+    public ResponseEntity<Object> createItem(@RequestBody ItemRequest request) {
         try {
 
             Item item = Item.builder()
@@ -85,33 +66,18 @@ public class ItemController {
         }
     }
 
-    @Operation(
-        summary = "Get Item by ID",
-        description = "Returns an item based on the ID",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Get an item by ID."),
-            @ApiResponse(responseCode = "404", description = "Item not found.")
-        })
     @GetMapping(value = "/items/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Object> getItemById(@PathVariable(name = "id", required = true) Long id) {
+    public ResponseEntity<Object> getItemById(@PathVariable(name = "id", required = true) Long id) {
         Item item = buscarItemUseCase.findById(id);
         if (Objects.nonNull(item)) {
             return ResponseEntity.ok(item);
         }
         ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.ITEM_NOT_FOUND.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-
     }
 
-    @Operation(
-        summary = "Update Item",
-        description = "Update an existing item",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Update an existing item."),
-            @ApiResponse(responseCode = "404", description = "Item not found.")
-        })
     @PutMapping(value = "/items/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Object> atualizarItem(@PathVariable(name = "id") Long id,@RequestBody Item item) {
+    public ResponseEntity<Object> atualizarItem(@PathVariable(name = "id") Long id,@RequestBody Item item) {
         try {
             Item updatedItem = atualizarItemUseCase.save(item);
             return ResponseEntity.status(HttpStatus.OK).body(updatedItem);
@@ -121,12 +87,8 @@ public class ItemController {
         }
     }
 
-    @Operation(
-        summary = "Delete Item",
-        description = "Delete an existing item",
-        responses = {@ApiResponse(responseCode = "200", description = "Delete an existing item.")})
     @DeleteMapping("/items/{id}")
-    ResponseEntity<Object> deletarItem(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<Object> deletarItem(@PathVariable(name = "id") Long id) {
         try {
             deletarItemUseCase.deletarItem(id);
             return ResponseEntity.status(HttpStatus.OK).build();
@@ -140,7 +102,7 @@ public class ItemController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
+        ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);

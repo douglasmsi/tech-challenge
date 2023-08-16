@@ -6,4 +6,3 @@ import br.com.fiap.postech.fastfood.domain.itempedido.ItemPedido;
 public interface AdicionarItemPedidoUseCase {
   ItemPedido addItemPedido(String numeroPedido, Item item, Integer quantidade);
 }
-

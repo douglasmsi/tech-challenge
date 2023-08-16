@@ -7,4 +7,3 @@ public interface BuscarItemPedidoUseCase {
   List<ItemPedido> findByNumeroPedido(String numeroPedido);
   List<ItemPedido> findAll();
 }
-

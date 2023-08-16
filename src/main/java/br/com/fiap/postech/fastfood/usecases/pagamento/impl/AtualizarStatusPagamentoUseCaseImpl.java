@@ -14,5 +14,3 @@ public class AtualizarStatusPagamentoUseCaseImpl implements AtualizarStatusPagam
     return pagamentoPersistencePort.updateStatusPagamento(pagamento);
   }
 }
-
-

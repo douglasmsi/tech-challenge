@@ -13,5 +13,4 @@ public class ItemPedidoRequest {
   private Item item;
   private Integer quantidade;
 
-
 }

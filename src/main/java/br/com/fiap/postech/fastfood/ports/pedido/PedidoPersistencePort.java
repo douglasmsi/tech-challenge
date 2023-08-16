@@ -13,5 +13,4 @@ public interface PedidoPersistencePort {
     List<Pedido> findAll();
     Pedido findByNumeroPedido(String numeroPedido);
 
-
 }

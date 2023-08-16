@@ -3,49 +3,29 @@ package br.com.fiap.postech.fastfood.controller.pedido;
 import br.com.fiap.postech.fastfood.controller.dto.ErrorResponse;
 import br.com.fiap.postech.fastfood.controller.dto.UpdatePedidoRequest;
 import br.com.fiap.postech.fastfood.domain.cliente.Cliente;
-import br.com.fiap.postech.fastfood.domain.pedido.Pedido;
 import br.com.fiap.postech.fastfood.domain.enums.ErrorMessages;
+import br.com.fiap.postech.fastfood.domain.pedido.Pedido;
 import br.com.fiap.postech.fastfood.usecases.pedido.AtualizarPedidoUseCase;
 import br.com.fiap.postech.fastfood.usecases.pedido.BuscarPedidoUseCase;
 import br.com.fiap.postech.fastfood.usecases.pedido.CriarPedidoUseCase;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@OpenAPIDefinition(info = @Info(title = "Pedido", description = "Pedidos", version = "1.00"))
-@Tag(name = "Pedido", description = "Pedidos")
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequiredArgsConstructor
-public class PedidoController {
+public class PedidoController implements PedidoControllerSwagger {
 
     private final CriarPedidoUseCase criarPedidoUseCase;
     private final BuscarPedidoUseCase buscarPedidoUseCase;
     private final AtualizarPedidoUseCase atualizarPedidoUseCase;
 
-    @Operation(
-        summary = "Get all Pedidos",
-        description = "Returns a list of all Pedidos",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Get a list of all Pedidos."),
-            @ApiResponse(responseCode = "404", description = "No Pedidos found.")
-        }
-    )
     @GetMapping(value = "/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getAllPedidos() {
         List<Pedido> pedidos = buscarPedidoUseCase.findAll();
@@ -56,14 +36,6 @@ public class PedidoController {
         return ResponseEntity.ok(pedidos);
     }
 
-    @Operation(
-        summary = "Get Pedido by NumeroPedido",
-        description = "Returns a Pedido by its NumeroPedido",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Get a Pedido by its NumeroPedido."),
-            @ApiResponse(responseCode = "404", description = "No Pedido found for the given NumeroPedido.")
-        }
-    )
     @GetMapping(value = "/pedidos/{numeroPedido}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getPedidoByNumero(@PathVariable(value = "numeroPedido") String numeroPedido) {
         Pedido pedido = buscarPedidoUseCase.findByNumeroPedido(numeroPedido);
@@ -74,14 +46,6 @@ public class PedidoController {
         return ResponseEntity.ok(pedido);
     }
 
-    @Operation(
-        summary = "Create Pedido",
-        description = "Create a new Pedido",
-        responses = {
-            @ApiResponse(responseCode = "201", description = "Pedido created successfully."),
-            @ApiResponse(responseCode = "400", description = "Failed to create the Pedido.")
-        }
-    )
     @PostMapping(value = "/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> createPedido(@RequestBody Cliente request) {
         try {
@@ -108,15 +72,6 @@ public class PedidoController {
         }
     }
 
-
-    @Operation(
-        summary = "Update Status Pedido",
-        description = "Update the status of a Pedido",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Status of Pedido updated successfully."),
-            @ApiResponse(responseCode = "400", description = "Failed to update the status of the Pedido.")
-        }
-    )
     @PutMapping(value = "/pedidos/{numeroPedido}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> updateStatusPedido(@PathVariable(value = "numeroPedido") String numeroPedido, @RequestBody UpdatePedidoRequest request) {
         try {

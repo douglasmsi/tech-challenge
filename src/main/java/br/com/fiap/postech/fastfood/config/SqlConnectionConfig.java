@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 @EnableJpaRepositories(
         entityManagerFactoryRef = "EntityManagerFactory",
         transactionManagerRef = "TransactionManager",
-        basePackages = {"br.com.fiap.postech.fastfood.infrastructure.repository"})
+        basePackages = {"br.com.fiap.postech.fastfood.repository"})
 @EnableJpaAuditing
 @Profile("local")
 public class SqlConnectionConfig {
@@ -57,8 +57,6 @@ public class SqlConnectionConfig {
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String ddlGeneration;
 
-
-
     @Value("$app.datasource.properties.allowPublicKeyRetrieval")
     private String allowPublicKeyRetrieval;
 
@@ -69,7 +67,6 @@ public class SqlConnectionConfig {
      */
     @Bean(name = "dataSource")
     public DataSource dataSource() {
-
         final String url = getUrl();
 
         final HikariConfig hikariConfig = new HikariConfig();
@@ -96,4 +93,3 @@ public class SqlConnectionConfig {
     }
 
 }
-
