@@ -4,6 +4,7 @@ import br.com.fiap.postech.fastfood.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.domain.enums.PedidoStatus;
 import br.com.fiap.postech.fastfood.domain.itempedido.ItemPedido;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,8 @@ public class Pedido {
     PagamentoStatus statusPagamento;
     BigDecimal valorTotal;
     String cpf;
+    LocalDateTime dataPedido;
+    LocalDateTime dataAtualizacao;
 
     @JsonManagedReference
     List<ItemPedido> items;

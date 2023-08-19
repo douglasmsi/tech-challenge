@@ -6,6 +6,7 @@ import br.com.fiap.postech.fastfood.domain.cliente.Cliente;
 import br.com.fiap.postech.fastfood.domain.enums.ErrorMessages;
 import br.com.fiap.postech.fastfood.domain.pedido.Pedido;
 import br.com.fiap.postech.fastfood.usecases.pedido.AtualizarPedidoUseCase;
+import br.com.fiap.postech.fastfood.usecases.pedido.BuscarPedidoParaEntregaUseCase;
 import br.com.fiap.postech.fastfood.usecases.pedido.BuscarPedidoUseCase;
 import br.com.fiap.postech.fastfood.usecases.pedido.CriarPedidoUseCase;
 import lombok.RequiredArgsConstructor;
@@ -24,11 +25,22 @@ public class PedidoController implements PedidoControllerSwagger {
 
     private final CriarPedidoUseCase criarPedidoUseCase;
     private final BuscarPedidoUseCase buscarPedidoUseCase;
+    private final BuscarPedidoParaEntregaUseCase buscarPedidoParaEntregaUseCase;
     private final AtualizarPedidoUseCase atualizarPedidoUseCase;
 
     @GetMapping(value = "/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getAllPedidos() {
         List<Pedido> pedidos = buscarPedidoUseCase.findAll();
+        if (pedidos.isEmpty()) {
+            ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_NOT_FOUND.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+        return ResponseEntity.ok(pedidos);
+    }
+
+    @GetMapping(value = "/pedidos-para-entrega", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> getAllPedidosParaEntrega() {
+        List<Pedido> pedidos = buscarPedidoParaEntregaUseCase.findAllPedidosParaEntrega();
         if (pedidos.isEmpty()) {
             ErrorResponse errorResponse = new ErrorResponse(ErrorMessages.PEDIDO_NOT_FOUND.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);

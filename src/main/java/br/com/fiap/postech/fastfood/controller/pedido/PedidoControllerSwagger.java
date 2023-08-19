@@ -25,6 +25,16 @@ public interface PedidoControllerSwagger {
     )
     ResponseEntity<Object> getAllPedidos();
 
+  @Operation(
+      summary = "Get all Pedidos para Entrega",
+      description = "Returns a list of all Pedidos para entrega",
+      responses = {
+          @ApiResponse(responseCode = "200", description = "Get a list of all Pedidos para entrega."),
+          @ApiResponse(responseCode = "404", description = "No Pedidos found.")
+      }
+  )
+  ResponseEntity<Object> getAllPedidosParaEntrega();
+
     @Operation(
             summary = "Get Pedido by NumeroPedido",
             description = "Returns a Pedido by its NumeroPedido",

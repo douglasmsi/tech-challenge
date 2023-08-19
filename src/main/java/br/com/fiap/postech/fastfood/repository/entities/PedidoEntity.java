@@ -3,6 +3,7 @@ package br.com.fiap.postech.fastfood.repository.entities;
 import br.com.fiap.postech.fastfood.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.domain.enums.PedidoStatus;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,6 +41,12 @@ public class PedidoEntity {
     @Column
     private BigDecimal valorTotal;
 
+    @Column
+    private LocalDateTime dataPedido;
+
+    @Column
+    private LocalDateTime dataAtualizacao;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private ClienteEntity cliente;
@@ -60,6 +67,8 @@ public class PedidoEntity {
             ", pedidoStatus=" + pedidoStatus +
             ", pagamentoStatus=" + pagamentoStatus +
             ", valorTotal=" + valorTotal +
+            ", dataPedido=" + dataPedido +
+            ", dataAtualizacao=" + dataAtualizacao +
             ", cliente=" + (cliente != null ? cliente.getId() : null) + // Evita a recursão infinita
             ", items=" + items +
             ", pagamentoEntity=" + (pagamentoEntity != null ? pagamentoEntity.getId() : null) + // Evita a recursão infinita

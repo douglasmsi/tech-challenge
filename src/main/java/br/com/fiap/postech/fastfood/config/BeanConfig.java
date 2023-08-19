@@ -26,6 +26,7 @@ import br.com.fiap.postech.fastfood.usecases.itempedido.impl.DeletarItemPedidoUs
 import br.com.fiap.postech.fastfood.usecases.pagamento.*;
 import br.com.fiap.postech.fastfood.usecases.pagamento.impl.*;
 import br.com.fiap.postech.fastfood.usecases.pedido.impl.AtualizarPedidoUseCaseImpl;
+import br.com.fiap.postech.fastfood.usecases.pedido.impl.BuscarPedidoParaEntregaUseCaseImpl;
 import br.com.fiap.postech.fastfood.usecases.pedido.impl.BuscarPedidoUseCaseImpl;
 import br.com.fiap.postech.fastfood.usecases.pedido.impl.CriarPedidoUseCaseImpl;
 import org.modelmapper.ModelMapper;
@@ -60,6 +61,11 @@ public class BeanConfig {
     @Bean
     public BuscarPedidoUseCaseImpl buscarPedidoUseCaseImpl(PedidoPersistencePort persistence) {
         return new BuscarPedidoUseCaseImpl(persistence);
+    }
+
+    @Bean
+    public BuscarPedidoParaEntregaUseCaseImpl buscarPedidoParaEntregaUseCaseImpl(PedidoPersistencePort persistence) {
+        return new BuscarPedidoParaEntregaUseCaseImpl(persistence);
     }
 
     @Bean

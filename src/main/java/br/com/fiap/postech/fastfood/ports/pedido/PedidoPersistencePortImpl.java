@@ -14,6 +14,7 @@ import br.com.fiap.postech.fastfood.repository.pagamento.PagamentoJpaRepository;
 import br.com.fiap.postech.fastfood.repository.pedido.PedidoJpaRepository;
 import br.com.fiap.postech.fastfood.usecases.pedido.PedidoNumberGenerator;
 import br.com.fiap.postech.fastfood.usecases.pedido.impl.PedidoNumberGeneratorImpl;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -43,6 +44,8 @@ public class PedidoPersistencePortImpl implements PedidoPersistencePort {
             .numeroPedido(numeroPedido)
             .statusPagamento(PagamentoStatus.PENDENTE)
             .statusPedido(PedidoStatus.CRIADO)
+            .dataPedido(LocalDateTime.now())
+            .dataAtualizacao(LocalDateTime.now())
             .build();
 
         ClienteEntity clienteEntity = clienteJpaRepository.findByCpf(pedido.getCpf());
@@ -80,6 +83,7 @@ public class PedidoPersistencePortImpl implements PedidoPersistencePort {
         }
 
         pedidoEntity.setPedidoStatus(request.getStatusPedido());
+        pedidoEntity.setDataAtualizacao(LocalDateTime.now());
         // Verifique se o novo status do pedido é CANCELADO
         if (request.getStatusPedido() == PedidoStatus.CANCELADO) {
             // Recupere o Pagamento associado
