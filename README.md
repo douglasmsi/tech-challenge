@@ -81,7 +81,7 @@ make down
 
 ## Testing the application with Postman Collection
 
-[Postman Collection](docs/fastfood.postman_collections.json)
+[Postman Collection - Kubernetes](docs/Fastfood-Kubernetes.postman_collection.json)
 
 ## API Documentation
 
