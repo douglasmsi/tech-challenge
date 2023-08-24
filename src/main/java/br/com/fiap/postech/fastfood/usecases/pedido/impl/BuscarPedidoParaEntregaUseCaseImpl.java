@@ -17,15 +17,17 @@ public class BuscarPedidoParaEntregaUseCaseImpl implements BuscarPedidoParaEntre
   public List<Pedido> findAllPedidosParaEntrega() {
 
     return pedidoPersistencePort.findAll().stream()
-        .filter(pedido -> pedido.getStatusPedido() == PedidoStatus.ENTREGA || pedido.getStatusPedido() == PedidoStatus.ANDAMENTO)
+        .filter(pedido -> pedido.getStatusPedido() == PedidoStatus.ENTREGA || pedido.getStatusPedido() == PedidoStatus.ANDAMENTO || pedido.getStatusPedido() == PedidoStatus.CRIADO)
         .sorted(Comparator.comparing(Pedido::getDataPedido)
             .thenComparing(pedido -> {
               if (pedido.getStatusPedido() == PedidoStatus.ENTREGA) {
                 return 0;
               } else if (pedido.getStatusPedido() == PedidoStatus.ANDAMENTO) {
                 return 1;
-              } else {
+              } else if (pedido.getStatusPedido() == PedidoStatus.CRIADO) {
                 return 2;
+              } else {
+                return 3;
               }
             }))
         .collect(Collectors.toList());
