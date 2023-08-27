@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "97f82f23-ac47-47c8-9282-e44c159586e8",
+		"_postman_id": "3b8e9673-4b9c-4f7a-ae54-5ce5b4249579",
 		"name": "Fastfood",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "484183",
-		"_collection_link": "https://interstellar-capsule-343115.postman.co/workspace/Tech-Challenge---FIAP-%2F-Alura-P~45fd98c7-6120-45b2-8142-ca10997141ce/collection/484183-97f82f23-ac47-47c8-9282-e44c159586e8?action=share&creator=484183&source=collection_link"
+		"_exporter_id": "8037604"
 	},
 	"item": [
 		{
@@ -16,11 +15,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/items",
+							"raw": "{{host_local}}/items",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"items"
 							]
@@ -34,14 +32,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/items/1",
+							"raw": "{{host_local}}/items/{{item_id}}",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"items",
-								"1"
+								"{{item_id}}"
 							]
 						}
 					},
@@ -49,6 +46,19 @@
 				},
 				{
 					"name": "Post Criar Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();\r",
+									"var itemId = responseJson.id;\r",
+									"pm.environment.set(\"item_id\", itemId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -62,11 +72,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/items",
+							"raw": "{{host_local}}/items",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"items"
 							]
@@ -85,11 +94,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/clientes",
+							"raw": "{{host_local}}/clientes",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"clientes"
 							]
@@ -103,14 +111,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/clientes/123456",
+							"raw": "{{host_local}}/clientes/{{cpf}}",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"clientes",
-								"123456"
+								"{{cpf}}"
 							]
 						}
 					},
@@ -118,6 +125,19 @@
 				},
 				{
 					"name": "Post Create Cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();\r",
+									"var cpf = responseJson.cpf;\r",
+									"pm.environment.set(\"cpf\", cpf);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -131,11 +151,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/clientes",
+							"raw": "{{host_local}}/clientes",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"clientes"
 							]
@@ -158,7 +177,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"cpf\": \"123456\"\n}",
+							"raw": "{\n    \"cpf\": {{cpf}}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -166,11 +185,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/metodo-pagamentos",
+							"raw": "{{host_local}}/metodo-pagamentos",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"metodo-pagamentos"
 							]
@@ -180,12 +198,25 @@
 				},
 				{
 					"name": "Criar metodo de pagamento",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();\r",
+									"var metodoPagamentoId = responseJson.id;\r",
+									"pm.environment.set(\"metodo_pagamento_id\", metodoPagamentoId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"metodoPagamento\": {\n    \"cvv\": \"123\",\n    \"dataExpiracao\": \"12/24\",\n    \"numeroCartao\": \"134556\",\n    \"cpf\": \"22222\"\n  }\n}",
+							"raw": "{\n  \"metodoPagamento\": {\n    \"cvv\": \"123\",\n    \"dataExpiracao\": \"12/24\",\n    \"numeroCartao\": \"134556\",\n    \"cpf\": {{cpf}}\n  }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -193,11 +224,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/metodo-pagamentos",
+							"raw": "{{host_local}}/metodo-pagamentos",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"metodo-pagamentos"
 							]
@@ -234,14 +264,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/pedidos/FF2706232453",
+							"raw": "{{host_local}}/pedidos/{{numero_pedido}}",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"pedidos",
-								"FF2706232453"
+								"{{numero_pedido}}"
 							]
 						}
 					},
@@ -249,12 +278,25 @@
 				},
 				{
 					"name": "Post Criar Pedidos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();\r",
+									"var numeroPedido = responseJson.numeroPedido;\r",
+									"pm.environment.set(\"numero_pedido\", numeroPedido);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"cpf\": \"123456\"\n}\n",
+							"raw": "{\n  \"cpf\": {{cpf}}\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -262,11 +304,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/pedidos",
+							"raw": "{{host_local}}/pedidos",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"pedidos"
 							]
@@ -312,19 +353,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"numeroPedido\": \"FF2706234754\",\n  \"item\": {\n    \n    \"id\": 2\n},\n  \"quantidade\": 1\n}"
+							"raw": "{\n  \"numeroPedido\": \"{{numero_pedido}}\",\n  \"item\": {\n    \"id\": {{item_id}}\n},\n  \"quantidade\": 1\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/pedidos/itempedido/FF2706234754",
-							"protocol": "http",
+							"raw": "{{host_local}}/pedidos/itempedido/{{numero_pedido}}",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"pedidos",
 								"itempedido",
-								"FF2706234754"
+								"{{numero_pedido}}"
 							]
 						}
 					},
@@ -337,12 +376,25 @@
 			"item": [
 				{
 					"name": "Pagar o pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();\r",
+									"var pagamentoId = responseJson.id;\r",
+									"pm.environment.set(\"pagamento_id\", pagamentoId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"cpf\": \"1234567\",\n  \"metodoPagamentoId\" : 2\n}",
+							"raw": "{\n  \"cpf\": {{cpf}},\n  \"metodoPagamentoId\" : {{metodo_pagamento_id}}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -350,16 +402,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/pedidos/checkout/FF2706234754",
-							"protocol": "http",
+							"raw": "{{host_local}}/pedidos/checkout/{{numero_pedido}}",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"pedidos",
 								"checkout",
-								"FF2706234754"
+								"{{numero_pedido}}"
 							]
 						}
 					},
@@ -372,7 +422,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"statusPedido\": \"CANCELADO\",\n  \"cpf\": \"1234567\",\n  \"numeroPedido\": \"FF2706234754\"\n}",
+							"raw": "{\n  \"statusPedido\": \"CANCELADO\",\n  \"cpf\": {{cpf}},\n  \"numeroPedido\": \"{{numero_pedido}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -380,14 +430,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/pedidos/FF2706234754",
+							"raw": "{{host_local}}/pedidos/{{numero_pedido}}",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"pedidos",
-								"FF2706234754"
+								"{{numero_pedido}}"
 							]
 						}
 					},
@@ -404,12 +453,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/pagamentos",
-							"protocol": "http",
+							"raw": "{{host_local}}/pagamentos",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"pagamentos"
 							]
@@ -423,15 +470,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/pagamentos/{id}",
-							"protocol": "http",
+							"raw": "{{host_local}}/pagamentos/{{pagamento_id}}",
 							"host": [
-								"localhost"
+								"{{host_local}}"
 							],
-							"port": "8080",
 							"path": [
 								"pagamentos",
-								"{id}"
+								"{{pagamento_id}}"
 							]
 						}
 					},
