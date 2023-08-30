@@ -1,0 +1,448 @@
+{
+	"info": {
+		"_postman_id": "f6534b9d-6169-466b-9eef-39b80919c689",
+		"name": "Fastfood Kubernetes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "484183",
+		"_collection_link": "https://interstellar-capsule-343115.postman.co/workspace/Tech-Challenge---FIAP-%252F-Alura-P~45fd98c7-6120-45b2-8142-ca10997141ce/collection/484183-f6534b9d-6169-466b-9eef-39b80919c689?action=share&source=collection_link&creator=484183"
+	},
+	"item": [
+		{
+			"name": "1 - Itens",
+			"item": [
+				{
+					"name": "Post Criar Item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Batata frita\",\n  \"descricao\": \"Bata frita\",\n  \"valor\": 10.00,\n  \"categoria\": \"ACOMPANHAMENTO\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/items",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/items",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pesquisar Item Por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/items/1",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2 - Clientes",
+			"item": [
+				{
+					"name": "Post Create Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\": \"654321\",\n    \"nome\": \"Nome do Cliente 2\",\n    \"telefone\": \"4444555\",\n    \"endereco\": \"Endereço do Cliente 2\",\n    \"email\": \"cliente2@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/clientes",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/clientes",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pesquisar Cliente por CPF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/clientes/654321",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"clientes",
+								"654321"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3 - Adicionar Metodo de pagamento",
+			"item": [
+				{
+					"name": "Criar metodo de pagamento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"metodoPagamento\": {\n    \"cvv\": \"123\",\n    \"dataExpiracao\": \"12/24\",\n    \"numeroCartao\": \"134556\",\n    \"cpf\": \"654321\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/metodo-pagamentos",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"metodo-pagamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar todos Cartoes cadastrados",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\": \"654321\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/metodo-pagamentos",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"metodo-pagamentos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4 - Pedidos",
+			"item": [
+				{
+					"name": "Get All Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/pedidos",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pedidos by numeroPedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/pedidos/FF2706232453",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"pedidos",
+								"FF2706232453"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Pedidos para entrega",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/pedidos-para-entrega",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"pedidos-para-entrega"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Criar Pedidos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n    {\n        \"cpf\": \"654321\"\n    }\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/pedidos",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5 - Add Itens no Pedido",
+			"item": [
+				{
+					"name": "Get Item Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/pedidos/itempedido/FF2408233828",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"pedidos",
+								"itempedido",
+								"FF2408233828"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Add Item no Pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numeroPedido\": \"FF2906233459\",\n  \"item\": {\n    \n    \"id\": 1\n},\n  \"quantidade\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost/pedidos/itempedido/FF2408233828",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"pedidos",
+								"itempedido",
+								"FF2408233828"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "6 - Checkout - Pagar pedido",
+			"item": [
+				{
+					"name": "Pagar o pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"654321\",\n  \"metodoPagamentoId\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/pedidos/checkout/FF2408233828",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"pedidos",
+								"checkout",
+								"FF2408233828"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "7 - Atualizar status do pedido",
+			"item": [
+				{
+					"name": "Atualizar o status do Pedido para em andamento",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"statusPedido\": \"FINALIZADO\",\n  \"cpf\": \"654321\",\n  \"numeroPedido\": \"FF2408233828\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/pedidos/FF2408233828",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"pedidos",
+								"FF2408233828"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "8 - Consultas Pagamentos",
+			"item": [
+				{
+					"name": "Get All Pagamentos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/pagamentos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"pagamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pagamentos by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/pagamentos/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"pagamentos",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

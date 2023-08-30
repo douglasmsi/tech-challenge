@@ -12,6 +12,7 @@ services:
       MYSQL_USER: fastfooduser
       MYSQL_PASSWORD: fastfoodpass
       MYSQL_ROOT_PASSWORD: fastfoodroot
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     ports:
       - "3306:3306"
     healthcheck:
