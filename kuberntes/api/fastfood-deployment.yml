@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: fastfood
-          image: emersondiegoduarte/fastfood:v6
+          image: emersondiegoduarte/fastfood:v7
           ports:
             - containerPort: 8080
           livenessProbe:
