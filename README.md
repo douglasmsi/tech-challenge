@@ -51,14 +51,17 @@ The hexagonal structure emphasizes the clear separation of responsibilities in d
 
 ### ✅ Running the Application
 
-To run the application, you need to have Docker installed on your machine. Please follow these steps:
+To run the application, you need to have Docker and Kubernetes installed on your machine. Please follow these steps:
 
-1. Open your terminal and navigate to the root directory of the project.
+1. Open your terminal and navigate to the following directories of the project.
+    - kuberntes/database/postgres
+    - kuberntes/api
 
-2. Run the following command:
+2. Run the following command on each path:
 
 ```bash
-make up
+kubectl apply -f ../postgres
+kubectl apply -f ../api
 ```
 
 This command will start the application and set up the necessary environment.
@@ -68,15 +71,8 @@ This command will start the application and set up the necessary environment.
 To view the logs of the aplication run the following command:
 
 ```bash
-make logs
-```
-
-### 🛑 Stop Application
-
-And to stop this aplication run this one:
-
-```bash
-make down
+kubectl get pods
+kubectl logs <nomedopod>
 ```
 
 ## Testing the application with Postman Collection
