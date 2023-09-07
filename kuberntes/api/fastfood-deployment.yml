@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fast-food-pod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fast-food-pod
+  template:
+    metadata:
+      labels:
+        app: fast-food-pod
+    spec:
+      containers:
+        - name: fastfood
+          image: emersondiegoduarte/fastfood:v7
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          envFrom:
+            # Load the environment variables/PostgresSQL credentials
+            # This should be the ConfigMap name created ealier
+            - secretRef:
+                name: fastfood-security
+            - configMapRef:
+                name: db-secret-credentials
