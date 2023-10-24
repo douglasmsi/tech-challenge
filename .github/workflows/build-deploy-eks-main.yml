@@ -77,10 +77,16 @@ jobs:
       - name: Authenticate with AWS ECR Public
         run: |
           aws ecr-public get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REPOSITORY }}
-      
+
+      - name: Get Latest Tag
+        id: getLatestTag
+        uses: WyriHaximus/github-action-get-previous-tag@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build and push Docker image
         env:
-          IMAGE_TAG: latest
+          IMAGE_TAG: ${{ steps.getLatestTag.outputs.tag }}
         run: |
           docker build -t ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG .
           docker tag $IMAGE_TAG public.ecr.aws/n0p9h9c2/$IMAGE_TAG
