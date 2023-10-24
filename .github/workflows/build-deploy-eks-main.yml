@@ -38,12 +38,15 @@ jobs:
         run: |
           git config --global user.email "douglasmsi@gmail.com"
           git config --global user.name "Douglas Marra"
-      
+
       - name: Create Git tag
-        run: git tag -a v${{ env.PROJECT_VERSION }} -m "Version ${{ env.PROJECT_VERSION }}"
-        env:
-          PROJECT_VERSION: ${{ steps.build-maven.outputs.PROJECT_VERSION }}
-          GITHUB_TOKEN: ${{ SECRETS.GITHUB_TOKEN }}  
+        id: create-tag
+        run: git tag -a v${{ steps.build-maven.outputs.PROJECT_VERSION }} -m "Version ${{ steps.build.outputs.PROJECT_VERSION }}"
+        env: 
+          GITHUB_TOKEN: ${{ SECRETS.GITHUB_TOKEN }}
+
+      - name: Push Git tag to GitHub
+        run: git push origin v${{ steps.create-tag.outputs.PROJECT_VERSION }}
 
       - name: Create Release
         id: create_release
@@ -83,7 +86,7 @@ jobs:
       
       - name: Build and push Docker image
         env:
-          IMAGE_TAG: ${{ github.ref }}
+          IMAGE_TAG: v${{ steps.build-maven.outputs.PROJECT_VERSION }}
         run: |
           docker build -t ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG .
           docker push ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
