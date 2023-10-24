@@ -32,11 +32,9 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: Bump Version
+      - name: Bump version
         id: bump
-        uses: nnichols/maven-version-bump-action@v3
-        with:
-          github-token: ${{ secrets.github_token }}
+        uses: mickem/gh-action-bump-maven-version
           
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
