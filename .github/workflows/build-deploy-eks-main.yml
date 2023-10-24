@@ -80,7 +80,7 @@ jobs:
       
       - name: Build and push Docker image
         env:
-          IMAGE_TAG: v${{ job.steps.build-maven.outputs.version }}
+          IMAGE_TAG: ${{ github.ref_name }}
         run: |
           docker build -t ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG .
           docker push ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
