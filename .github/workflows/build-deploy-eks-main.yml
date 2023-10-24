@@ -32,9 +32,8 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: Bump version
-        id: bump
-        uses: mickem/gh-action-bump-maven-version
+      - name: tag-version
+        uses: juliansangillo/tag-version@v1.5
           
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
