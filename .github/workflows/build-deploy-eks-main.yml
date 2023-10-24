@@ -41,12 +41,13 @@ jobs:
 
       - name: Create Git tag
         id: create-tag
-        run: git tag -a v${{ steps.build-maven.outputs.PROJECT_VERSION }} -m "Version ${{ steps.build.outputs.PROJECT_VERSION }}"
+        run: git tag -a v${{ steps.build-maven.outputs.build-maven.PROJECT_VERSION }} -m "Version ${{ steps.build-maven.outputs.build-maven.PROJECT_VERSION }}"
+
         env: 
           GITHUB_TOKEN: ${{ SECRETS.GITHUB_TOKEN }}
 
       - name: Push Git tag to GitHub
-        run: git push origin v${{ steps.create-tag.outputs.PROJECT_VERSION }}
+        run: git push origin v${{ steps.build-maven.outputs.build-maven.PROJECT_VERSION }}
 
       - name: Create Release
         id: create_release
