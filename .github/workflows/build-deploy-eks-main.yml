@@ -7,9 +7,9 @@ on:
     branches: [main]
 
 env:
-  AWS_REGION: MY_AWS_REGION
-  ECR_REPOSITORY: MY_ECR_REPOSITORY
-  EKS_CLUSTER: MY_EKS_CLUSTER
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: public.ecr.aws/n0p9h9c2
+  EKS_CLUSTER: tech-challenge
 
 permissions:
   contents: read
