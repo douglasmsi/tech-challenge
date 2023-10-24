@@ -34,10 +34,10 @@ jobs:
         id: build-maven
         run: mvn -B package --file pom.xml
 
-      - name: Get Version
-        uses: ./
-        id: getVersion
-        
+      - name: Get Project Version from pom.xml
+        uses: entimaniac/read-pom-version-action@1.0.0
+        id: getVersion    
+
       - name: Print the version
         run: echo "The version we just got is ${{ steps.getVersion.outputs.version }}"
 
