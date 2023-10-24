@@ -8,7 +8,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: public.ecr.aws/n0p9h9c2
+  ECR_REPOSITORY: public.ecr.aws/n0p9h9c2/dmsec
   EKS_CLUSTER: tech-challenge
 
 permissions:
@@ -107,7 +107,7 @@ jobs:
           IMAGE_TAG: ${{ needs.analyze-tags.outputs.previous-tag }}
         run: |
           docker build -t $IMAGE_TAG .
-          docker tag $IMAGE_TAG public.ecr.aws/n0p9h9c2/$IMAGE_TAG
+          docker tag $IMAGE_TAG ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
           docker push ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
 
       - name: Create kubeconfig for Amazon EKS
