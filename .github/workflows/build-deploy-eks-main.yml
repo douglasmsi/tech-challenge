@@ -31,6 +31,13 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+      
+      - name: Version  
+        id: version  
+        uses: juliansangillo/tag-version@v1  
+        with:  
+          production-branch: main  
+          dev-branch: develop  
 
       - name: tag-version
         uses: juliansangillo/tag-version@v1.5
