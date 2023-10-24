@@ -12,8 +12,16 @@ env:
   EKS_CLUSTER: tech-challenge
 
 permissions:
-  contents: read
-  id-token: write
+  actions: read|write
+  checks: read|write
+  contents: read|write
+  deployments: read|write
+  issues: read|write
+  packages: read|write
+  pull-requests: read|write
+  repository-projects: read|write
+  security-events: read|write
+  statuses: read|write
 
 jobs:
   build:
