@@ -50,11 +50,6 @@ jobs:
       - name: Authenticate with AWS ECR Public
         run: |
           aws ecr-public get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REPOSITORY }}
-
-      - name: Create kubeconfig for Amazon EKS
-        run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER }} --region ${{ env.AWS_REGION }}
-        env:
-          KUBECONFIG: ${{ runner.workspace }}/kubeconfig.yml
       
       - name: Build and push Docker image
         env:
