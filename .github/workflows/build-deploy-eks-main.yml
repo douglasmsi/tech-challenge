@@ -97,7 +97,7 @@ jobs:
 
       - name: Build and push Docker image
         env:
-          IMAGE_TAG: ${{ needs.generate.outputs.semvers.patch }}
+          IMAGE_TAG: ${{ generate.steps.semvers.outputs.patch }}
         run: |
           docker build -t $IMAGE_TAG .
           docker tag $IMAGE_TAG ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
