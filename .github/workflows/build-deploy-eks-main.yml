@@ -41,7 +41,7 @@ jobs:
 
       - name: Create Git tag
         id: create-tag
-        run: git tag -a v${{ steps.build-maven.outputs.build-maven.PROJECT_VERSION }} -m "Version ${{ steps.build-maven.outputs.build-maven.PROJECT_VERSION }}"
+        run: git tag -a v${{ build-maven.outputs.PROJECT_VERSION }} -m "Version ${{ steps.build-maven.outputs.PROJECT_VERSION }}"
 
         env: 
           GITHUB_TOKEN: ${{ SECRETS.GITHUB_TOKEN }}
