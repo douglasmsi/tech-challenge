@@ -91,7 +91,7 @@ jobs:
       
       - name: Build and push Docker image
         env:
-          IMAGE_TAG: v${{ steps.getVersion.outputs.version }}
+          IMAGE_TAG: v${{ build.steps.getVersion.outputs.version }}
         run: |
           docker build -t ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG .
           docker push ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
