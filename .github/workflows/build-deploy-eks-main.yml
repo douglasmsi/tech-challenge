@@ -31,6 +31,11 @@ jobs:
       - name: Build with Maven
         id: build-maven
         run: mvn -B package --file pom.xml
+
+      - name: Set Git user identity
+        run: |
+          git config --global user.email "douglasmsi@gmail.com"
+          git config --global user.name "Douglas Marra"
       
       - name: Create Git tag
         run: git tag -a v${{ env.PROJECT_VERSION }} -m "Version ${{ env.PROJECT_VERSION }}"
