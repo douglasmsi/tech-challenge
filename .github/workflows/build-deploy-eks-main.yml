@@ -83,6 +83,7 @@ jobs:
           IMAGE_TAG: latest
         run: |
           docker build -t ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG .
+          docker tag $IMAGE_TAG public.ecr.aws/n0p9h9c2/$IMAGE_TAG
           docker push ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
 
       - name: Create kubeconfig for Amazon EKS
