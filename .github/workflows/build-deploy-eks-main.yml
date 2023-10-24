@@ -30,6 +30,21 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+  
+  create_release:
+    name: Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: target/${{ env.PROJECT_ARTIFACT_ID}}.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROJECT_ARTIFACT_ID: ${{ steps.build.outputs.PROJECT_ARTIFACT_ID }}
+
 
   deploy:
     name: Deploy
@@ -53,7 +68,7 @@ jobs:
       
       - name: Build and push Docker image
         env:
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: ${{ github.ref }}
         run: |
           docker build -t ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG .
           docker push ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
