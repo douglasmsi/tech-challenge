@@ -104,11 +104,16 @@
             			<artifactId>versions-maven-plugin</artifactId>
             			<version>2.8.1</version>
             			<executions>
-                			<execution>
+                			 <execution>
+                    				<id>update-versions</id>
                     				<phase>initialize</phase>
                     				<goals>
                         				<goal>set</goal>
                     				</goals>
+                    				<configuration>
+                        				<generateBackupPoms>false</generateBackupPoms>
+                        				<newVersion>${project.artifactId}-${git.commit.id.abbrev}</newVersion>
+                    				</configuration>
                 			</execution>
             			</executions>
         		</plugin>
