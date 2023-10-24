@@ -88,9 +88,9 @@ jobs:
         env:
           IMAGE_TAG: ${{ steps.getLatestTag.outputs.tag }}
         run: |
-          docker build -t ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG .
-          docker tag $IMAGE_TAG public.ecr.aws/n0p9h9c2/$IMAGE_TAG
-          docker push ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
+          docker build -t ${{ env.ECR_REPOSITORY }}:${{ steps.getLatestTag.outputs.tag }} .
+          docker tag ${{ steps.getLatestTag.outputs.tag }} public.ecr.aws/n0p9h9c2/${{ steps.getLatestTag.outputs.tag }}
+          docker push ${{ env.ECR_REPOSITORY }}:${{ steps.getLatestTag.outputs.tag }}
 
       - name: Create kubeconfig for Amazon EKS
         run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER }} --region ${{ env.AWS_REGION }}
