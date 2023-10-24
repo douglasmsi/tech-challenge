@@ -112,7 +112,7 @@
                     				</goals>
                     				<configuration>
                         				<generateBackupPoms>false</generateBackupPoms>
-                        				<newVersion>v${project.artifactId}</newVersion>
+                        				<newVersion>${project.version}</newVersion>
                     				</configuration>
                 			</execution>
             			</executions>
