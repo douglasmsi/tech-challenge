@@ -34,6 +34,13 @@ jobs:
         id: build-maven
         run: mvn -B package --file pom.xml
 
+      - name: Get Project Version from pom.xml
+        uses: entimaniac/read-pom-version-action@1.0.0
+        id: getVersion
+
+      - name: Print the version
+        run: echo "v${{ steps.getVersion.outputs.version }}"
+
       - name: Set Git user identity
         run: |
           git config --global user.email "douglasmsi@gmail.com"
@@ -50,22 +57,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ steps.create_tag.outputs.tag_name }}
-          release_name: Release ${{ steps.create_tag.outputs.tag_name }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
 
-  
   deploy:
     name: Deploy
     needs: build
@@ -88,7 +80,7 @@ jobs:
       
       - name: Build and push Docker image
         env:
-          IMAGE_TAG: ${{ github.ref_name }}
+          IMAGE_TAG: latest
         run: |
           docker build -t ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG .
           docker push ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
