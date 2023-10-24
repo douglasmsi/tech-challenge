@@ -74,7 +74,7 @@ jobs:
 
   analyze-tags:
     runs-on: ubuntu-latest
-    needs: build
+    needs: generate
     outputs:
       previous-tag: ${{ steps.previoustag.outputs.tag }}
       timestamp-diff: ${{ steps.diff.outputs.timestamp-diff }}
