@@ -31,32 +31,19 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: Set Git user identity
-        run: |
-          git config --global user.email "douglasmsi@gmail.com"
-          git config --global user.name "Douglas Marra"
-      
-      - name: Create Git tag
-        run: git tag -a v${{ env.PROJECT_VERSION }} -m "Version ${{ env.PROJECT_VERSION }}"
-        env:
-          PROJECT_VERSION: ${{ steps.build.outputs.PROJECT_VERSION }}
-  
-  
-  create_release:
-    name: Create GitHub Release
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create GitHub Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
         with:
-          files: target/${{ env.PROJECT_ARTIFACT_ID}}.jar
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROJECT_ARTIFACT_ID: ${{ steps.build.outputs.PROJECT_ARTIFACT_ID }}
-
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+  
   deploy:
     name: Deploy
     needs: build
