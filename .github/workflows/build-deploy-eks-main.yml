@@ -48,22 +48,19 @@ jobs:
 
       - name: Create Git tag
         id: create-tag
-        run: git tag -a ${{ steps.getVersion.outputs.version }} -m "Version ${{ steps.getVersion.outputs.version }}"
-
+        run: git tag -a v${{ steps.getVersion.outputs.version }} -m "Version ${{ steps.getVersion.outputs.version }}"
         env: 
           GITHUB_TOKEN: ${{ SECRETS.GITHUB_TOKEN }}
 
-      - name: Push Git tag to GitHub
-        run: git push origin ${{ steps.build-maven.outputs.build-maven.PROJECT_VERSION }}
-
+   
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ env.PROJECT_VERSION }}
-          release_name: Release v${{ env.PROJECT_VERSION }}
+          tag_name: v${{ steps.getVersion.outputs.version }}
+          release_name: Release v${{ steps.getVersion.outputs.version }}
           body: |
             Changes in this Release
             - First Change
@@ -94,7 +91,7 @@ jobs:
       
       - name: Build and push Docker image
         env:
-          IMAGE_TAG: v${{ steps.build-maven.outputs.PROJECT_VERSION }}
+          IMAGE_TAG: v${{ steps.getVersion.outputs.version }}
         run: |
           docker build -t ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG .
           docker push ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
