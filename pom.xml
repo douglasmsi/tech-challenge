@@ -112,7 +112,7 @@
                     				</goals>
                     				<configuration>
                         				<generateBackupPoms>false</generateBackupPoms>
-                        				<newVersion>${project.artifactId}-${git.commit.id.abbrev}</newVersion>
+                        				<newVersion>v${project.artifactId}</newVersion>
                     				</configuration>
                 			</execution>
             			</executions>
