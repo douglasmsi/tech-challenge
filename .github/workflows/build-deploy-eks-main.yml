@@ -32,15 +32,16 @@ jobs:
         run: mvn -B package --file pom.xml
       
       - uses: christophebedard/tag-version-commit@v1
+        id: tag-version-commit
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ tag }}
-          name: Release ${{ tag }}
-          body: ${{ steps.tag_version.outputs.changelog }}
+          tag: ${{ steps.tag-version-commit.outputs.tag }}
+          name: Release ${{ steps.tag-version-commit.outputs.tag }}
+          body: ${{ steps.tag-version-commit.outputs.tag }}
   
   deploy:
     name: Deploy
