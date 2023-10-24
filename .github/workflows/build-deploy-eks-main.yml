@@ -39,7 +39,7 @@ jobs:
         id: getVersion    
 
       - name: Print the version
-        run: echo "The version we just got is ${{ steps.getVersion.outputs.version }}"
+        run: echo "v${{ steps.getVersion.outputs.version }}"
 
       - name: Set Git user identity
         run: |
@@ -48,7 +48,7 @@ jobs:
 
       - name: Create Git tag
         id: create-tag
-        run: git tag -a v${{ build-maven.outputs.PROJECT_VERSION }} -m "Version ${{ steps.build-maven.outputs.PROJECT_VERSION }}"
+        run: git tag -a v${{ steps.getVersion.outputs.version }} -m "Version ${{ steps.getVersion.outputs.version }}"
 
         env: 
           GITHUB_TOKEN: ${{ SECRETS.GITHUB_TOKEN }}
