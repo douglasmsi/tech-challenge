@@ -36,7 +36,7 @@ jobs:
         run: git tag -a v${{ env.PROJECT_VERSION }} -m "Version ${{ env.PROJECT_VERSION }}"
         env:
           PROJECT_VERSION: ${{ steps.build-maven.outputs.PROJECT_VERSION }}
-          
+          GITHUB_TOKEN: ${{ SECRETS.GITHUB_TOKEN }}  
 
   
   deploy:
