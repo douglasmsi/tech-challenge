@@ -46,36 +46,29 @@ jobs:
           git config --global user.email "douglasmsi@gmail.com"
           git config --global user.name "Douglas Marra"
 
-
-  generate:
-    runs-on: ubuntu-latest
-    needs: build
+  create-release:
+    name: Create Release
+    runs-on: ['self-hosted']
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # Required due to the way Git works, without it this action won't be able to find any or the correct tags
-      - name: 'Get Previous tag'
-        id: previoustag
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
-        with:
-          fallback: 1.0.0 # Optional fallback tag to use when no tag can be found
-      - name: 'Get next minor version'
-        id: semvers
-        uses: "WyriHaximus/github-action-next-semvers@v1"
-        with:
-          version: ${{ steps.previoustag.outputs.tag }}
-      - name: 'Create new milestone'
-        id: createmilestone
-        uses: "WyriHaximus/github-action-create-milestone@v1"
-        with:
-          title: ${{ steps.semvers.outputs.patch }}
+      - name: Create Release
+        id: create_release
+        uses: zendesk/action-create-release@v1
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
 
 
   deploy:
     name: Deploy
-    needs: generate
+    needs: create-release
     runs-on: ubuntu-latest
 
     steps:
@@ -93,11 +86,9 @@ jobs:
         run: |
           aws ecr-public get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REPOSITORY }}
 
-
-
       - name: Build and push Docker image
         env:
-          IMAGE_TAG: ${{ needs.generate.steps.semvers.outputs.patch }}
+          IMAGE_TAG: ${{ needs.create-release.outputs.current_tag }}
         run: |
           docker build -t $IMAGE_TAG .
           docker tag $IMAGE_TAG ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
