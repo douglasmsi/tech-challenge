@@ -80,7 +80,7 @@ jobs:
 
       - name: Build and push Docker image
         env:
-          IMAGE_TAG: ${{ build.steps.release.outputs.automatic_release_tag }}
+          IMAGE_TAG: ${{ needs.build.outputs.release.outputs.automatic_release_tag }}
         run: |
           docker build -t $IMAGE_TAG .
           docker tag $IMAGE_TAG ${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
