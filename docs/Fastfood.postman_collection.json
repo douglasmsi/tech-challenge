@@ -1,0 +1,519 @@
+{
+	"info": {
+		"_postman_id": "1bf4e617-bcec-4e1f-8b0a-c7fe1dba2308",
+		"name": "Fastfood",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "484183",
+		"_collection_link": "https://interstellar-capsule-343115.postman.co/workspace/Tech-Challenge---FIAP-%252F-Alura-P~45fd98c7-6120-45b2-8142-ca10997141ce/collection/484183-1bf4e617-bcec-4e1f-8b0a-c7fe1dba2308?action=share&source=collection_link&creator=484183"
+	},
+	"item": [
+		{
+			"name": "1 - Itens",
+			"item": [
+				{
+					"name": "Post Criar Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();\r",
+									"var itemId = responseJson.id;\r",
+									"pm.environment.set(\"item_id\", itemId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Batata frita\",\n  \"descricao\": \"Bata frita\",\n  \"valor\": 10.00,\n  \"categoria\": \"ACOMPANHAMENTO\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/items",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/items",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pesquisar Item Por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/items/{{item_id}}",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"items",
+								"{{item_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2 - Clientes",
+			"item": [
+				{
+					"name": "Get All Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/clientes",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pesquisar Cliente por CPF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/clientes/{{cpf}}",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"clientes",
+								"{{cpf}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Create Cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();\r",
+									"var cpf = responseJson.cpf;\r",
+									"pm.environment.set(\"cpf\", cpf);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\": \"654321\",\n    \"nome\": \"Nome do Cliente 2\",\n    \"telefone\": \"4444555\",\n    \"endereco\": \"Endereço do Cliente 2\",\n    \"email\": \"cliente2@example.com\",\n    \"pedidos\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/clientes",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3 - Adicionar Metodo de pagamento",
+			"item": [
+				{
+					"name": "Listar todos Cartoes cadastrados",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cpf\": {{cpf}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/metodo-pagamentos",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"metodo-pagamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar metodo de pagamento",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();\r",
+									"var metodoPagamentoId = responseJson.id;\r",
+									"pm.environment.set(\"metodo_pagamento_id\", metodoPagamentoId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"metodoPagamento\": {\n    \"cvv\": \"123\",\n    \"dataExpiracao\": \"12/24\",\n    \"numeroCartao\": \"134556\",\n    \"cpf\": {{cpf}}\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/metodo-pagamentos",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"metodo-pagamentos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4 - Pedidos",
+			"item": [
+				{
+					"name": "Get All Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/pedidos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pedidos by numeroPedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/pedidos/{{numero_pedido}}",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"pedidos",
+								"{{numero_pedido}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Criar Pedidos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();\r",
+									"var numeroPedido = responseJson.numeroPedido;\r",
+									"pm.environment.set(\"numero_pedido\", numeroPedido);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": {{cpf}}\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/pedidos",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5 - Add Itens no Pedido",
+			"item": [
+				{
+					"name": "Get Item Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/pedidos/itempedido/{{numero_pedido}}",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"pedidos",
+								"itempedido",
+								"{{numero_pedido}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Add Item no Pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numeroPedido\": \"{{numero_pedido}}\",\n  \"item\": {\n    \"id\": {{item_id}}\n},\n  \"quantidade\": 1\n}"
+						},
+						"url": {
+							"raw": "{{host_local}}/pedidos/itempedido/{{numero_pedido}}",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"pedidos",
+								"itempedido",
+								"{{numero_pedido}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "6 - Checkout - Pagar pedido",
+			"item": [
+				{
+					"name": "Pagar o pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();\r",
+									"var pagamentoId = responseJson.id;\r",
+									"pm.environment.set(\"pagamento_id\", pagamentoId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": {{cpf}},\n  \"metodoPagamentoId\" : {{metodo_pagamento_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/pedidos/checkout/{{numero_pedido}}",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"pedidos",
+								"checkout",
+								"{{numero_pedido}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar o status do Pedido para em andamento",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"statusPedido\": \"ANDAMENTO\",\n  \"cpf\": {{cpf}},\n  \"numeroPedido\": \"{{numero_pedido}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/pedidos/{{numero_pedido}}",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"pedidos",
+								"{{numero_pedido}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "7 - Atualizar status do pedido",
+			"item": [
+				{
+					"name": "Atualizar o status do Pedido para em FINALIZADO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"statusPedido\": \"FINALIZADO\",\n  \"cpf\": \"{{cpf}}\",\n  \"numeroPedido\": \"{{numero_pedido}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_local}}/pedidos/{{numero_pedido}}",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"pedidos",
+								"{{numero_pedido}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "8 - Consultas Pagamentos",
+			"item": [
+				{
+					"name": "Get All Pagamentos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/pagamentos",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"pagamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pagamentos by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host_local}}/pagamentos/{{pagamento_id}}",
+							"host": [
+								"{{host_local}}"
+							],
+							"path": [
+								"pagamentos",
+								"{{pagamento_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
