@@ -12,7 +12,7 @@ env:
   EKS_CLUSTER: tech-challenge-eks
   RELEASE_REVISION: "pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}"
   KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-  KUBE_NAMESPACE: production
+  KUBE_NAMESPACE: default
 
 
 permissions:
