@@ -8,8 +8,8 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: public.ecr.aws/n0p9h9c2/dmsec
-  EKS_CLUSTER: tech-challenge
+  ECR_REPOSITORY: tech-challenge
+  EKS_CLUSTER: tech-challenge-eks
   RELEASE_REVISION: "pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}"
   KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
   KUBE_NAMESPACE: production
