@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: fastfood
-          image: emersondiegoduarte/fastfood:v7
+          image: public.ecr.aws/n0p9h9c2/dmsec:latest
           ports:
             - containerPort: 8080
           livenessProbe:
