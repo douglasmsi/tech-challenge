@@ -1,4 +1,4 @@
-name: CI/CD on Pull Request
+name: Continous Integration - Build & Github Release
 
 on:
   push:

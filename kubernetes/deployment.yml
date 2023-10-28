@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fast-food-pod
-  namespace: fast-food-namespace
+  name: tech-challenge-app
+  namespace: tech-challenge-namespace
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: fast-food-pod
+      app: tech-challenge-app
   template:
     metadata:
       labels:
-        app: fast-food-pod
+        app: tech-challenge-app
     spec:
       containers:
-        - name: fastfood
-          image: public.ecr.aws/n0p9h9c2/dmsec:latest
+        - name: fast-food-app
+          image: 653185900972.dkr.ecr.us-east-1.amazonaws.com/tech-challenge/tech-challenge-app:latest
           ports:
             - containerPort: 8080
           livenessProbe:
@@ -24,10 +24,10 @@ spec:
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 30
-          envFrom:
+          #envFrom:
             # Load the environment variables/PostgresSQL credentials
             # This should be the ConfigMap name created ealier
-            - secretRef:
-                name: fastfood-security
-            - configMapRef:
-                name: db-secret-credentials
+          #  - secretRef:
+           #     name: fastfood-security
+          #  - configMapRef:
+           #     name: db-secret-credentials

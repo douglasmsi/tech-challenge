@@ -75,49 +75,11 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
-    		<outputDirectory>target</outputDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
-			</plugin>
-
-			<plugin>
-            			<groupId>org.codehaus.mojo</groupId>
-            			<artifactId>versions-maven-plugin</artifactId>
-            			<version>2.8.1</version>
-            			<executions>
-                			 <execution>
-                    				<id>update-versions</id>
-                    				<phase>initialize</phase>
-                    				<goals>
-                        				<goal>set</goal>
-                    				</goals>
-                    				<configuration>
-                        				<generateBackupPoms>false</generateBackupPoms>
-                        				<newVersion>${project.version}</newVersion>
-                    				</configuration>
-                			</execution>
-            			</executions>
-        		</plugin>
-
 		</plugins>
 	</build>
 
