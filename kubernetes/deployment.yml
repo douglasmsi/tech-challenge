@@ -4,7 +4,7 @@ metadata:
   name: tech-challenge-app
   namespace: tech-challenge-namespace
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: tech-challenge-app
