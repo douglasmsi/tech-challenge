@@ -103,7 +103,7 @@ jobs:
         env:
           RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
         with:
-          args: set image deployment/tech-challenge-app app=latest --record -n $KUBE_NAMESPACE
+            args: set image deployment/tech-challenge-app tech-challenge-app=$RELEASE_IMAGE -n $KUBE_NAMESPACE
 
       - name: Verify Kubernetes deployment
         uses: kodermax/kubectl-aws-eks@master
