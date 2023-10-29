@@ -12,7 +12,7 @@ env:
   EKS_CLUSTER: tech-challenge-eks
   RELEASE_REVISION: "pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}"
   KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-  KUBE_NAMESPACE: default
+  KUBE_NAMESPACE: tech-challenge-namespace
 
 
 permissions:
@@ -101,9 +101,9 @@ jobs:
       - name: Deploy to Kubernetes cluster
         uses: kodermax/kubectl-aws-eks@master
         env:
-          RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.RELEASE_REVISION }}
+          RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
         with:
-          args: set image deployment/fast-food-pod app=${{ env.RELEASE_IMAGE }} --record -n $KUBE_NAMESPACE
+          args: set image deployment/tech-challenge-app app=latest --record -n $KUBE_NAMESPACE
 
       - name: Verify Kubernetes deployment
         uses: kodermax/kubectl-aws-eks@master
