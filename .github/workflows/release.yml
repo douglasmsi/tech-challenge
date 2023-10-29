@@ -108,4 +108,4 @@ jobs:
       - name: Verify Kubernetes deployment
         uses: kodermax/kubectl-aws-eks@master
         with:
-          args: rollout status deploy fast-food-pod -n $KUBE_NAMESPACE
+          args: rollout status deploy tech-challenge-app -n $KUBE_NAMESPACE
