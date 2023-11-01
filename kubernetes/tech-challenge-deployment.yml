@@ -21,7 +21,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: 8080
+              port: 9000
             initialDelaySeconds: 10
             periodSeconds: 30
           env:
