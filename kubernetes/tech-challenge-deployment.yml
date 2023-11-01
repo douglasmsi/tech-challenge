@@ -51,22 +51,3 @@ spec:
                   name: postgres-config-map
                   key: postgres-user-password
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  labels:
-    app: tech-challenge-app
-  name: tech-challenge-app
-spec:
-  ports:
-  - name: 8080-8080
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
-  selector:
-    app: tech-challenge-app
-  type: ClusterIP
-status:
-  loadBalancer: {}
