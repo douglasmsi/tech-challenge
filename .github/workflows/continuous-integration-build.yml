@@ -1,9 +1,12 @@
-name: CI/CD on Pull Request
+name: Continous Integration - Build
 
 on:
   pull_request:
     branches:
       - develop
+    types:
+      - opened
+      - synchronize
 
 jobs:
   build:
