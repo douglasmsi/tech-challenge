@@ -82,13 +82,6 @@ jobs:
         env:
           EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
 
-      - name: Run Service
-        uses: nikosch86/github-action-eks-kubectl@main
-        with:
-          command: "apply -f kubernetes/tech-challenge-service.yaml.bkppp"
-        env:
-          EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
-
       - name: Run Config map
         uses: nikosch86/github-action-eks-kubectl@main
         with:
