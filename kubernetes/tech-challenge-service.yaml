@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: tech-challenge-app
   namespace: tech-challenge-namespace
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
 spec:
   selector:
     app: tech-challenge-app
