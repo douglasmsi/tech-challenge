@@ -15,4 +15,7 @@ FROM openjdk:17-slim
 
 COPY --from=build /app/target/*.jar /usr/local/lib/app.jar
 
+ENV PORT 8080
+EXPOSE 8080
+
 ENTRYPOINT ["java", "-jar", "/usr/local/lib/app.jar"]
