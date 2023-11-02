@@ -1,10 +1,11 @@
 name: Release
 
 on:
-  pull_request:
-    branches: [develop]
   push:
-    branches: [main]
+    branches:
+      - main
+      - master
+      - develop
 
 env:
   AWS_REGION: us-east-1
@@ -69,14 +70,37 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-      - name: Deploy to Kubernetes cluster
-        uses: kodermax/kubectl-aws-eks@master
+      - name: Run Namespace
+        uses: nikosch86/github-action-eks-kubectl@main
+        with:
+          command: "apply kubernetes/tech-challenge-namespace.yaml"
         env:
-          RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
-        with:
-          args: set image deployment/tech-challenge-app app=latest --record -n $KUBE_NAMESPACE
+          EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
 
-      - name: Verify Kubernetes deployment
-        uses: kodermax/kubectl-aws-eks@master
+      - name: Run Secret
+        uses: nikosch86/github-action-eks-kubectl@main
         with:
-          args: rollout status deploy tech-challenge-app -n $KUBE_NAMESPACE
+          command: "apply kubernetes/tech-challenge-secret.yaml"
+        env:
+          EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
+
+      - name: Run Service
+        uses: nikosch86/github-action-eks-kubectl@main
+        with:
+          command: "apply kubernetes/tech-challenge-service.yaml"
+        env:
+          EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
+
+      - name: Run Config map
+        uses: nikosch86/github-action-eks-kubectl@main
+        with:
+          command: "apply kubernetes/tech-challenge-postgres-config-map.yaml"
+        env:
+          EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
+
+      - name: Run Deployment
+        uses: nikosch86/github-action-eks-kubectl@main
+        with:
+          command: "apply kubernetes/tech-challenge-deployment.yaml"
+        env:
+          EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
