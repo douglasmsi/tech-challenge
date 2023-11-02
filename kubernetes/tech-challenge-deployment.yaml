@@ -21,7 +21,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: 9000
+              port: 8080
             initialDelaySeconds: 10
             periodSeconds: 30
           env:
@@ -50,4 +50,18 @@ spec:
                 configMapKeyRef:
                   name: postgres-config-map
                   key: postgres-user-password
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tech-challenge-app
+  namespace: tech-challenge-namespace
+spec:
+  selector:
+    app: tech-challenge-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+  allocateLoadBalancerNodePorts: false
