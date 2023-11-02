@@ -95,3 +95,10 @@ jobs:
           command: "apply -f kubernetes/tech-challenge-deployment.yaml"
         env:
           EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
+
+      - name: Run Service Metrics
+        uses: nikosch86/github-action-eks-kubectl@main
+        with:
+          command: "apply -f kubernetes/tech-challenge-metrics.yaml"
+        env:
+          EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
