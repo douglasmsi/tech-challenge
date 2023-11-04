@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tech-challenge-app
+  namespace: tech-challenge-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tech-challenge-app
+  template:
+    metadata:
+      labels:
+        app: tech-challenge-app
+    spec:
+      containers:
+        - name: app
+          image: 653185900972.dkr.ecr.us-east-1.amazonaws.com/tech-challenge:latest
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          env:
+            - name: DB_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: postgres-server
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: postgres-port
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: postgres-database-name
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: postgres-user-username
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config-map
+                  key: postgres-user-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tech-challenge-app
+  namespace: tech-challenge-namespace
+spec:
+  selector:
+    app: tech-challenge-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+  allocateLoadBalancerNodePorts: false

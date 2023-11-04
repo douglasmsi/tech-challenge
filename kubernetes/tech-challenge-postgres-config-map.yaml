@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config-map
+  namespace: tech-challenge-namespace
+data:
+  postgres-server: "tech-challenge.caxagz6v59r4.us-east-1.rds.amazonaws.com"
+  postgres-database-name: "techchallengedb"
+  postgres-user-username: "techchallengeuser"
+  postgres-user-password: "techchallengepassword"
+  postgres-port: "5432"
