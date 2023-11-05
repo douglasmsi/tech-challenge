@@ -6,6 +6,9 @@ Welcome to the Fastfood documentation! 🎉🎉 This documentation provides an o
 
 This is a simple application that allows users to order food online and have it delivered to their location. Whether you're craving a juicy burger, a delicious pizza, or a refreshing salad, Fastfood has got you covered!
 
+### Terraform + Github Actions - Build e Deploy 
+
+![Architecture](docs/terraform-github.png)
 
 ### ✅ Running the Application
 
