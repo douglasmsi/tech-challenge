@@ -71,34 +71,35 @@ jobs:
       - name: Run Namespace
         uses: nikosch86/github-action-eks-kubectl@main
         with:
-          command: "apply -f kubernetes/tech-challenge-namespace.yaml"
+          command: "apply -f kubernetes/1-tech-challenge-namespace.yaml"
+        env:
+          EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
+
+
+      - name: Run Config map
+        uses: nikosch86/github-action-eks-kubectl@main
+        with:
+          command: "apply -f kubernetes/2-tech-challenge-postgres-config-map.yaml"
         env:
           EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
 
       - name: Run Secret
         uses: nikosch86/github-action-eks-kubectl@main
         with:
-          command: "apply -f kubernetes/tech-challenge-secret.yaml"
-        env:
-          EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
-
-      - name: Run Config map
-        uses: nikosch86/github-action-eks-kubectl@main
-        with:
-          command: "apply -f kubernetes/tech-challenge-postgres-config-map.yaml"
-        env:
-          EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
-
-      - name: Run Deployment
-        uses: nikosch86/github-action-eks-kubectl@main
-        with:
-          command: "apply -f kubernetes/tech-challenge-deployment.yaml"
+          command: "apply -f kubernetes/3-tech-challenge-secret.yaml"
         env:
           EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
 
       - name: Run Service Metrics
         uses: nikosch86/github-action-eks-kubectl@main
         with:
-          command: "apply -f kubernetes/tech-challenge-metrics.yaml"
+          command: "apply -f kubernetes/4-tech-challenge-metrics.yaml"
+        env:
+          EKS_CLUSTER: ${{ env.EKS_CLUSTER }}
+
+      - name: Run Deployment
+        uses: nikosch86/github-action-eks-kubectl@main
+        with:
+          command: "apply -f kubernetes/5-tech-challenge-deployment.yaml"
         env:
           EKS_CLUSTER: ${{ env.EKS_CLUSTER }}

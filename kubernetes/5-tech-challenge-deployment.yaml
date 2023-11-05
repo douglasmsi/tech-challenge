@@ -54,7 +54,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tech-challenge-app
+  name: tech-challenge-alb
   namespace: tech-challenge-namespace
 spec:
   selector:
@@ -64,4 +64,6 @@ spec:
       port: 80
       targetPort: 8080
   type: LoadBalancer
-  allocateLoadBalancerNodePorts: false
+  allocateLoadBalancerNodePorts: true
+  loadBalancerSourceRanges:
+    - 0.0.0.0/0
