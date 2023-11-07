@@ -1,9 +1,9 @@
 package br.com.fiap.postech.fastfood.usecases.pedido.impl;
 
 import br.com.fiap.postech.fastfood.controller.dto.UpdatePedidoRequest;
-import br.com.fiap.postech.fastfood.domain.pedido.Pedido;
 import br.com.fiap.postech.fastfood.domain.enums.PagamentoStatus;
 import br.com.fiap.postech.fastfood.domain.enums.PedidoStatus;
+import br.com.fiap.postech.fastfood.domain.pedido.Pedido;
 import br.com.fiap.postech.fastfood.ports.pedido.PedidoPersistencePort;
 import br.com.fiap.postech.fastfood.usecases.pedido.AtualizarPedidoUseCase;
 import lombok.RequiredArgsConstructor;

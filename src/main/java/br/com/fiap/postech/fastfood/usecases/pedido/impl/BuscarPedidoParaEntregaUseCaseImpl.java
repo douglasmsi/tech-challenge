@@ -4,10 +4,11 @@ import br.com.fiap.postech.fastfood.domain.enums.PedidoStatus;
 import br.com.fiap.postech.fastfood.domain.pedido.Pedido;
 import br.com.fiap.postech.fastfood.ports.pedido.PedidoPersistencePort;
 import br.com.fiap.postech.fastfood.usecases.pedido.BuscarPedidoParaEntregaUseCase;
+import lombok.RequiredArgsConstructor;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class BuscarPedidoParaEntregaUseCaseImpl implements BuscarPedidoParaEntregaUseCase {

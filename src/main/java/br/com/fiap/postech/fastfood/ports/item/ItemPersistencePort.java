@@ -1,7 +1,7 @@
 package br.com.fiap.postech.fastfood.ports.item;
 
-import br.com.fiap.postech.fastfood.domain.item.Item;
 import br.com.fiap.postech.fastfood.domain.enums.CategoriaItem;
+import br.com.fiap.postech.fastfood.domain.item.Item;
 
 import java.util.List;
 

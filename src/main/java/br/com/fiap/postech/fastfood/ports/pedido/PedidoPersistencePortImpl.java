@@ -14,11 +14,11 @@ import br.com.fiap.postech.fastfood.repository.pagamento.PagamentoJpaRepository;
 import br.com.fiap.postech.fastfood.repository.pedido.PedidoJpaRepository;
 import br.com.fiap.postech.fastfood.usecases.pedido.PedidoNumberGenerator;
 import br.com.fiap.postech.fastfood.usecases.pedido.impl.PedidoNumberGeneratorImpl;
-import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
