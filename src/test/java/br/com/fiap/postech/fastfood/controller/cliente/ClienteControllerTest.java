@@ -38,12 +38,12 @@ class ClienteControllerTest {
     private CriarClienteUseCase criarClienteUseCase;
 
     @Test
-    void whenCreateCliente_shouldReturnsuccess() throws Exception {
+    void whenCreateCliente_shouldReturnSuccess() throws Exception {
         final var cliente = ClienteMock.create();
 
         when(criarClienteUseCase.save(any(Cliente.class))).thenReturn(cliente);
 
-        String content = new ObjectMapper().writeValueAsString(cliente);
+        final var content = new ObjectMapper().writeValueAsString(cliente);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/clientes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);

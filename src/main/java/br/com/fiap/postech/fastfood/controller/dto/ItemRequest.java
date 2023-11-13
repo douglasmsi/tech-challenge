@@ -1,14 +1,14 @@
 package br.com.fiap.postech.fastfood.controller.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemRequest {
 
     private String nome;
