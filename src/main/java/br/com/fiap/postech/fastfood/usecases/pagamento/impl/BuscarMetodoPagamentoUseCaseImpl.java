@@ -3,8 +3,9 @@ package br.com.fiap.postech.fastfood.usecases.pagamento.impl;
 import br.com.fiap.postech.fastfood.domain.pagamento.MetodoPagamento;
 import br.com.fiap.postech.fastfood.ports.pagamento.MetodoPagamentoPersistencePort;
 import br.com.fiap.postech.fastfood.usecases.pagamento.BuscarMetodoPagamentoUseCase;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 public class BuscarMetodoPagamentoUseCaseImpl implements BuscarMetodoPagamentoUseCase {

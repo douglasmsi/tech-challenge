@@ -1,7 +1,7 @@
 package br.com.fiap.postech.fastfood.usecases.item.impl;
 
-import br.com.fiap.postech.fastfood.domain.item.Item;
 import br.com.fiap.postech.fastfood.domain.enums.CategoriaItem;
+import br.com.fiap.postech.fastfood.domain.item.Item;
 import br.com.fiap.postech.fastfood.ports.item.ItemPersistencePort;
 import br.com.fiap.postech.fastfood.usecases.item.BuscarItemUseCase;
 import lombok.RequiredArgsConstructor;
