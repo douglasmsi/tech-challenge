@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -136,6 +137,23 @@ class ItemControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is(500))
                 .andExpect(MockMvcResultMatchers.content().contentType(APPLICATION_JSON_VALUE))
                 .andExpect(MockMvcResultMatchers.content().string(expectedError));
+    }
+
+    @Test
+    void whenUpdateItem_shouldReturnSuccess() throws Exception {
+        when(atualizarItemUseCase.save(any(Item.class))).thenReturn(ItemMock.create());
+
+        String content = (new ObjectMapper()).writeValueAsString(ItemMock.create());
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.put("/items/{id}", 1L)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content);
+
+        MockMvcBuilders.standaloneSetup(itemController)
+                .build()
+                .perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()))
+                .andExpect(MockMvcResultMatchers.content().contentType(APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("$.nome").value("X-Burguer"));
     }
 
     @Test
